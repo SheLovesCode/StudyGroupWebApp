@@ -1,0 +1,32 @@
+{
+  "name": "2021-012-project",
+  "version": "1.0.0",
+  "description": "---\r # ELEN4010 Group Project #\r ### Farai Mutsvandiani 1842163 ###\r ### Diana Munyaradzi 1034382 ###\r ### Steven Makoni 1935885 ###\r ### Elijah Yambayamba Kadimba 1870356 ###\r ### Katelyn Boodhram 1911499 ###\r ---",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app",
+    "test": "jest"
+  },
+  "jest": {
+    "collectCoverage": true,
+    "coverageReporters": [
+      "html"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/witseie-elen4010/2021-012-project.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/witseie-elen4010/2021-012-project/issues"
+  },
+  "homepage": "https://github.com/witseie-elen4010/2021-012-project#readme",
+  "dependencies": {
+    "bootstrap": "^5.0.1",
+    "express": "4.17.1",
+    "jest": "^27.0.4"
+  }
+}
