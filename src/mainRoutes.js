@@ -9,6 +9,7 @@ const users = []
 const passport = require('passport')
 
 const initializePassport = require('./passport-config')
+const { response } = require('express')
 initializePassport(passport, email => users.find(user => user.email === email),
   id => users.find(user => user.id === id)
 )
@@ -21,10 +22,9 @@ mainRouter.get('/home', function (req, res) {
   res.sendFile(path.join(__dirname, '../views', 'home.html'))
 })
 
-mainRouter.get('/register', (req, res) => {
+mainRouter.get('/register', function (req, res) {
   res.render('../views/register.ejs')
 })
-
 
 mainRouter.post('/register', async function (req, res) {
   try {
