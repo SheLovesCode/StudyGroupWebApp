@@ -1,0 +1,44 @@
+/* Landing page where user is asked to enter their chat name */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+ }
+
+ h2 {
+     margin-top: 20px;
+ }
+
+ body {
+    margin: 0; 
+    padding-bottom: 3rem; 
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+ }
+
+ .enterName {
+    margin-bottom: 1rem;
+ }
+
+ .chatWindow {
+    height: 500px;
+    border: 1px solid lightslategray;
+    padding: 1rem;
+    overflow-y: scroll;
+    margin-bottom: 15px;
+ }
+
+ #messages {
+    list-style-type: none; 
+    margin: 0;
+    padding: 0;
+ }
+
+ .chatMessage {
+     margin-bottom: 1rem;
+ }
+
+ .memberName, .newMember {
+     font-weight: bolder;
+ }
+
