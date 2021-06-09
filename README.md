@@ -9,3 +9,6 @@
 ### Elijah Yambayamba Kadimba 1870356 ###
 ### Katelyn Boodhram 1911499 ###
 ---
+Must add a .env file which must contain the following line:
+    
+    SESSION_SECRET=secret

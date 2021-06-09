@@ -16,10 +16,10 @@ initializePassport(passport, email => users.find(user => user.email === email),
 mainRouter.get('/', function (req, res) {
   res.send('Hello World, I\'m Node.js. Nice to meet you!')
 })
-mainRouter.get('/about', function (req, res) {
-  res.sendFile(path.join(__dirname, '../views', 'about.html'))
-})
 
+mainRouter.get('/home', function (req, res) {
+  res.sendFile(path.join(__dirname, '../views', 'home.html'))
+})
 mainRouter.get('/register', (req, res) => {
   res.render('../views/register.ejs')
 })
@@ -45,7 +45,7 @@ mainRouter.get('/login', function (req, res) {
 })
 
 mainRouter.post('/login', passport.authenticate('local', {
-  successRedirect: '/',
+  successRedirect: '/home',
   failureRedirect: '/login',
   failureFlash: true
 }))
