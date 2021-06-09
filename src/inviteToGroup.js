@@ -3,7 +3,7 @@
 // When the accept button is pressed, the page routes to group chat.
 const Acceptbutton = document.getElementById('Acceptbtn')
 Acceptbutton.addEventListener('click', function myFunction () {
-  window.location = 'chat.html'
+  window.location = '../src/chat.html'
   document.write('Please Wait...Adding you to your new Group...')
   setTimeout(myFunction(), 4000)
 }, false)
