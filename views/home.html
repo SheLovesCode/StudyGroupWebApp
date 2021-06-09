@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <title>Homepage</title>
+    <meta charset="utf-8" />
+        <style>
+            body {
+                background-color:darkblue;
+                color: white;
+            }
+            .wrapper{
+                width: 400px;
+                max-width: 90%;
+                margin: 0 auto;
+            }
+            .wrapper label{
+                display: block;
+                margin: 0.5em 0;
+            }
+            .wrapper label input{
+                font-size: 18px;
+                padding: 0.5em;
+            }
+            .wrapper input[type="submit"]{
+                font-size: 25px;
+                color: blue;
+            }
+        </style>
+</head>
+<body>
+    <h1>Welcome to my Kudu Buddy</h1>
+    <p>
+    Kadel08 programmed This!
+    </p>
+    <div class="wrapper">
+
+        <form class="form">
+
+            <label id="emailField">
+                <input type="email" name="emailField" placeholder="email" required />
+            </label>
+            
+            <label id="groupNameField">
+                <input type="text" name="groupNameField" placeholder="groupName" required />
+            </label>
+
+            <input type="submit" value="Create a Group" name="submit" />
+        
+        </form>
+
+    </div>
+    <script language="text/javascript" defer src="../src/createGroup.js"></script>
+</body>
+</html>
