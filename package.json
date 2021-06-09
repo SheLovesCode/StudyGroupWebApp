@@ -4,7 +4,7 @@
   "description": "---\r # ELEN4010 Group Project #\r ### Farai Mutsvandiani 1842163 ###\r ### Diana Munyaradzi 1034382 ###\r ### Steven Makoni 1935885 ###\r ### Elijah Yambayamba Kadimba 1870356 ###\r ### Katelyn Boodhram 1911499 ###\r ---",
   "main": "app.js",
   "scripts": {
-    "start": "node app",
+    "start": "node app.js",
     "test": "jest"
   },
   "jest": {
@@ -33,6 +33,7 @@
     "express-flash": "0.0.2",
     "express-session": "^1.17.2",
     "jest": "^27.0.4",
+    "method-override": "^3.0.0",
     "passport": "^0.4.1",
     "passport-local": "^1.0.0",
     "socket.io": "^4.1.2"
