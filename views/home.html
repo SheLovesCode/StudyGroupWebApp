@@ -34,7 +34,7 @@
     </p>
     <div class="wrapper">
 
-        <form class="form">
+        <form action="/home" class="form" method="GET">
 
             <label id="emailField">
                 <input type="email" name="emailField" placeholder="email" required />
@@ -44,7 +44,7 @@
                 <input type="text" name="groupNameField" placeholder="groupName" required />
             </label>
 
-            <input type="submit" value="Create a Group" name="submit" />
+            <input type="submit" value="Create a Group" name="submit" formmethod="POST" />
         
         </form>
 
