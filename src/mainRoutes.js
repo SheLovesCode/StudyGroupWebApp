@@ -61,4 +61,9 @@ mainRouter.post('/home', function (req, res) {
   res.redirect('/chat')
 })
 
+mainRouter.delete('/logout', function (req, res) {
+  req.logOut()
+  res.redirect('/login')
+})
+
 module.exports = mainRouter
