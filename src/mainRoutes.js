@@ -20,9 +20,11 @@ mainRouter.get('/', function (req, res) {
 mainRouter.get('/home', function (req, res) {
   res.sendFile(path.join(__dirname, '../views', 'home.html'))
 })
+
 mainRouter.get('/register', (req, res) => {
   res.render('../views/register.ejs')
 })
+
 
 mainRouter.post('/register', async function (req, res) {
   try {
@@ -44,10 +46,19 @@ mainRouter.get('/login', function (req, res) {
   res.render('../views/login.ejs')
 })
 
+// Serve html file to js file
+mainRouter.get('/chat', function (req, res) {
+  res.sendFile(path.join(__dirname, '../src', 'chat.html'))
+})
+
 mainRouter.post('/login', passport.authenticate('local', {
   successRedirect: '/home',
   failureRedirect: '/login',
   failureFlash: true
 }))
+
+mainRouter.post('/home', function (req, res) {
+  res.redirect('/chat')
+})
 
 module.exports = mainRouter
