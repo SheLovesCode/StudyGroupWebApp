@@ -42,16 +42,16 @@ io.on('connection', (socket) => {
 
   // Print out that the user has connected
   console.log('a user has connected');
-  
+
   // Print out chat message server side
   socket.on('chat message', (chatMessage) => {
-      console.log('message: ' + chatMessage); // Print out chat message in the console
-      io.emit('chat message', chatMessage); // Print out message in the group chat
+    console.log('message: ' + chatMessage); // Print out chat message in the console
+    io.emit('chat message', chatMessage); // Print out message in the group chat
   });
 
   // Print out that the user has disconnected
   socket.on('disconnect', () => {
-      console.log('User disconnected');
+    console.log('User disconnected');
   });
 });
 
