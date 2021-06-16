@@ -1,21 +1,26 @@
 let socket = io();
-let messages = document.getElementById('messages');
-let form = document.getElementById('form');
-let input = document.getElementById('input');
+let chatBox = document.getElementById('chatBox');
+let messageInput = document.querySelector('input[name="message"]');
+
+socket.on('connect', function() {
+    console.log('Connected to server');
+});
+
+socket.on('disconnect', function() {
+    console.log('Disconnected from server');
+});
 
 // Send message to the server 
-form.addEventListener('submit', function(chatMessage) {
+chatBox.addEventListener('submit', function(chatMessage) {
     chatMessage.preventDefault();
-    if (input.value) {
-        socket.emit('chat message', input.value);
-        input.value = '';
-    }
+    socket.emit("createMessage", messageInput.value);
 });
 
 // Send message to group chat
-socket.on('chat message', function(printMessage) {
+socket.on('createNewMessage', function(printMessage) {
+    console.log('createNewMessage', printMessage);
     let item = document.createElement('li');
-    item.textContent = printMessage;
-    messages.appendChild(item);
+    item.innerText = printMessage;
+    document.querySelector('body').appendChild(item);
     window.scrollTo(0, document.body.scrollHeight);
 });
