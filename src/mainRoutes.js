@@ -48,7 +48,7 @@ mainRouter.get('/login', function (req, res) {
 
 // Serve html file to js file
 mainRouter.get('/chat', function (req, res) {
-  res.sendFile(path.join(__dirname, '../src', 'chat.html'))
+  res.sendFile(path.join(__dirname, '../views', 'chat.html'))
 })
 
 mainRouter.post('/login', passport.authenticate('local', {
