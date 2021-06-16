@@ -1,37 +1,21 @@
-//Import express
-const express = require('express');
-const app = express();
+let socket = io();
+let messages = document.getElementById('messages');
+let form = document.getElementById('form');
+let input = document.getElementById('input');
 
-// // Import http
-const http = require('http');
-const server = http.createServer(app);
-const { Server } = require("socket.io");
-const io = new Server(server);
-
-// Serve html file to js file
-app.get('/', (req, res) => {
-  res.sendFile(__dirname + '/chat.html');
- });
-
-// Connection and disconnection functionality
-io.on('connection', (socket) => {
-
-    // Print out that the user has connected
-    console.log('a user has connected');
-    
-    // Print out chat message server side
-    socket.on('chat message', (chatMessage) => {
-        console.log('message: ' + chatMessage); // Print out chat message in the console
-        io.emit('chat message', chatMessage); // Print out message in the group chat
-    });
-
-    // Print out that the user has disconnected
-    socket.on('disconnect', () => {
-        console.log('User disconnected');
-    });
+// Send message to the server 
+form.addEventListener('submit', function(chatMessage) {
+    chatMessage.preventDefault();
+    if (input.value) {
+        socket.emit('chat message', input.value);
+        input.value = '';
+    }
 });
 
-// Listen on a port
-server.listen(3000, () => {
-    console.log('listening on port 3000');
+// Send message to group chat
+socket.on('chat message', function(printMessage) {
+    let item = document.createElement('li');
+    item.textContent = printMessage;
+    messages.appendChild(item);
+    window.scrollTo(0, document.body.scrollHeight);
 });
