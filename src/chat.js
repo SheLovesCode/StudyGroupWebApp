@@ -1,6 +1,4 @@
 const socket = io();
-const chatBox = document.getElementById('chatBox');
-const messageInput = document.querySelector('input[name="message"]');
 
 socket.on('connect', function() {
     console.log('Connected to server');
@@ -11,15 +9,18 @@ socket.on('disconnect', function() {
 });
 
 // Send message to the server 
-chatBox.addEventListener('submit', function(chatMessage) {
+document.querySelector('#sendMessageButton').addEventListener('click', function(chatMessage) {
     chatMessage.preventDefault();
-    socket.emit("createMessage:", messageInput.value);
+    socket.emit("createMessage", document.querySelector('input[name="message"]').value, function() {
+
+    });
 });
 
 // Send message to group chat
 socket.on('createNewMessage', function(printMessage) {
-    console.log('createNewMessage', printMessage);
-    const item = document.createElement('li');
+    console.log("createNewMessage", printMessage);
+
+    let item = document.createElement('li');
     item.innerText = printMessage;
     document.querySelector('body').appendChild(item);
     window.scrollTo(0, document.body.scrollHeight);

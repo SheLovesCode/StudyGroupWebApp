@@ -49,10 +49,16 @@ io.on('connection', function(socket) {
     // Print out that the user has connected
     console.log('a user has connected');
 
+    // Events created when a new user joins the group: for the new user and for the rest of the group
+    // socket.emit('createNewMessage', createChatMessage('Diana', 'Welcome to the group chat'));
+    // socket.broadcast.emit('createNewMessage', createChatMessage('Diana', 'New user has joined'));
+
+
     // Print out chat message server side
-    socket.on('createMessage', function(chatMessage) {
-        console.log("createMessage", chatMessage); // Print out chat message in the console
+    socket.on('createMessage', function(chatMessage, callback) {
+        console.log("createMessage:", chatMessage); // Print out chat message in the console
         io.emit('createNewMessage', createChatMessage(chatMessage)); // Print out message in the group chat
+        callback("This is the server: ");
     });
 
     // Print out that the user has disconnected
