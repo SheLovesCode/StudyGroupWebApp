@@ -1,56 +1,29 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title> My Kudu Buddy Web App</title>
-        <style>
-            body { margin: 0; padding-bottom: 3rem; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
-      
-            #form { background:rgba(187, 122, 122, 0.15); padding: 0.25rem; position: fixed; bottom: 0; left: 0; right: 0; display: flex; height: 3rem; box-sizing: border-box; backdrop-filter: blur(10px); }
-            #input { border: none; padding: 0 1rem; flex-grow: 1; border-radius: 2rem; margin: 0.25rem; }
-            #input:focus { outline: none; }
-            #form > button { background: #333; border: none; padding: 0 1rem; margin: 0.25rem; border-radius: 3px; outline: none; color: #fff; }
-      
-            #messages { list-style-type: none; margin: 0; padding: 0; }
-            #messages > li { padding: 0.5rem 1rem; }
-            #messages > li:nth-child(odd) { background: #efefef; }
-        </style>
-    </head>
 
-    <body>
-        <ul id="messages"></ul>
-        <form id="form" action="">
-            <input id="input" autocomplete="off" />
-            <button>Send</button>
-        </form>
+<head>
+    <title> My Kudu Buddy Web App</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="">
+</head>
 
-        <script src="/socket.io/socket.io.js"></script>
-        
-        <script>
+<body>
+    <p>GROUP chat</p>
+    <!--Creating the form send the message -->
+    <form id="chatBox" action="">
+        <input type="text" name="message" id="messageInput" placeholder="Begin typing message" autocomplete="off" />
+        <button type="submit" id="sendMessageButton">Send Message</button>
+    </form>
 
-            console.log("hello");
-            var socket = io();
-            var messages = document.getElementById('messages');
-            var form = document.getElementById('form');
-            var input = document.getElementById('input');
-            
-            // Send message to the server 
-            form.addEventListener('submit', function(chatMessage)
-            {
-                chatMessage.preventDefault();
-                if(input.value) {
-                    socket.emit('chat message', input.value);
-                    input.value = '';
-                }
-            });
+    <!-- Send COVID screening tool form -->
+    <form action="https://www.wits.ac.za/covid19/covid19-screening-tool/" method="get" target="_blank">
+        <button type="submit">Send Invite</button>
+    </form>
 
-            // Send message to group chat
-            socket.on('chat message', function(printMessage)
-            {
-                var item = document.createElement('li');
-                item.textContent = printMessage;
-                messages.appendChild(item);
-                window.scrollTo(0, document.body.scrollHeight);
-            });
-        </script>
-    </body>
+    <!-- Socket.io script-->
+    <script src="/socket.io/socket.io.js"></script>
+    <script type="text/javascript" src="/chat.js"></script>
+</body>
+
 </html>
