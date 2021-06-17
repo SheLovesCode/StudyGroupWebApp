@@ -35,6 +35,16 @@ mainRouter.get('/creategroup', function (req, res) {
   })
 })
 
+mainRouter.get('/sendInvite', function (req, res) {
+  res.sendFile(path.join(__dirname, '../views', 'sendInvite.html'))
+  mainRouter.get('/public/form.css', function (req, res) {
+    res.sendFile(path.join(__dirname, '../public', '/form.css'))
+  })
+  mainRouter.get('/src/sendInvite.js', function (req, res) {
+    res.sendFile(path.join(__dirname, '../src', '/sendInvite.js'))
+  })
+})
+
 mainRouter.get('/register', (req, res) => {
   res.render('../views/register.ejs')
 })
