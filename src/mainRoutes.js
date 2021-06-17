@@ -65,6 +65,16 @@ mainRouter.post('/register', async function (req, res) {
   console.log(users)
 })
 
+mainRouter.get('/profile', function (req, res) {
+  res.sendFile(path.join(__dirname, '../views', 'profile.html'))
+  mainRouter.get('/public/profile.css', function (req, res) {
+    res.sendFile(path.join(__dirname, '../public', '/profile.css'))
+  })
+  mainRouter.get('/src/profile.js', function (req, res) {
+    res.sendFile(path.join(__dirname, '../src', '/profile.js'))
+  })
+})
+
 mainRouter.get('/login', function (req, res) {
   res.render('../views/login.ejs')
 })
