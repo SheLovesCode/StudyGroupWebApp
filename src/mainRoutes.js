@@ -10,6 +10,9 @@ const users = []
 const passport = require('passport')
 
 const initializePassport = require('./passport-config')
+const db = require('../db.js')
+const accountManager = require('../src/database/dbAccountManagement.js')
+
 initializePassport(passport, email => users.find(user => user.email === email),
   id => users.find(user => user.id === id)
 )
@@ -50,19 +53,8 @@ mainRouter.get('/register', (req, res) => {
 })
 
 mainRouter.post('/register', async function (req, res) {
-  try {
-    const hashedPassword = await bcrypt.hash(req.body.password, 10)
-    users.push({
-      id: Date.now().toString(),
-      name: req.body.name,
-      email: req.body.email,
-      password: hashedPassword
-    })
-    res.redirect('/login')
-  } catch {
-    res.redirect('/register')
-  }
-  console.log(users)
+  console.log(req.body)
+  accountManager.addUser(req.body, req, res)
 })
 
 mainRouter.get('/profile', function (req, res) {
@@ -76,6 +68,8 @@ mainRouter.get('/profile', function (req, res) {
 })
 
 mainRouter.get('/login', function (req, res) {
+  console.log(req.body)
+  accountManager.login(req.body, req, res)
   res.render('../views/login.ejs')
 })
 
