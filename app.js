@@ -2,39 +2,40 @@
 // Template code for group 12
 
 if (process.env.NODE_ENV !== 'production') {
-    require('dotenv').config()
+  require('dotenv').config()
 }
 
-const path = require('path');
-const express = require('express');
-const app = express();
-const mainRouter = require('./src/mainRoutes.js');
-const port = process.env.PORT || 3000;
+const path = require('path')
+const express = require('express')
+const app = express()
+const mainRouter = require('./src/mainRoutes.js')
+const port = process.env.PORT || 3000
 
+// Socket IO configuration
+const http = require('http')
+const server = http.createServer(app)
+const { Server } = require('socket.io')
+const io = new Server(server)
 
-// Socket IO configuration 
-const http = require('http');
-const server = http.createServer(app);
-const { Server } = require("socket.io");
-const io = new Server(server);
 // Import chatMessages.js
-const { createChatMessage } = require('./src/chatMessages');
-const publicPath = path.join(__dirname, './src'); // Important for chat.js external script
+const { createChatMessage } = require('./src/chatMessages')
+const publicPath = path.join(__dirname, './src') // Important for chat.js external script
 
 const passport = require('passport')
 const flash = require('express-flash')
 const session = require('express-session')
 const methodOverride = require('method-override')
 
-app.use(express.static(publicPath));
+app.use(express.static(publicPath))
 app.set('view engine', 'ejs')
 app.use(express.urlencoded({ extended: false }))
 app.use(flash())
 app.use(session({
-    secret: process.env.SESSION_SECRET,
-    resave: false,
-    saveUninitialized: false
+  secret: process.env.SESSION_SECRET,
+  resave: false,
+  saveUninitialized: false
 }))
+app.use('/static', express.static(path.join(__dirname, 'public')))
 app.use(passport.initialize())
 app.use(passport.session())
 app.use(methodOverride('_method'))
@@ -44,29 +45,27 @@ app.use(mainRouter)
 // io.on listens for an event (in this case 'connection') and the call back function is the same
 // as the socket declared in index.html
 // the socket parameter will now be used to access the io() object in this function
-io.on('connection', function(socket) {
+io.on('connection', function (socket) {
+  // Print out that the user has connected
+  console.log('a user has connected')
 
-    // Print out that the user has connected
-    console.log('a user has connected');
+  // Events created when a new user joins the group: for the new user and for the rest of the group
+  // socket.emit('createNewMessage', createChatMessage('Diana', 'Welcome to the group chat'));
+  // socket.broadcast.emit('createNewMessage', createChatMessage('Diana', 'New user has joined'));
 
-    // Events created when a new user joins the group: for the new user and for the rest of the group
-    // socket.emit('createNewMessage', createChatMessage('Diana', 'Welcome to the group chat'));
-    // socket.broadcast.emit('createNewMessage', createChatMessage('Diana', 'New user has joined'));
+  // Print out chat message server side
+  socket.on('createMessage', function (chatMessage, callback) {
+    console.log('createMessage:', chatMessage) // Print out chat message in the console
+    io.emit('createNewMessage', createChatMessage(chatMessage)) // Print out message in the group chat
+    callback('This is the server: ')
+  })
 
+  // Print out that the user has disconnected
+  socket.on('disconnect', function () {
+    console.log('A user has disconnected')
+  })
+})
 
-    // Print out chat message server side
-    socket.on('createMessage', function(chatMessage, callback) {
-        console.log("createMessage:", chatMessage); // Print out chat message in the console
-        io.emit('createNewMessage', createChatMessage(chatMessage)); // Print out message in the group chat
-        callback("This is the server: ");
-    });
-
-    // Print out that the user has disconnected
-    socket.on('disconnect', function() {
-        console.log('A user has disconnected');
-    });
-});
-
-server.listen(port, function() {
-    console.log(`Server is up on ${port}`);
+server.listen(port, function () {
+  console.log(`Server is up on ${port}`)
 })
