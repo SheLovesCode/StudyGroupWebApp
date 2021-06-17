@@ -1,6 +1,7 @@
 function covidScreening() {
 
-    let allowedToMeet = "NO";
+    let allowedToMeet = " ";
+
     const A1 = document.covidForm.symptoms.value;
     const A2 = document.covidForm.seriousSymptoms.value;
     const B1 = document.covidForm.tested.value;
@@ -8,13 +9,23 @@ function covidScreening() {
     const C1 = document.covidForm.medical.value;
     const C2 = document.covidForm.age.value;
 
-    if (A1 == "YES" || A2 == "YES" || B1 == "YES" || B2 == "YES") {
-        allowedToMeet = "NO";
-    } else if (C1 == "YES" || C2 == "YES") {
+    // Still need to account for when no radio input is selected
+    // Ensuring that every question has been answered
+    if (C1 == "NO" && C2 == "NO" && A1 == "NO" && A2 == "NO" && B1 == "NO" && B2 == "NO") {
+        allowedToMeet = "YES";
+    } else if ((C1 == "YES" || C2 == "YES") && (A1 == "NO" && A2 == "NO" && B1 == "NO" && B2 == "NO")) {
         allowedToMeet = "MAYBE";
     } else {
         allowedToMeet = "YES";
     }
+    document.write("Are you allowed to attend Face-to-Face meetings: ", allowedToMeet)
 
-    document.write(allowedToMeet);
 }
+
+// Adding checkBox for them to attest that the information provided is true
+// function checkBox(checkCheckBox) {
+//     if (checkCheckBox.agree.checked == false) {
+//         alert('Please check the box to continue.');
+//         return false;
+//     } else return true;
+// }
