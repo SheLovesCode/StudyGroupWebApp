@@ -28,11 +28,5 @@ module.exports = {
   clearList: function () {
     userList = []
   }
-  // isUsernameUnique
-  // isUsernameValid
-  // isEmailUnique
-  // isEmailValid
-  // isPasswordValid
-  // userNameExists
-  // emailExists
+  
 }
