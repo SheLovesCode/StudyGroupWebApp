@@ -1,4 +1,4 @@
-'use strict'
+g'use strict'
 
 const groupList = []
 const email = document.getElementById('email')
