@@ -5,14 +5,11 @@ const express = require('express')
 const mainRouter = express.Router()
 const db = require('../db.js')
 const bcrypt = require('bcrypt')
-const users = []
-
 const passport = require('passport')
-
 const initializePassport = require('./passport-config')
-const db = require('../db.js')
 const accountManager = require('../src/database/dbAccountManagement.js')
 
+const users = []
 initializePassport(passport, email => users.find(user => user.email === email),
   id => users.find(user => user.id === id)
 )
