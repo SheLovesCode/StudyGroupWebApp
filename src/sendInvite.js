@@ -1,6 +1,5 @@
-g'use strict'
+'use strict'
 
-const groupList = []
 const email = document.getElementById('email')
 const studyGroup = document.getElementById('groupName')
 
