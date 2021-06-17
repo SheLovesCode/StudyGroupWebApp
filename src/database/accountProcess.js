@@ -28,5 +28,4 @@ module.exports = {
   clearList: function () {
     userList = []
   }
-  
 }
