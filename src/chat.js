@@ -11,9 +11,7 @@ socket.on('disconnect', function() {
 // Send message to the server 
 document.querySelector('#sendMessageButton').addEventListener('click', function(chatMessage) {
     chatMessage.preventDefault();
-    socket.emit("createMessage", document.querySelector('input[name="message"]').value, function() {
-
-    });
+    socket.emit("createMessage", document.querySelector('input[name="message"]').value);
 });
 
 // Send message to group chat
