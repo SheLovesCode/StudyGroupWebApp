@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Member Poll</title>
+    <link rel="stylsheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css">
+    <link rel="stylesheet" href="../public/votingStyle.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Voting for membership of: </h2>
+        <img src=""/>
+        <div class="voting">
+            <button style="display: inline-block;" id="yesbtn" onclick="setValue1()">Yes</button>
+            <h3 style="display: inline-block;" id = "num1">0</h3>
+            
+            <button id="nobtn" onclick="setValue2()">No</button>
+            <h3 style="display: inline-block;" id = "num2">0</h3>
+        </div>
+    </div>
+    <script defer src="../src/anonymousVotingPoll.js"></script>
+</body>
+</html>
