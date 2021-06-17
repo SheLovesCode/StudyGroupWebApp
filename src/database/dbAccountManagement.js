@@ -9,7 +9,7 @@ const createUserQuery = function (user) {
   return command + formattedData
 }
 
-async function getList () {
+async function getList() {
   try {
     const pool = await db.pools
     const users = await pool.request().query('SELECT * FROM Users')
@@ -39,31 +39,8 @@ module.exports.addUser = async function (details, req, res) {
   module.exports.login = async function (details, req, res) {
     try {
       await getList()
-      // if ('loginUsername' in details) {
-      //   const index = accountProcess.userNameExists(details.loginUsername)
-      //   if (index !== -1) {
-      //     passwordCompare(index, details.loginUsernamePassword, req, res)
-      //   } else {
-      //     const message = `The username for '${details.loginUsername}' does not exist.`
-      //     res.render('error.ejs',
-      //       { error: 'Invalid Username', message: message, tips: [], link: '/', button: 'Accounts' })
-      //   }
-      // }
-      // if ('loginEmail' in details) {
-      //   const index = accountProcess.emailExists(details.loginEmail)
-      //   if (index !== -1) {
-      //     passwordCompare(index, details.loginEmailPassword, req, res)
-      //   } else {
-      //     const message = `The email address for '${details.loginEmail}' does not exist.`
-      //     res.render('error.ejs',
-      //       { error: 'Invalid Email', message: message, tips: [], link: '/', button: 'Accounts' })
-      //   }
-      // }
     } catch (err) {
       console.log(err)
-      //   const message = 'Please Try Again'
-      //   res.render('error.ejs',
-      //     { error: 'Error Accessing Database', message: message, tips: [], link: '/', button: 'Accounts' })
     }
   }
 }
