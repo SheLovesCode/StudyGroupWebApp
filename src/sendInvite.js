@@ -17,7 +17,6 @@ const sendInvite = (event) => {
     alert('The email is not valid')
   } else {
     sendEmail(emailAddress, studyGroupName)
-    
   }
 }
 
@@ -43,3 +42,10 @@ function sendEmail (emailAddress, studyGroupName) {
     message => alert(`Successfully sent to ${emailAddress}`)
   )
 }
+
+const Homebutton = document.getElementById('Homebtn')
+Homebutton.addEventListener('click', function myFunction () {
+  window.location = 'home.html'
+  document.write('Please Wait...Taking you home...')
+  setTimeout(myFunction(), 4000)
+}, false)
