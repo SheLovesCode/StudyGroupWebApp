@@ -15,16 +15,24 @@ initializePassport(passport, email => users.find(user => user.email === email),
 )
 
 mainRouter.get('/', function (req, res) {
-  //  res.send('Hello World, I\'m Node.js. Nice to meet you!')
   res.render('../views/register.ejs')
 })
 
 mainRouter.get('/home', function (req, res) {
   res.sendFile(path.join(__dirname, '../views', 'home.html'))
+  mainRouter.get('/public/home.css', function (req, res) {
+    res.sendFile(path.join(__dirname, '../public', '/home.css'))
+  })
 })
 
-mainRouter.get('/test', function (req, res) {
-  res.sendFile(path.join(__dirname, '../views', 'welcome.html'))
+mainRouter.get('/creategroup', function (req, res) {
+  res.sendFile(path.join(__dirname, '../views', 'createGroupForm.html'))
+  mainRouter.get('/public/form.css', function (req, res) {
+    res.sendFile(path.join(__dirname, '../public', '/form.css'))
+  })
+  mainRouter.get('/src/createGroup.js', function (req, res) {
+    res.sendFile(path.join(__dirname, '../src', '/createGroup.js'))
+  })
 })
 
 mainRouter.get('/register', (req, res) => {
@@ -61,11 +69,6 @@ mainRouter.post('/login', passport.authenticate('local', {
   failureRedirect: '/login',
   failureFlash: true
 }))
-
-/*
-mainRouter.post('/home', function (req, res) {
-  res.redirect('/chat')
-}) */
 
 mainRouter.delete('/logout', function (req, res) {
   req.logOut()
