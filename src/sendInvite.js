@@ -1,6 +1,5 @@
-g'use strict'
+'use strict'
 
-const groupList = []
 const email = document.getElementById('email')
 const studyGroup = document.getElementById('groupName')
 
@@ -29,6 +28,7 @@ function isEmail (email) {
   return re.test(email)
 }
 
+// links to smtpJS host to send email
 function sendEmail (emailAddress, studyGroupName) {
   Email.send({
     Host: 'smtp.gmail.com',
@@ -43,6 +43,7 @@ function sendEmail (emailAddress, studyGroupName) {
   )
 }
 
+// takes you back to home after clicking the "Cancel" button
 const Homebutton = document.getElementById('Homebtn')
 Homebutton.addEventListener('click', function myFunction () {
   window.location = 'home.html'
