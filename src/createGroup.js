@@ -25,14 +25,14 @@ const addStudyGroup = (ev) => {
     document.forms[0].reset()
     alert('Group : ' + studyGroupName + ' succesfully added')
   }
-
+/*
   // for displaying purposes
   console.warn('added', { groupList })
   const pre = document.querySelector('#msg pre')
   pre.textContent = '\n' + JSON.stringify(groupList, '\t', 2)
 
   // Save maybe to a local storage
-  localStorage.setItem('MyMoviesList', JSON.stringify(groupList))
+  localStorage.setItem('MyMoviesList', JSON.stringify(groupList)) */
 }
 
 document.addEventListener('DOMContentLoaded', () => {
