@@ -3,13 +3,13 @@
 const path = require('path')
 const express = require('express')
 const mainRouter = express.Router()
-const db = require('../db.js')
 const bcrypt = require('bcrypt')
 const users = []
 
 const passport = require('passport')
 
 const initializePassport = require('./passport-config')
+const { response } = require('express')
 initializePassport(passport, email => users.find(user => user.email === email),
   id => users.find(user => user.id === id)
 )
@@ -61,7 +61,7 @@ mainRouter.get('/login', function (req, res) {
 
 // Serve html file to js file
 mainRouter.get('/chat', function (req, res) {
-  res.sendFile(path.join(__dirname, '../views', 'chat.html'))
+  res.sendFile(path.join(__dirname, '../src', 'chat.html'))
 })
 
 mainRouter.post('/login', passport.authenticate('local', {
@@ -73,27 +73,6 @@ mainRouter.post('/login', passport.authenticate('local', {
 mainRouter.delete('/logout', function (req, res) {
   req.logOut()
   res.redirect('/login')
-})
-
-mainRouter.get('/database', function (req, res) {
-  // Make a query to the database
-  db.pools
-    // Run query
-    .then((pool) => {
-      return pool.request()
-        // This is only a test query, change it to whatever you need
-        .query('SELECT 1')
-    })
-    // Send back the result
-    .then(result => {
-      res.send(result)
-    })
-    // If there's an error, return that with some description
-    .catch(err => {
-      res.send({
-        Error: err
-      })
-    })
 })
 
 module.exports = mainRouter
