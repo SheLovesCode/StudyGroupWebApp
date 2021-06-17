@@ -9,6 +9,9 @@ const users = []
 const passport = require('passport')
 
 const initializePassport = require('./passport-config')
+const db = require('../db.js')
+const accountManager = require('../src/database/dbAccountManagement.js')
+
 initializePassport(passport, email => users.find(user => user.email === email),
   id => users.find(user => user.id === id)
 )
@@ -25,24 +28,27 @@ mainRouter.get('/register', (req, res) => {
   res.render('../views/register.ejs')
 })
 
-
 mainRouter.post('/register', async function (req, res) {
-  try {
-    const hashedPassword = await bcrypt.hash(req.body.password, 10)
-    users.push({
-      id: Date.now().toString(),
-      name: req.body.name,
-      email: req.body.email,
-      password: hashedPassword
-    })
-    res.redirect('/login')
-  } catch {
-    res.redirect('/register')
-  }
-  console.log(users)
+  console.log(req.body)
+  accountManager.addUser(req.body, req, res)
+  // try {
+  //   const hashedPassword = await bcrypt.hash(req.body.password, 10)
+  //   users.push({
+  //     id: Date.now().toString(),
+  //     name: req.body.name,
+  //     email: req.body.email,
+  //     password: hashedPassword
+  //   })
+  //   res.redirect('/login')
+  // } catch {
+  //   res.redirect('/register')
+  // }
+  // console.log(users)
 })
 
 mainRouter.get('/login', function (req, res) {
+  console.log(req.body)
+  accountManager.login(req.body, req, res)
   res.render('../views/login.ejs')
 })
 
@@ -66,26 +72,25 @@ mainRouter.delete('/logout', function (req, res) {
   res.redirect('/login')
 })
 
-const db = require('../db.js')
 mainRouter.get('/database', function (req, res) {
-// Make a query to the database
-db.pools
-// Run query
-.then((pool) => {
-return pool.request()
-// This is only a test query, change it to whatever you need
-.query('SELECT 1')
-})
-// Send back the result
-.then(result => {
-res.send(result)
-})
-// If there's an error, return that with some description
-.catch(err => {
-res.send({
-Error: err
-})
-})
+  // Make a query to the database
+  db.pools
+    // Run query
+    .then((pool) => {
+      return pool.request()
+        // This is only a test query, change it to whatever you need
+        .query('SELECT 1')
+    })
+    // Send back the result
+    .then(result => {
+      res.send(result)
+    })
+    // If there's an error, return that with some description
+    .catch(err => {
+      res.send({
+        Error: err
+      })
+    })
 })
 
 module.exports = mainRouter
