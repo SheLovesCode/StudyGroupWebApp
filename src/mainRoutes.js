@@ -4,15 +4,25 @@ const path = require('path')
 const express = require('express')
 const mainRouter = express.Router()
 const db = require('../db.js')
-const bcrypt = require('bcrypt')
 const passport = require('passport')
 const initializePassport = require('./passport-config')
 const accountManager = require('../src/database/dbAccountManagement.js')
+// const bcrypt = require('bcrypt')
+const alert = require('alert')
 
-const users = []
-initializePassport(passport, email => users.find(user => user.email === email),
-  id => users.find(user => user.id === id)
-)
+// const users = []
+// initializePassport(passport, email => users.find(user => user.email === email),
+//   id => users.find(user => user.id === id)
+// )
+function checkIfSignedIn(req, res, next) {
+  if (req.session.user) { next() } else {
+    // const err = new Error('Not logged in')
+    console.log(req.session.user)
+    // next(err)
+    alert('User not logged in!')
+    res.redirect('/login')
+  }
+}
 
 mainRouter.get('/', function (req, res) {
   res.render('../views/register.ejs')
@@ -25,7 +35,7 @@ mainRouter.get('/home', function (req, res) {
   })
 })
 
-mainRouter.get('/creategroup', function (req, res) {
+mainRouter.get('/creategroup', checkIfSignedIn, function (req, res) {
   res.sendFile(path.join(__dirname, '../views', 'createGroupForm.html'))
   mainRouter.get('/public/form.css', function (req, res) {
     res.sendFile(path.join(__dirname, '../public', '/form.css'))
@@ -35,7 +45,7 @@ mainRouter.get('/creategroup', function (req, res) {
   })
 })
 
-mainRouter.get('/sendInvite', function (req, res) {
+mainRouter.get('/sendInvite', checkIfSignedIn, function (req, res) {
   res.sendFile(path.join(__dirname, '../views', 'sendInvite.html'))
   mainRouter.get('/public/form.css', function (req, res) {
     res.sendFile(path.join(__dirname, '../public', '/form.css'))
@@ -50,11 +60,12 @@ mainRouter.get('/register', (req, res) => {
 })
 
 mainRouter.post('/register', async function (req, res) {
-  console.log(req.body)
+  // console.log(req.body)
+  console.log(accountManager)
   accountManager.addUser(req.body, req, res)
 })
 
-mainRouter.get('/profile', function (req, res) {
+mainRouter.get('/profile', checkIfSignedIn, function (req, res) {
   res.sendFile(path.join(__dirname, '../views', 'profile.html'))
   mainRouter.get('/public/profile.css', function (req, res) {
     res.sendFile(path.join(__dirname, '../public', '/profile.css'))
@@ -66,23 +77,28 @@ mainRouter.get('/profile', function (req, res) {
 
 mainRouter.get('/login', function (req, res) {
   console.log(req.body)
-  accountManager.login(req.body, req, res)
   res.render('../views/login.ejs')
 })
 
 // Serve html file to js file
-mainRouter.get('/chat', function (req, res) {
+mainRouter.get('/chat', checkIfSignedIn, function (req, res) {
   res.sendFile(path.join(__dirname, '../views', 'chat.html'))
 })
+// #******* close this for now by adding 2********#
+// mainRouter.post('/login2', passport.authenticate('local', {
+//   successRedirect: '/home',
+//   failureRedirect: '/login',
+//   failureFlash: true
+// }))
+// #******* close this for now ********#
 
-mainRouter.post('/login', passport.authenticate('local', {
-  successRedirect: '/home',
-  failureRedirect: '/login',
-  failureFlash: true
-}))
+mainRouter.post('/login', function (req, res) {
+  accountManager.login(req.body, req, res)
+})
 
-mainRouter.delete('/logout', function (req, res) {
+mainRouter.delete('/logout', checkIfSignedIn, function (req, res) {
   req.logOut()
+  req.session.destroy(function () { })
   res.redirect('/login')
 })
 
