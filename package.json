@@ -25,6 +25,7 @@
   },
   "homepage": "https://github.com/witseie-elen4010/2021-012-project#readme",
   "dependencies": {
+    "alert": "^5.0.10",
     "bcrypt": "^5.0.1",
     "bootstrap": "^5.0.1",
     "dotenv": "^10.0.0",
