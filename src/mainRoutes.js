@@ -35,6 +35,42 @@ mainRouter.get('/creategroup', function (req, res) {
   })
 })
 
+mainRouter.get('/group', function (req, res) {
+  res.sendFile(path.join(__dirname, '../views', 'grouppage.html'))
+  mainRouter.get('/public/page.css', function (req, res) {
+    res.sendFile(path.join(__dirname, '../public', '/page.css'))
+  })
+  mainRouter.get('/utils/hello-and-hi.jpg', function (req, res) {
+    res.sendFile(path.join(__dirname, '../utils', '/hello-and-hi.jpg'))
+  })
+})
+
+mainRouter.get('/group/content', function (req, res) {
+  res.sendFile(path.join(__dirname, '../views', 'insidegroups.html'))
+  mainRouter.get('/group/team.html', function (req, res) {
+    res.sendFile(path.join(__dirname, '../views', '/team.html'))
+  })
+  mainRouter.get('/group/insidegroups.html', function (req, res) {
+    res.sendFile(path.join(__dirname, '../views', '/insidegroups.html'))
+  })
+  mainRouter.get('/group/classNotes.html', function (req, res) {
+    res.sendFile(path.join(__dirname, '../views', '/classNotes.html'))
+  })
+  mainRouter.get('/group/files.html', function (req, res) {
+    res.sendFile(path.join(__dirname, '../views', '/files.html'))
+  })
+  mainRouter.get('/group/poll.html', function (req, res) {
+    res.sendFile(path.join(__dirname, '../views', '/poll.html'))
+  })
+  mainRouter.get('/public/insideGroups.css', function (req, res) {
+    res.sendFile(path.join(__dirname, '../public', '/insideGroups.css'))
+  })
+  mainRouter.get('/utils/hello-and-hi.jpg', function (req, res) {
+    res.sendFile(path.join(__dirname, '../utils', '/hello-and-hi.jpg'))
+  })
+})
+
+
 mainRouter.get('/sendInvite', function (req, res) {
   res.sendFile(path.join(__dirname, '../views', 'sendInvite.html'))
   mainRouter.get('/public/form.css', function (req, res) {
