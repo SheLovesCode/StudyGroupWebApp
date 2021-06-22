@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Group Page</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="../public/page.css">
+    <script src="https://kit.fontawesome.com/67c66657c7.js"></script>
+                <script>
+                function changeLanguage(language) {
+                    var element = document.getElementById("url");
+                    element.value = language;
+                    element.innerHTML = language;
+                }
+
+                function showDropdown() {
+                    document.getElementById("myDropdown").classList.toggle("show");
+                }
+
+                // Close the dropdown if the user clicks outside of it
+                window.onclick = function(event) {
+                    if (!event.target.matches('.dropbtn')) {
+                        var dropdowns = document.getElementsByClassName("dropdown-content");
+                        var i;
+                        for (i = 0; i < dropdowns.length; i++) {
+                            var openDropdown = dropdowns[i];
+                            if (openDropdown.classList.contains('show')) {
+                                openDropdown.classList.remove('show');
+                            }
+                        }
+                    }
+                }
+            </script>
+</head>
+<body>
+    <h1>Study Groups</h1>
+    <input type="checkbox" id="check">
+    <nav>
+        <div class="icon">My <b style="color: darkblue;">K</b>udu <b style="color: darkblue;">B</b>uddy</div>
+        <div class="search_box">
+            <input type="search" placeholder="Search here">
+            <span class="fa fa-search"></span>
+        </div>
+        <ol>
+            <li><a href="#">home</a></li>
+            <li><a href="#">profile</a></li>
+            <li><a href="#">contact us</a></li>
+            <li><a href="#">about</a></li>
+        </ol>
+        <label for="check" class="bar">
+            <span class="fa fa-bars" id="bars"></span>
+            <span class="fa fa-times" id="times"></span>
+        </label>
+    </nav>
+    <section></section>
+    <div class="container">
+        <div class="box">
+            <div class="info">
+            <h2>WITS ELITE</h2>
+            <a href="/group/content" class="btn">Click Me</a>
+            </div>
+        </div>
+        <div class="box">
+            <div class="info">
+                <h2>1234 START</h2>
+                <a href="/group/content" class="btn">Click Me</a>
+            </div>
+        </div>
+        <div class="box">
+            <div class="info">
+                <h2>WAS GUD</h2>
+                <a href="/group/content" class="btn">Click Me</a>
+            </div>
+        </div>
+        <div class="box">
+            <div class="info">
+                <div class="dropdown">
+                    <ul class="dropbtn icons btn-right showLeft" onclick="showDropdown()">
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                    </ul>
+                    <div id="myDropdown" class="dropdown-content">
+                        <a href="#">Manage Group</a>
+                        <a href="#">Leave Group</a>
+                        <a href="#">Add Member</a>
+                        <a href="#">Get link to group</a>
+                    </div>
+                </div>
+                <h2>LECTURER.INC</h2>
+                <a href="/group/content" class="btn">Click Me</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
