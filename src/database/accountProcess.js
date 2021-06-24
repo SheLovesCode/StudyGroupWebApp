@@ -67,7 +67,19 @@ module.exports = {
       if (userList[i].email === email_) { return false }
     }
     return true
-  }
+  },
   // Email exists
-
+  EmailExists: function (email) {
+    const index = userList.findIndex((user) => {
+      return user.email === email
+    })
+    return index
+  },
+  //  Password is valid
+  isPasswordValid: function (password, username) {
+    const validPasswordLength = 5
+    if ((username !== password) && (password.length >= validPasswordLength)) return true
+    else return false
+  }
+  // Address is valid
 }
