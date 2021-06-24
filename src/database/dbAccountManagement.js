@@ -1,3 +1,4 @@
+
 'use strict'
 
 const db = require('../../db')
@@ -8,8 +9,7 @@ const createUserQuery = function (user) {
   const formattedData = `VALUES ('${user.username}','${user.email}', '${user.password}', '${user.address}');`
   return command + formattedData
 }
-
-async function getList() {
+async function getList () {
   try {
     const pool = await db.pools
     const users = await pool.request().query('SELECT * FROM Users')
@@ -56,9 +56,17 @@ module.exports.addUser = async function (details, req, res) {
       return
     }
     // email unique
-
+    if (!accountProcess.isEmailUnique(user.email)) {
+      console.log('Error: Email not valid')
+      res.redirect('/register')
+      return
+    }
     // password valid
-
+    if (!accountProcess.isPasswordValid(user.password, user.username)) {
+      console.log('Error: Password not valid')
+      res.redirect('/register')
+      return
+    }
     // address valid
     const pool = await db.pools
     await pool.request().query(createUserQuery(user)) // User details added to the table
