@@ -44,19 +44,20 @@
             <button type="submit">Send Face-to-Face Meeting Invite</button>
         </form>
         <!-- Send Online Meeting Invite -->
-        <a href="#" id="sendOnlineInvite" class="inviteButton">Send Online Meeting Invite</a>
+        <button class="meetingBtn">Send Online Meeting Invite</button>
     </div>
-
+    <script type="text/javascript" src="../src/meetings.js"></script>
     <!--Pop-up Modal Section -->
     <div class="backgroundModal">
         <div class="modal-content">
             <div class="close">+</div>
-            <img src="../utils/onlineMeeting.jpg" alt="">
-            <form>
-                <input type="text" placeholder="Email address">
-                <input type="text" placeholder="Meeting  Link">
-                <a href="" class="inviteButton">Send Invite</a>
-            </form>
+            <h2> Send link for online meeting </h2>
+            <label for="email">Email: </label>
+            <input type="text" name="email">
+            <label for="meetingLink">Meeting Link: </label>
+            <input type="text" name="meetingLink">
+            <button>Send Invite </button>
         </div>
     </div>
+    <script type="text/javascript" src="../src/covidForm.js"></script>
 </body>
