@@ -43,10 +43,20 @@
         <form action="/CovidScreening" method="get" target="_blank">
             <button type="submit">Send Face-to-Face Meeting Invite</button>
         </form>
+        <!-- Send Online Meeting Invite -->
+        <a href="#" id="sendOnlineInvite" class="inviteButton">Send Online Meeting Invite</a>
+    </div>
 
-        <form action="/CovidScreening" method="get" target="_blank">
-            <button type="submit">Send Online Meeting Invite</button>
-        </form>
-
+    <!--Pop-up Modal Section -->
+    <div class="backgroundModal">
+        <div class="modal-content">
+            <div class="close">+</div>
+            <img src="../utils/onlineMeeting.jpg" alt="">
+            <form>
+                <input type="text" placeholder="Email address">
+                <input type="text" placeholder="Meeting  Link">
+                <a href="" class="inviteButton">Send Invite</a>
+            </form>
+        </div>
     </div>
 </body>

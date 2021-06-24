@@ -1,13 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400&display=swap');
-
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Poppins',sans-serif;
+    font-family: 'Poppins', sans-serif;
 }
 
-nav{
+nav {
     display: flex;
     width: 100%;
     background: cornflowerblue;
@@ -17,24 +16,24 @@ nav{
     padding: 7.5px 30px;
 }
 
-nav .icon{
+nav .icon {
     font-size: 25px;
     font-weight: 800;
     color: #fff;
     cursor: pointer;
 }
 
-nav ol{
+nav ol {
     display: flex;
     list-style: none;
     margin: auto 0;
 }
 
-nav ol li{
+nav ol li {
     margin: 0 2px;
 }
 
-nav ol li a{
+nav ol li a {
     color: #fff;
     font-size: 20px;
     text-decoration: none;
@@ -43,19 +42,19 @@ nav ol li a{
     padding: 5px 10px;
 }
 
-nav ol li:hover a{
+nav ol li:hover a {
     background: #fff;
     color: cornflowerblue;
 }
 
-nav .search_box{
+nav .search_box {
     display: flex;
     margin: auto 0;
     height: 35px;
     line-height: 35px;
 }
 
-nav .search_box input{
+nav .search_box input {
     border: none;
     outline: none;
     background: #fff;
@@ -65,7 +64,7 @@ nav .search_box input{
     width: 400px;
 }
 
-nav .search_box span{
+nav .search_box span {
     color: cornflowerblue;
     font-size: 20px;
     background: #fff;
@@ -76,10 +75,11 @@ nav .search_box span{
     z-index: 1;
 }
 
-nav .search_box span:hover{
+nav .search_box span:hover {
     color: #fff;
 }
-nav .search_box span::after{
+
+nav .search_box span::after {
     height: 100%;
     width: 100%;
     content: '';
@@ -91,45 +91,45 @@ nav .search_box span::after{
     z-index: -1;
 }
 
-nav .search_box span:hover::after{
+nav .search_box span:hover::after {
     width: 100%;
 }
 
-nav .bar{
+nav .bar {
     position: relative;
     margin: auto;
 }
 
-nav .bar span{
+nav .bar span {
     position: absolute;
     color: #fff;
     font-size: 20px;
 }
 
-input[type="checkbox"]{
+input[type="checkbox"] {
     -webkit-appearance: none;
     display: none;
 }
 
 @media screen and (max-width: 1250px) {
-    nav{
+    nav {
         display: block;
         padding: 0;
     }
-    nav .icon{
+    nav .icon {
         display: inline-block;
         padding: 15px 30px;
     }
-    nav .search_box{
+    nav .search_box {
         width: 100%;
         display: inline-flex;
         justify-content: center;
         margin-bottom: 15px;
     }
-    nav .search_box input{
+    nav .search_box input {
         width: 90%;
     }
-    nav ol{
+    nav ol {
         display: flex;
         flex-direction: column;
         background: darkblue;
@@ -142,57 +142,54 @@ input[type="checkbox"]{
         transition: 0.3s 0.1s all;
         opacity: 0;
     }
-    nav ol lo a{
+    nav ol lo a {
         color: #000;
         font-size: 28px;
         padding: 25px;
         display: block;
     }
-    nav ol li:nth-child(1){
+    nav ol li:nth-child(1) {
         transform: translateX(-150px);
     }
-    
-    nav ol li:nth-child(2){
+    nav ol li:nth-child(2) {
         transform: translateX(-200px);
     }
-    
-    nav ol li:nth-child(3){
+    nav ol li:nth-child(3) {
         transform: translateX(-250px);
     }
-    
-    nav ol li:nth-child(4){
+    nav ol li:nth-child(4) {
         transform: translateX(-300px);
     }
-    nav .bar{
+    nav .bar {
         display: block;
         position: absolute;
         top: 20px;
         right: 80px;
         cursor: pointer;
     }
-    nav .bar #times{
+    nav .bar #times {
         display: none;
     }
-    #check:checked ~ nav .bar #times{
+    #check:checked~nav .bar #times {
         display: block;
     }
-    #check:checked ~ nav .bar #bars{
+    #check:checked~nav .bar #bars {
         display: none;
     }
-    #check:checked ~ nav ol{
+    #check:checked~nav ol {
         visibility: visible;
         height: 465px;
     }
-    #check:checked ~ nav ol li:nth-child(1),
-    #check:checked ~ nav ol li:nth-child(2),
-    #check:checked ~ nav ol li:nth-child(3),
-    #check:checked ~ nav ol li:nth-child(4){
+    #check:checked~nav ol li:nth-child(1),
+    #check:checked~nav ol li:nth-child(2),
+    #check:checked~nav ol li:nth-child(3),
+    #check:checked~nav ol li:nth-child(4) {
         transform: translateX(0);
         opacity: 1;
     }
 }
 
-section{
+section {
     background: url(../utils/hello-and-hi.jpg);
     height: 100%;
     width: 100%;
@@ -218,7 +215,7 @@ section{
     list-style: none;
 }
 
-.nav_bar ul li{
+.nav_bar ul li {
     float: left;
     font-size: 16px;
     font-weight: bold;
@@ -228,12 +225,14 @@ section{
 .nav_bar ul li a {
     text-decoration: none;
     color: #fff;
-    background-color:cornflowerblue;
+    background-color: cornflowerblue;
     border: 1px solide #000000;
     border-bottom: none;
     padding: 10px 20px 10px 20px;
     -webkit-border-top-right-radius: 10px;
+    border-top-right-radius: 10px;
     -webkit-border-top-left-radius: 10px;
+    border-top-left-radius: 10px;
     -moz-border-radius-topleft: 10px;
     -moz-border-radius-topright: 10px;
     width: 95px;
@@ -244,7 +243,7 @@ section{
 .nav_bar ul li a:hover {
     text-decoration: none;
     color: #000000;
-    background:cornflowerblue;
+    background: cornflowerblue;
     -moz-transition: background-color 200ms ease-in;
     -webkit-transition: background-color 200ms ease in;
     -ms-transition: background-color 200ms ease-in;
@@ -257,6 +256,7 @@ section{
     color: #000000;
     border-bottom: 1px solid #ffffff;
 }
+
 .nav_bar ul li a#onlink:hover {
     background: #ffffff;
     color: #000000;
@@ -276,4 +276,50 @@ section{
     font-size: 14px;
     margin: 0;
     padding: 0;
+}
+
+
+/* Send Online Meeting Invite */
+
+.backgroundModal {
+    width: 100%;
+    height: 100%;
+    /* 0.7 is the opacity of the background of the pop up*/
+    background-color: rgba(0, 0, 0, 0.7);
+    position: absolute;
+    top: 0;
+    display: flex;
+    /* Centering the elements of the modal */
+    justify-content: center;
+    align-items: center;
+    display: none;
+}
+
+.modal-content {
+    width: 300px;
+    height: 300px;
+    background-color: white;
+    border-radius: 4px;
+    text-align: centre;
+    padding: 20px;
+    position: relative;
+}
+
+input {
+    width: 50%;
+    display: block;
+    margin: 15px auto;
+}
+
+
+/* Closing button */
+
+.close {
+    position: absolute;
+    top: 0;
+    right: 14px;
+    font-size: 42px;
+    transform: rotate(45deg);
+    cursor: pointer;
+    /* Allow hovering */
 }
