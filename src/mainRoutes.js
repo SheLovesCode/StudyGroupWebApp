@@ -8,7 +8,7 @@ const bcrypt = require('bcrypt')
 const passport = require('passport')
 const initializePassport = require('./passport-config')
 const accountManager = require('../src/database/dbAccountManagement.js')
-
+const groupManager = require('../src/createGroup')
 const users = []
 initializePassport(passport, email => users.find(user => user.email === email),
   id => users.find(user => user.id === id)
@@ -30,9 +30,10 @@ mainRouter.get('/creategroup', function (req, res) {
   mainRouter.get('/public/form.css', function (req, res) {
     res.sendFile(path.join(__dirname, '../public', '/form.css'))
   })
-  mainRouter.get('/src/createGroup.js', function (req, res) {
-    res.sendFile(path.join(__dirname, '../src', '/createGroup.js'))
-  })
+})
+
+mainRouter.post('/creategroup', function (req, res) {
+  groupManager.addGroup(req.body, req, res)
 })
 
 mainRouter.get('/group', function (req, res) {
@@ -69,7 +70,6 @@ mainRouter.get('/group/content', function (req, res) {
     res.sendFile(path.join(__dirname, '../utils', '/hello-and-hi.jpg'))
   })
 })
-
 
 mainRouter.get('/sendInvite', function (req, res) {
   res.sendFile(path.join(__dirname, '../views', 'sendInvite.html'))
