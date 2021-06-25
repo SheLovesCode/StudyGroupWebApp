@@ -127,7 +127,6 @@ mainRouter.get('/profile', function (req, res) {
 
 mainRouter.get('/login', function (req, res) {
   console.log(req.body)
-  accountManager.login(req.body, req, res)
   res.render('../views/login.ejs')
 })
 
