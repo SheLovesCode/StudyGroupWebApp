@@ -27,17 +27,20 @@ const session = require('express-session')
 const methodOverride = require('method-override')
 const bodyParser = require('body-parser')
 
+const cookieParser = require('cookie-parser') // load cookie-parser for session
+
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 
 app.use('/cdn', express.static('public'))
-
+app.use(express.static('public'))
 app.use(express.static(publicPath))
 app.set('view engine', 'ejs')
 // app.use(express.urlencoded({ extended: false }))
 app.use(flash())
+app.use(cookieParser())
 app.use(session({
-  secret: process.env.SESSION_SECRET,
+  secret: 'cookie_secret',
   resave: false,
   saveUninitialized: false
 }))
