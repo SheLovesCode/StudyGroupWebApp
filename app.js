@@ -21,7 +21,6 @@ const io = new Server(server)
 const createChatMessage = require('./src/chatMessages')
 const publicPath = path.join(__dirname, './src') // Important for chat.js external script
 
-const passport = require('passport')
 const flash = require('express-flash')
 const session = require('express-session')
 const methodOverride = require('method-override')
@@ -45,8 +44,6 @@ app.use(session({
   saveUninitialized: false
 }))
 app.use('/static', express.static(path.join(__dirname, 'public')))
-app.use(passport.initialize())
-app.use(passport.session())
 app.use(methodOverride('_method'))
 
 app.use(mainRouter)

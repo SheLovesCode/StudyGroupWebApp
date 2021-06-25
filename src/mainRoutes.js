@@ -4,16 +4,9 @@ const path = require('path')
 const express = require('express')
 const mainRouter = express.Router()
 const db = require('../db.js')
-const passport = require('passport')
-const initializePassport = require('./passport-config')
 const accountManager = require('../src/database/dbAccountManagement.js')
-// const bcrypt = require('bcrypt')
 const alert = require('alert')
 
-// const users = []
-// initializePassport(passport, email => users.find(user => user.email === email),
-//   id => users.find(user => user.id === id)
-// )
 function checkIfSignedIn(req, res, next) {
   if (req.session.user) { next() } else {
     // const err = new Error('Not logged in')
@@ -60,7 +53,6 @@ mainRouter.get('/register', (req, res) => {
 })
 
 mainRouter.post('/register', async function (req, res) {
-  // console.log(req.body)
   console.log(accountManager)
   accountManager.addUser(req.body, req, res)
 })
@@ -84,13 +76,6 @@ mainRouter.get('/login', function (req, res) {
 mainRouter.get('/chat', checkIfSignedIn, function (req, res) {
   res.sendFile(path.join(__dirname, '../views', 'chat.html'))
 })
-// #******* close this for now by adding 2********#
-// mainRouter.post('/login2', passport.authenticate('local', {
-//   successRedirect: '/home',
-//   failureRedirect: '/login',
-//   failureFlash: true
-// }))
-// #******* close this for now ********#
 
 mainRouter.post('/login', function (req, res) {
   accountManager.login(req.body, req, res)
