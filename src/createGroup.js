@@ -1,5 +1,6 @@
 'use strict'
 //Just a random comment
+
 const groupList = []
 const email = document.getElementById('email')
 const studyGroup = document.getElementById('groupName')
