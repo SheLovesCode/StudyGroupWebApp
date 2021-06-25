@@ -4,15 +4,18 @@ const path = require('path')
 const express = require('express')
 const mainRouter = express.Router()
 const db = require('../db.js')
-const bcrypt = require('bcrypt')
-const passport = require('passport')
-const initializePassport = require('./passport-config')
 const accountManager = require('../src/database/dbAccountManagement.js')
+const alert = require('alert')
 
-const users = []
-initializePassport(passport, email => users.find(user => user.email === email),
-  id => users.find(user => user.id === id)
-)
+function checkIfSignedIn(req, res, next) {
+  if (req.session.user) { next() } else {
+    // const err = new Error('Not logged in')
+    console.log(req.session.user)
+    // next(err)
+    alert('User not logged in!')
+    res.redirect('/login')
+  }
+}
 
 mainRouter.get('/', function (req, res) {
   res.render('../views/register.ejs')
@@ -133,11 +136,7 @@ mainRouter.get('/chat', function (req, res) {
   res.sendFile(path.join(__dirname, '../views', 'chat.html'))
 })
 
-mainRouter.post('/login', passport.authenticate('local', {
-  successRedirect: '/home',
-  failureRedirect: '/login',
-  failureFlash: true
-}))
+mainRouter.post('/login', )
 
 // Covid Screening after invitation
 mainRouter.get('/CovidScreening', function (req, res) {
