@@ -4,4 +4,4 @@ let createChatMessage = function(text) {
     return text;
 }
 
-module.exports = createChatMessage;
+module.exports = createChatMessage
