@@ -8,3 +8,11 @@ deploy:
   on:
     branch: main
 
+steps:
+  - task: AzureWebApp@1
+  displayName: Azure App Service Deploy
+  inputs:
+    azureSubscription: 'Azure for Students'
+    appName: 'MyKuduBuddy'
+    package: '$(System.DefaultWorkingDirectory)/**/*.zip')'
+    customWebConfig: '-Handler iisnode -NodeStartFile app.js -appType node'

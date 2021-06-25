@@ -23,20 +23,3 @@ socket.on('createNewMessage', function(printMessage) {
     document.querySelector('body').appendChild(item);
     window.scrollTo(0, document.body.scrollHeight);
 });
-
-document.querySelector('#sendLocation').addEventListener('click', function(geolocation) {
-    // Check if their browser supports Geolocation
-    if (!navigator.geolocation) {
-        return alert('Geolocation is not supported by your browser.');
-    }
-
-    // First function returns the position; Second function is if the position cannot be determine
-    navigator.geolocation.getCurrentPosition(function(position) {
-        socket.emit('createLocation', {
-            latitude: position.coords.latitude,
-            longitude: position.coords.longitude
-        })
-    }, function() {
-        alert('Unable to fetch location.')
-    })
-});
