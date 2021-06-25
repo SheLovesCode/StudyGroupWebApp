@@ -82,7 +82,6 @@ mainRouter.post('/login', function (req, res) {
 })
 
 mainRouter.delete('/logout', checkIfSignedIn, function (req, res) {
-  req.logOut()
   req.session.destroy(function () { })
   res.redirect('/login')
 })
