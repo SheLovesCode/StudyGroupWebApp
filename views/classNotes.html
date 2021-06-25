@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Inside Group Page</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +8,7 @@
     <link rel="stylesheet" type="text/css" href="../public/insideGroups.css">
     <script src="https://kit.fontawesome.com/67c66657c7.js"></script>
 </head>
+
 <body>
     <input type="checkbox" id="check">
     <nav>
@@ -32,11 +34,30 @@
             <li><a href="insidegroups.html">Chats</a></li>
             <li><a href="team.html">Team</a></li>
             <li><a href="files.html">Files</a></li>
-            <li><a href="classNotes.html"  id="onlink">Notes</a></li>
+            <li><a href="classNotes.html" id="onlink">Notes</a></li>
             <li><a href="poll.html">Polls</a></li>
         </ul>
     </div>
     <div class="main_container">
-        <p>This is the notes page</p>
+        <!-- Send COVID screening tool form -->
+        <form action="/CovidScreening" method="get" target="_blank">
+            <button type="submit">Send Face-to-Face Meeting Invite</button>
+        </form>
+        <!-- Send Online Meeting Invite -->
+        <button class="meetingBtn">Send Online Meeting Invite</button>
     </div>
+    <script type="text/javascript" src="../src/meetings.js"></script>
+    <!--Pop-up Modal Section -->
+    <div class="backgroundModal">
+        <div class="modal-content">
+            <div class="close">+</div>
+            <h2> Send link for online meeting </h2>
+            <label for="email">Email: </label>
+            <input type="text" name="email">
+            <label for="meetingLink">Meeting Link: </label>
+            <input type="text" name="meetingLink">
+            <button>Send Invite </button>
+        </div>
+    </div>
+    <script type="text/javascript" src="../src/covidForm.js"></script>
 </body>
