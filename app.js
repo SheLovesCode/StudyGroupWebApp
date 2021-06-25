@@ -21,11 +21,12 @@ const io = new Server(server)
 const createChatMessage = require('./src/chatMessages')
 const publicPath = path.join(__dirname, './src') // Important for chat.js external script
 
-const passport = require('passport')
 const flash = require('express-flash')
 const session = require('express-session')
 const methodOverride = require('method-override')
 const bodyParser = require('body-parser')
+
+const cookieParser = require('cookie-parser') // load cookie-parser for session
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
@@ -36,14 +37,13 @@ app.use(express.static(publicPath))
 app.set('view engine', 'ejs')
 // app.use(express.urlencoded({ extended: false }))
 app.use(flash())
+app.use(cookieParser())
 app.use(session({
-  secret: process.env.SESSION_SECRET,
+  secret: 'cookie_secret',
   resave: false,
   saveUninitialized: false
 }))
 app.use('/static', express.static(path.join(__dirname, 'public')))
-app.use(passport.initialize())
-app.use(passport.session())
 app.use(methodOverride('_method'))
 
 app.use(mainRouter)

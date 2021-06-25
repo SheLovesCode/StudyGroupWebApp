@@ -72,6 +72,7 @@ module.exports.addUser = async function (details, req, res) {
     await pool.request().query(createUserQuery(user)) // User details added to the table
 
     req.session.user = { name: user.username, email: user.email }
+    console.log(req.session.user)
     res.redirect('/login')
   } catch (err) {
     console.log(err)
