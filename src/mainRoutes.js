@@ -136,16 +136,19 @@ mainRouter.get('/chat', function (req, res) {
   res.sendFile(path.join(__dirname, '../views', 'chat.html'))
 })
 
-mainRouter.post('/login', )
+mainRouter.post('/login', function (req, res) {
+  accountManager.login(req.body, req, res)
+})
+
+mainRouter.delete('/logout', checkIfSignedIn, function (req, res) {
+  req.logOut()
+  req.session.destroy(function () { })
+  res.redirect('/login')
+})
 
 // Covid Screening after invitation
 mainRouter.get('/CovidScreening', function (req, res) {
   res.sendFile(path.join(__dirname, '../views', 'covidForm.html'))
-})
-
-mainRouter.delete('/logout', function (req, res) {
-  req.logOut()
-  res.redirect('/login')
 })
 
 mainRouter.get('/database', function (req, res) {
