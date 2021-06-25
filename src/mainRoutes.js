@@ -121,8 +121,8 @@ mainRouter.post('/register', async function (req, res) {
 
 mainRouter.get('/profile', function (req, res) {
   res.sendFile(path.join(__dirname, '../views', 'profile.html'))
-  mainRouter.get('/public/form.css', function (req, res) {
-    res.sendFile(path.join(__dirname, '../public', '/form.css'))
+  mainRouter.get('/public/profile.css', function (req, res) {
+    res.sendFile(path.join(__dirname, '../public', '/profile.css'))
   })
   mainRouter.get('/src/profile.js', checkIfSignedIn, function (req, res) {
     res.sendFile(path.join(__dirname, '../src', '/profile.js'))
