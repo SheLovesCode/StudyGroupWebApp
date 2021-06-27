@@ -9,6 +9,7 @@ const createUserQuery = function (user) {
   const formattedData = `VALUES ('${user.username}','${user.email}', '${user.password}', '${user.address}');`
   return command + formattedData
 }
+
 async function getList () {
   try {
     const pool = await db.pools
@@ -36,6 +37,7 @@ const passwordCompare = function (index, password, req, res) {
 
 module.exports.addUser = async function (details, req, res) {
   const user = accountProcess.createUser(details) // Create an object from the req.body
+
   try {
     // username unique
     if (!accountProcess.isUsernameValid(user.username)) {
