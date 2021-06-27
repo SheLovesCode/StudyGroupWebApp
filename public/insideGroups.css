@@ -61,7 +61,8 @@ nav .search_box input {
     height: 100%;
     padding: 0 10px;
     font-size: 20px;
-    width: 400px;
+    width: 500px;
+    position: relative;top: -15px;
 }
 
 nav .search_box span {
