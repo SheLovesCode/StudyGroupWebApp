@@ -1,32 +1,32 @@
 <!DOCTYPE html>
+
 <html lang="en">
-<head>
-<meta charset="utf-8" />
-<title>Let us make a study group</title>
-<link rel="stylesheet" href="../public/form.css">
-<script defer src="../src/createGroup.js"></script>
-</head>
+    <head>
+        <meta charset="utf-8" />
+        <title>Let us make a study group</title>
+        <link rel="stylesheet" href="../public/form.css">
+    </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <h2>Make a New Group</h2>
-        </div>
-    <form class="form" id="form">
-        <div class="form-control">       
-            <label for="Email">User Email Address</label>
-            <input type="email" id="email" placeholder="example@gmail.com" required/>
-            <small>Error Message</small>
-        </div>
-        <div class="form-control">
-            <label for="Study Group Name">Study Group Name</label>
-            <input type="text" id="groupName" placeholder="WITS303" required/>
-            <small>Error Message</small>
-        </div>
-            <button id="btn">Add Group</button>
-        <div id="msg">
-            <pre></pre>
-        </div>
-    </form>
+<div class="container">
+    <div class="header">
+        <h2>Make a New Group</h2>
     </div>
+<form action="/creategroup" method="post" class="form">
+  <div class="form-control">
+    <label for="fname">User Email Address:</label>
+    <input type="email" id="email" name="email" placeholder="example@gmail.com" required><br><br>
+    <small>Error Message</small>
+  </div>
+  <div class="form-control">
+    <label for="lname">Study Group Name:</label>
+    <input type="text" id="groupName"  name="groupName" placeholder="WITS303" required/><br><br>
+    <small>Error Message</small>
+</div>
+    <input type="submit" value="Add Group">
+<div id="msg">
+    <pre></pre>
+</div>
+</form>
+</div>
 </body>
 </html>

@@ -6,7 +6,8 @@ const mainRouter = express.Router()
 const db = require('../db.js')
 const accountManager = require('../src/database/dbAccountManagement.js')
 const alert = require('alert')
-
+const groupManager = require('../src/createGroup')
+ 
 function checkIfSignedIn(req, res, next) {
   if (req.session.user) {
     console.log('There')
@@ -37,9 +38,11 @@ mainRouter.get('/creategroup', function (req, res) {
   mainRouter.get('/public/form.css', function (req, res) {
     res.sendFile(path.join(__dirname, '../public', '/form.css'))
   })
-  mainRouter.get('/src/createGroup.js', function (req, res) {
-    res.sendFile(path.join(__dirname, '../src', '/createGroup.js'))
-  })
+})
+
+mainRouter.post('/creategroup', function (req, res) {
+  groupManager.obtainExistingGroups()
+  groupManager.addGroup(req.body, req, res)
 })
 
 mainRouter.get('/group', function (req, res) {
