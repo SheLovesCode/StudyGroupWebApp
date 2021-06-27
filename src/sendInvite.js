@@ -4,7 +4,7 @@ const email = document.getElementById('email')
 const studyGroup = document.getElementById('groupName')
 
 const sendInvite = (event) => {
-  event.preventDefault() // to stop the event from submitting
+  event.preventDefault()
   const emailAddress = email.value
   const studyGroupName = studyGroup.value
 
@@ -41,6 +41,7 @@ function sendEmail (emailAddress, studyGroupName) {
   }).then(
     message => alert(`Successfully sent to ${emailAddress}`)
   )
+  document.forms[0].reset()
 }
 
 // takes you back to home after clicking the "Cancel" button
