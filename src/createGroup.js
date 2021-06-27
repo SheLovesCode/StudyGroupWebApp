@@ -2,78 +2,86 @@
 
 const db = require('../db.js')
 const validateGrpCrd = require('../src/groupProcess')
-let groupList = []
 
 module.exports.addGroup = async function (groupDetails, req, res) {
   console.log(groupDetails)
-  const rating = 5
-  const group = {
-    id: Date.now(),
-    email: groupDetails.email,
-    studyGroup: groupDetails.groupName,
-    groupRating: rating
-  }
-  if (validateGrpCrd.isGroupNameValid(group.studyGroup)) { console.log('Valid Group') } else { console.log('Invalid Group') }
-  const isGroupInDB = false
-  const number = doesGroupExist(group.studyGroup, isGroupInDB)
-  console.log(number)
+  // Storing the Details entered by the User
+  const group = validateGrpCrd.storeGroupCredentials(groupDetails)
+  const studyGroupName = group.studyGroup
+  let doesGroupExist = false
+  // List of the stored study groups=
+  const groupList = validateGrpCrd.getGroupList()
+  console.log(groupList)
+  const foundGroupIndex = groupList.findIndex((group) => {
+    return group.groupname === studyGroupName
+  })
+  const foundGroup = groupList[foundGroupIndex]
+  console.log('******************************************')
 
-/*
-  if (group.email === '' || group.studyGroup === '') {
-    console.log('The email address or the group name was not entered')
-  } else if (!validateGrpCrd.isEmail(group.email)) {
-    console.log('The email is not valid')
+  // Checking if the Group entered is in the database
+  if (foundGroupIndex === -1) {
+    console.log('It does not exists')
+    doesGroupExist = false
   } else {
+    console.log(foundGroup.groupname)
+    const groupFound = foundGroup.groupname
+    console.log(groupFound + ' does exist')
+    doesGroupExist = true
+  }
+
+  try {
+    // Checking if the User inputted values
+    if (group.email === '' || group.studyGroup === '') {
+      console.log('The email address or the group name was not entered')
+      res.redirect('/creategroup')
+      return
+    }
+    // Checking if the User inputted a correct email
+    if (!validateGrpCrd.isEmailValid(group.email)) {
+      console.log('The email is not valid')
+      res.redirect('/creategroup')
+      return
+    }
+    // Checking if the User inputted a a group name that already exist
+    if (doesGroupExist === true) {
+      console.log('The group already exist')
+      res.redirect('/creategroup')
+      return
+    }
+    // Checking if the User inputted a a group name that already exist
+    if (!validateGrpCrd.isGroupNameValid(studyGroupName)) {
+      console.log('The study group name is not valid')
+      res.redirect('/creategroup')
+      return
+    }
+
+    // Making the query command for the database
     const cmd = 'INSERT INTO Groups (groupcreator,groupname,grouprating) '
     const cmdValue = `VALUES ('${group.email}','${group.studyGroup}',${group.groupRating});`
     const query = cmd + cmdValue
-    try {
-      const pool = await db.pools
-      await pool.request().query(query)
-      res.redirect('/home')
-    } catch (err) {
-      console.log(err)
-      res.redirect('/creategroup')
-    }
-  } */
+    // Create a connection
+    const pool = await db.pools
+    await pool.request().query(query)
+    console.log('Successfully added')
+    res.redirect('/home')
+  } catch (err) {
+    console.log(err)
+    res.redirect('/creategroup')
+  }
 }
 
-async function doesGroupExist (groupname, isGroupInDB) {
-  groupList = []
+module.exports.obtainExistingGroups = async function () {
+  console.log('Storing Current Study Groups in List')
   try {
+    // Making a connection to obtain the available groups in the database
     const pool = await db.pools
     const groups = await pool.request().query('SELECT groupname FROM Groups')
+    validateGrpCrd.clearGroupList()
+    // Storing all the database study groups in the list
     groups.recordset.forEach(element => {
-      groupList.push(element)
+      validateGrpCrd.storeGroup(element)
     })
   } catch (err) {
     console.log(err)
   }
-  const foundGroupIndex = groupList.findIndex((group) => {
-    return group.groupname === groupname
-  })/*
-  console.log(groupname)
-  console.log('******************************************')
-  console.log(groupList)
-  console.log('******************************************')
-  console.log(foundGroupIndex)
-  console.log('******************************************') */
-  if (foundGroupIndex === -1) {
-    // console.log('It does not exists')
-    isGroupInDB = false
-    return (trial(isGroupInDB))
-  } else { /*
-    const foundGroup = groupList[foundGroupIndex]
-    console.log('******************************************')
-    console.log(foundGroup.groupname)
-    const groupFound = foundGroup.groupname
-    console.log(groupFound + ' does exist') */
-    isGroupInDB = true
-    return (trial(isGroupInDB))
-  }
-}
-
-function trial (state) {
-  if (state === true) return 22
-  else return 44
 }

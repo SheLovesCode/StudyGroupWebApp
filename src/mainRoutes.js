@@ -33,6 +33,7 @@ mainRouter.get('/creategroup', function (req, res) {
 })
 
 mainRouter.post('/creategroup', function (req, res) {
+  groupManager.obtainExistingGroups()
   groupManager.addGroup(req.body, req, res)
 })
 
