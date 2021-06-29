@@ -39,15 +39,16 @@
         </ul>
     </div>
     <div class="main_container">
-        <p>Group Chat</p>
-        <!--Creating the form send the message -->
-        <form id="chatBox" action="">
-            <input type="text" name="message" id="messageInput" placeholder="Begin typing message" autocomplete="off" />
-            <button type="submit" id="sendMessageButton">Send Message</button>
-        </form>
-
-        <!-- Socket.io script-->
-        <script src="/socket.io/socket.io.js"></script>
-        <script type="text/javascript" src="/chat.js"></script>
+        <ol id="message" class="chatMessage"></ol>
+        <div class="chatFooter">
+            <!--Creating the form send the message -->
+            <form id="chatBox">
+                <input type="text" name="message" id="messageInput" placeholder="Begin typing message..." autofocus autocomplete="off" />
+                <button type="submit" id="sendMessageButton">Send Message</button>
+            </form>
+        </div>
     </div>
+    <!-- Socket.io script-->
+    <script src="/socket.io/socket.io.js"></script>
+    <script type="text/javascript" src="/chat.js"></script>
 </body>

@@ -62,7 +62,8 @@ nav .search_box input {
     padding: 0 10px;
     font-size: 20px;
     width: 500px;
-    position: relative;top: -15px;
+    position: relative;
+    top: -15px;
 }
 
 nav .search_box span {
@@ -329,5 +330,84 @@ input {
     font-size: 42px;
     transform: rotate(45deg);
     cursor: pointer;
-    /* Allow hovering */
+}
+
+
+/* Chat styling */
+
+.chatMessage {
+    list-style-type: none;
+    flex-grow: 1;
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
+    padding: 10px;
+}
+
+.chatFooter {
+    background: #d3ebf9;
+    padding: 10px;
+    display: flex;
+    flex-shrink: 0;
+}
+
+
+/* Within the navigation bar screen */
+
+.main_container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    width: 100%
+}
+
+
+/* chatFooter: The part of the screen where the message is typed */
+
+.chatFooter form {
+    flex-grow: 1;
+    display: flex
+}
+
+.chatFooter form * {
+    margin-right: 10px
+}
+
+.chatFooter input {
+    border: none;
+    padding: 10px;
+    flex-grow: 1
+}
+
+.message {
+    padding: 10px;
+}
+
+button {
+    background: #265f82;
+    cursor: pointer;
+    transition: background .3s ease
+}
+
+button:hover {
+    background: #1F4C69
+}
+
+button:disabled {
+    cursor: default;
+    background: #698ea5
+}
+
+@media (max-width:600px) {
+    * {
+        font-size: 1rem
+    }
+    .chatFooter {
+        flex-direction: column
+    }
+    .chatFooter form {
+        margin-bottom: 10px
+    }
+    .chatFooter button {
+        margin-right: 0
+    }
 }
