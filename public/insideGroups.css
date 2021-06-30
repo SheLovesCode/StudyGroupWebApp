@@ -321,18 +321,6 @@ input {
 }
 
 
-/* Closing button */
-
-.close {
-    position: absolute;
-    top: 0;
-    right: 14px;
-    font-size: 42px;
-    transform: rotate(45deg);
-    cursor: pointer;
-}
-
-
 /* Chat styling */
 
 .chatMessage {
@@ -410,4 +398,48 @@ button:disabled {
     .chatFooter button {
         margin-right: 0
     }
+}
+
+
+/* Send Invite Styling */
+
+.modal {
+    background: rgba(0, 0, 0, 0.5);
+    width: 100%;
+    height: 100%;
+    /* Makes the modal a percentage of the actual screen instead of the container */
+    position: fixed;
+    /* Allows modal to move with screen when the screen is scrolled*/
+    top: 0;
+    left: 0;
+    right: 0;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid blue;
+    border: 10px;
+}
+
+.modalContent {
+    height: 45%;
+    width: 45%;
+    position: relative;
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 5px;
+}
+
+
+/* Closing button */
+
+.closeBtn {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    font-size: 2rem;
+    cursor: pointer;
+    border: none;
+    outline: none;
+    background: none;
+    font-weight: bolder;
 }
