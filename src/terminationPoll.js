@@ -2,11 +2,6 @@
 
 const myUsernames = ['Elijah', 'Steve', 'Diana', 'Farai']
 
-myUsernames.forEach(function (user) {
-  // Creates a poll object with a question and possible answers
-
-})
-
 function createPoll (Name) {
   const poll = {
     question: 'Do you want to terminate the membership of ' + Name + '?',
