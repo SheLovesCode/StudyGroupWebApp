@@ -1,7 +1,9 @@
+// When the button is clicked, display the modal
 document.getElementById("sendFaceInviteBtn").onclick = function() {
     document.querySelector(".modal").style.display = "flex";
 }
 
+// Extract the div that contains the main_container so we can append to that instead of the body
 let meetingInformation = document.getElementsByClassName("faceMeeting");
 
 document.getElementById("faceMeetingBtn").onclick = function() {
@@ -24,4 +26,9 @@ document.getElementById("faceMeetingBtn").onclick = function() {
     covidFormBtn.id = "getCovidForm";
     covidFormBtn.innerHTML = "Complete COVID-19 Screening Form";
     newMeeting.appendChild(covidFormBtn);
+
+    // Close the modal if the close button is clicked
+    document.getElementById("faceMeetingModalBtn").onclick = function() {
+        document.querySelector(".modal").style.display = "none";
+    }
 }
