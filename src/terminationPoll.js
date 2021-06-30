@@ -1,68 +1,79 @@
 'use strict'
 
-// Creates a poll object with a question and possible answers
-const poll = {
-  question: 'Do you want to terminate the membership of (PersonName) from this group?',
-  answers: [
-    'Yes', 'No'
-  ],
-  pollCount: 20,
-  answersWeight: [0, 0],
-  selectedAnswer: -1
-}
+const myUsernames = ['Elijah', 'Steve', 'Diana', 'Farai']
 
-// Writes to the document
-const pollDOM = {
-  question: document.querySelector('.poll .question'),
-  answers: document.querySelector('.poll .answers')
-}
+myUsernames.forEach(function (user) {
+  // Creates a poll object with a question and possible answers
 
-// Creates a class of the visuals to display the answer and answer values.
-pollDOM.question.innerText = poll.question
-pollDOM.answers.innerHTML = poll.answers.map(function (answer, i) {
-  return (
-    `
-      <div class="answer" onclick="markAnswer('${i}')">
-        ${answer}
-        <span class="percentage-bar"></span>
-        <span class="percentage-value"></span>
-      </div>
-    `
-  )
-}).join('')
+})
 
-// Creates a border around the selected answer, calculates the new percentage of the new answer selected.
-// Only allows a user to vote once
-function markAnswer (i) {
-  poll.selectedAnswer = +i
-  try {
-    document.querySelector('.poll .answers .answer.selected').classList.remove('selected')
-  } catch (msg) {}
-  document.querySelectorAll('.poll .answers .answer')[+i].classList.add('selected')
-  showResults()
-}
-
-// Calculates the pnew percentage of the selected answer
-function showResults () {
-  const answers = document.querySelectorAll('.poll .answers .answer')
-  for (let i = 0; i < answers.length; i++) {
-    let percentage = 0
-    if (i == poll.selectedAnswer) {
-      percentage = rounding(
-        (poll.answersWeight[i] + 1) * 100 / (poll.pollCount + 1)
-      )
-    } else {
-      percentage = rounding(
-        (poll.answersWeight[i]) * 100 / (poll.pollCount + 1)
-      )
-    }
-    // Implements the percentage bar relative to the size of the answer bar
-    answers[i].querySelector('.percentage-bar').style.width = percentage + '%'
-    answers[i].querySelector('.percentage-value').innerText = percentage + '%'
+function createPoll (Name) {
+  const poll = {
+    question: 'Do you want to terminate the membership of ' + Name + '?',
+    groupMemberNum: 20, // Need to get from db
+    answersWeight: [0, 0], // Also from db
+    // selectedAnswer: -1,
+    pollCount: 0,
+    No: 0,
+    Yes: 0
   }
+  return [poll.question, poll.groupMemberNum, poll.pollCount, poll.Yes, poll.No]
 }
 
-// Rounds off the numbers
-function rounding (number) {
-  return Math.round(number)
-}
+const heading = document.getElementById('myHeading')
+const pollBtn = document.createElement('button')
+pollBtn.innerHTML = 'Go Back to Poll'
+heading.appendChild(pollBtn)
+let numOfPollsLeft = myUsernames.length
+myUsernames.forEach(function (element) {
+  const pollQuestion = document.createElement('li')
+  const pollElements = createPoll(element)
+  pollQuestion.innerText = pollElements[0]
+  heading.append(pollQuestion)
+  const yesBtn = document.createElement('button')
+  const noBtn = document.createElement('button')
+  yesBtn.innerHTML = 'Yes'
+  noBtn.innerHTML = 'No'
+  heading.appendChild(yesBtn)
+  heading.appendChild(noBtn)
+
+  yesBtn.addEventListener('click', function myFunction () {
+    pollElements[2] += 1
+    pollElements[3] += 1
+    yesBtn.remove()
+    noBtn.remove()
+    pollQuestion.remove()
+    // alert('Number of votes cast: ' + pollElements[2] + '\n' + 'Number of yes votes: ' + pollElements[3] + '\n' + 'Number of no votes: ' + pollElements[4])
+    if (numOfPollsLeft === 1) {
+      heading.innerHTML = 'No polls to review'
+      heading.appendChild(pollBtn)
+      numOfPollsLeft -= 1
+    } else {
+      numOfPollsLeft -= 1
+    }
+    // Change db status
+  }, false)
+
+  noBtn.addEventListener('click', function myFunction () {
+    pollElements[2] += 1
+    pollElements[4] += 1
+    yesBtn.remove()
+    noBtn.remove()
+    pollQuestion.remove()
+    // alert('Number of votes cast: ' + pollElements[2] + '\n' + 'Number of yes votes: ' + pollElements[3] + '\n' + 'Number of no votes: ' + pollElements[4])
+    if (numOfPollsLeft === 1) {
+      heading.innerHTML = 'No polls to review'
+      heading.appendChild(pollBtn)
+      numOfPollsLeft -= 1
+    } else {
+      numOfPollsLeft -= 1
+    }
+    // Change db status
+  }, false)
+
+  pollBtn.addEventListener('click', function myFunction () {
+    window.location = '/group/poll.html'
+    // document.write('Please Wait...Taking you back...')
+    // setTimeout(myFunction(), 10)
+  })
+})
