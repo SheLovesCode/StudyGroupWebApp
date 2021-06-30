@@ -5,16 +5,18 @@ const createTerminationPollButton = document.getElementById('createPollbtn')
 createTerminationPollButton.addEventListener('click', function myFunction () {
   const Username = document.querySelector('#myUsername').value
   const Reason = document.querySelector('#myReason').value
-
-  informationChecker(Username, Reason)
+  const Message = informationChecker(Username, Reason)
+  if (Message != 'Please enter all information') {
+    document.forms[0].reset()
+  }
+  alert(Message)
 }, false)
 
 function informationChecker (Username, Reason) {
   if (Username === '' || Reason === '') {
-    alert('Please enter all information')
+    return 'Please enter all information'
   } else {
-    alert('Termination poll regarding ' + Username + ' successfully created for this reason: ' + Reason)
-    document.forms[0].reset()
+    return 'Termination poll regarding ' + Username + ' successfully created for this reason: ' + Reason
   }
 }
 

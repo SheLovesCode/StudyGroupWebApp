@@ -1,4 +1,4 @@
-// Havig ennvironment problems with testing from where these functions are used hence,
+// Havig environment problems with testing from where these functions are used hence,
 // Placing them into one folder for the testing process.
 
 function rounding (number) {
@@ -10,7 +10,16 @@ function isEmail (email) {
   return re.test(email)
 }
 
+function informationChecker (Username, Reason) {
+  if (Username === '' || Reason === '') {
+    return 'Please enter all information'
+  } else {
+    return 'Termination poll regarding ' + Username + ' successfully created for this reason: ' + Reason
+  }
+}
+
 module.exports = {
-  method: rounding,
-  otherMethod: isEmail
+  method1: rounding,
+  method2: isEmail,
+  method3: informationChecker
 }
