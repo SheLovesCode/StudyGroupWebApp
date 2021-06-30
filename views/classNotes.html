@@ -34,30 +34,32 @@
             <li><a href="insidegroups.html">Chats</a></li>
             <li><a href="team.html">Team</a></li>
             <li><a href="files.html">Files</a></li>
-            <li><a href="classNotes.html" id="onlink">Notes</a></li>
+            <li><a href="classNotes.html" id="onlink">Meeting Invites</a></li>
             <li><a href="poll.html">Polls</a></li>
         </ul>
     </div>
+
     <div class="main_container">
         <!-- Send COVID screening tool form -->
         <form action="/CovidScreening" method="get" target="_blank">
             <button type="submit">Send Face-to-Face Meeting Invite</button>
         </form>
+
+        <!--Create Popup Modal -->
+        <div class="modal">
+            <div class="modalContent">
+                <p> Please enter the Meeting Information below </p>
+                <input type="text" class="faceMeeting" placeholder="Meeting Date">
+                <input type="text" class="faceMeeting" placeholder="Meeting Time">
+                <input type="text" class="faceMeeting" placeholder="Exam? Lecture?">
+                <input type="submit" id="faceMeetingBtn" value="Send Invite">
+            </div>
+        </div>
+
         <!-- Send Online Meeting Invite -->
         <button class="meetingBtn">Send Online Meeting Invite</button>
+
     </div>
     <script type="text/javascript" src="../src/meetings.js"></script>
-    <!--Pop-up Modal Section -->
-    <div class="backgroundModal">
-        <div class="modal-content">
-            <div class="close">+</div>
-            <h2> Send link for online meeting </h2>
-            <label for="email">Email: </label>
-            <input type="text" name="email">
-            <label for="meetingLink">Meeting Link: </label>
-            <input type="text" name="meetingLink">
-            <button>Send Invite </button>
-        </div>
-    </div>
     <script type="text/javascript" src="../src/covidForm.js"></script>
 </body>
