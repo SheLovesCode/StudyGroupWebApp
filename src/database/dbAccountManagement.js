@@ -12,7 +12,9 @@ const createUserQuery = function (user) {
 
 async function getList () {
   try {
-    const pool = await db.pools
+    const sql = db.sql
+    const config = db.config
+    const pool = await sql.connect(config)
     const users = await pool.request().query('SELECT * FROM Users')
 
     accountProcess.clearList()
@@ -70,7 +72,9 @@ module.exports.addUser = async function (details, req, res) {
       return
     }
     // address valid
-    const pool = await db.pools
+    const sql = db.sql
+    const config = db.config
+    const pool = await sql.connect(config)
     await pool.request().query(createUserQuery(user)) // User details added to the table
 
     req.session.user = { name: user.username, email: user.email }
