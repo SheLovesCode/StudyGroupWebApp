@@ -38,6 +38,7 @@ const pools = new mssql.ConnectionPool(config)
 module.exports = {
   sql: mssql,
   pools: pools,
+  config: config,
   isConnected: isConnected,
   connectionError: connectionError
 }
