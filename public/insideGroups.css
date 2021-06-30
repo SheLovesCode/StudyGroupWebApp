@@ -423,7 +423,7 @@ button:disabled {
     top: 0;
     left: 0;
     right: 0;
-    display: flex;
+    display: none;
     justify-content: center;
     align-items: center;
 }
@@ -435,4 +435,16 @@ button:disabled {
     background: #ffffff;
     padding: 20px;
     border-radius: 5px;
+}
+
+
+/* Closing button */
+
+.close {
+    position: absolute;
+    top: 0;
+    right: 14px;
+    font-size: 42px;
+    transform: rotate(45deg);
+    cursor: pointer;
 }

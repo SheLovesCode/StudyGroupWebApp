@@ -1,3 +1,7 @@
+document.getElementById("sendFaceInviteBtn").onclick = function() {
+    document.querySelector(".modal").style.display = "flex";
+}
+
 let meetingInformation = document.getElementsByClassName("faceMeeting");
 
 document.getElementById("faceMeetingBtn").onclick = function() {
