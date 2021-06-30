@@ -6,8 +6,8 @@ const config = {
   server: 'kudusql.database.windows.net',
   database: 'KuduDB',
   // Put login details in env. variables for security
-  user: 'kudusqladmin',
-  password: '1234@kudu',
+  user: process.env.DB_USER,
+  password: process.env.DB_PWD,
   port: 1433,
   // Required for Azure
   options: {
@@ -41,5 +41,3 @@ module.exports = {
   isConnected: isConnected,
   connectionError: connectionError
 }
-
-// 
