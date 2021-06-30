@@ -31,4 +31,11 @@ document.getElementById("faceMeetingBtn").onclick = function() {
     document.getElementById("faceMeetingModalBtn").onclick = function() {
         document.querySelector(".modal").style.display = "none";
     }
+
+    // When the student opts to fill in the Covid Form
+    document.getElementById("getCovidForm").onclick = function() {
+        console.log("GET COVID FORM")
+        window.location.href = '../CovidScreening';
+
+    }
 }
