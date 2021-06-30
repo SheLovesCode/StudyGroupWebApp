@@ -38,6 +38,26 @@
     </div>
     
     <div class="main_container">
+        <div class="container">
+            <div class="header">
+                <h2>Do you want to create a member termination poll?</h2>
+            </div>
+          <label>If you are not satisfied with a group member you can create a poll to terminate their membership here.</label>
+        <form class="form" id="form">
+            <div class="form-control">       
+                <input type="text" id="myUsername" placeholder="Username of proposed member" name="username" required>
+                <small>Error Message</small>
+            </div>
+            <div class="form-control">
+                <input type="text" id="myReason" placeholder="Enter your reason for membership termination request" required/>
+                <small>Error Message</small>
+            </div>
+                <button id="createPollbtn">Create Poll</button>
+            <div id="msg">
+                <pre></pre>
+            </div>
+        </form>
+        </div>
         <button id="Applicationbtn">View Pending Membership Applications</button>
         <button id="Terminationbtn">View Pending Membership Termination Polls</button>
         <script defer src="../src/poll.js"></script>
