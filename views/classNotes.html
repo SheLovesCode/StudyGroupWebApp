@@ -34,30 +34,30 @@
             <li><a href="insidegroups.html">Chats</a></li>
             <li><a href="team.html">Team</a></li>
             <li><a href="files.html">Files</a></li>
-            <li><a href="classNotes.html" id="onlink">Notes</a></li>
+            <li><a href="classNotes.html" id="onlink">Meeting Invites</a></li>
             <li><a href="poll.html">Polls</a></li>
         </ul>
     </div>
-    <div class="main_container">
+
+    <div class="main_container" id="mainContainer">
         <!-- Send COVID screening tool form -->
-        <form action="/CovidScreening" method="get" target="_blank">
-            <button type="submit">Send Face-to-Face Meeting Invite</button>
-        </form>
-        <!-- Send Online Meeting Invite -->
-        <button class="meetingBtn">Send Online Meeting Invite</button>
-    </div>
-    <script type="text/javascript" src="../src/meetings.js"></script>
-    <!--Pop-up Modal Section -->
-    <div class="backgroundModal">
-        <div class="modal-content">
-            <div class="close">+</div>
-            <h2> Send link for online meeting </h2>
-            <label for="email">Email: </label>
-            <input type="text" name="email">
-            <label for="meetingLink">Meeting Link: </label>
-            <input type="text" name="meetingLink">
-            <button>Send Invite </button>
+        <button class="meetingBtn" type="submit" id="sendFaceInviteBtn">Create Face-to-Face Meeting Invite</button>
+
+        <!--Create Popup Modal -->
+        <div class="modal">
+            <div class="modalContent">
+                <p> Please enter the Date and Time of the meeting below: </p>
+                <input type="text" class="faceMeeting" placeholder="Meeting Date">
+                <input type="text" class="faceMeeting" placeholder="Meeting Time">
+                <input type="submit" id="faceMeetingBtn" value="Send Invite">
+                <button class="closeBtn" id="faceMeetingModalBtn">&times;</button>
+            </div>
         </div>
+
+        <!-- Send Online Meeting Invite -->
+        <button class="meetingBtn" id="sendOnlineInviteBtn">Create Online Meeting Invite</button>
+
     </div>
-    <script type="text/javascript" src="../src/covidForm.js"></script>
+    <script type="text/javascript" src="/meetings.js"></script>
+    <script type="text/javascript" src="/covidForm.js"></script>
 </body>
