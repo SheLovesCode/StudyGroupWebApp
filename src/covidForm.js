@@ -60,20 +60,19 @@ function generateAcceptDeclineBtns(allowedToMeet) {
 }
 
 function checkRadioButtons() {
-    var radioButtons = document.querySelectorAll('input[type="radio"]');
+    const radioButtons = document.querySelectorAll('input[type="radio"]');
     let checkedRadioBtns = 0;
     for (const radioBtn of radioButtons) {
         if (radioBtn.checked) {
             checkedRadioBtns++;
         }
     }
-    console.log("Count: ", checkedRadioBtns);
+    return checkedRadioBtns;
 }
 
 function covidScreening() {
 
     let allowedToMeet = " ";
-
     const A1 = document.covidForm.symptoms.value;
     const A2 = document.covidForm.seriousSymptoms.value;
     const B1 = document.covidForm.tested.value;
@@ -81,26 +80,20 @@ function covidScreening() {
     const C1 = document.covidForm.medical.value;
     const C2 = document.covidForm.age.value;
 
-    checkRadioButtons();
-
-    // Still need to account for when no radio input is selected
-    // Ensuring that every question has been answered
-    if (C1 == "NO" && C2 == "NO" && A1 == "NO" && A2 == "NO" && B1 == "NO" && B2 == "NO") {
-        allowedToMeet = "YES";
-    } else if ((C1 == "YES" || C2 == "YES") && (A1 == "NO" && A2 == "NO" && B1 == "NO" && B2 == "NO")) {
-        allowedToMeet = "MAYBE";
-    } else {
-        allowedToMeet = "NO";
+    if (checkRadioButtons() === 6) {
+        // Still need to account for when no radio input is selected
+        // Ensuring that every question has been answered
+        if (C1 == "NO" && C2 == "NO" && A1 == "NO" && A2 == "NO" && B1 == "NO" && B2 == "NO") {
+            allowedToMeet = "YES";
+        } else if ((C1 == "YES" || C2 == "YES") && (A1 == "NO" && A2 == "NO" && B1 == "NO" && B2 == "NO")) {
+            allowedToMeet = "MAYBE";
+        } else {
+            allowedToMeet = "NO";
+        }
+    } else if (checkRadioButtons() < 6) {
+        alert('Please answer all questions');
     }
 
     // Create accept/decline functions
     generateAcceptDeclineBtns(allowedToMeet);
 }
-
-// Adding checkBox for them to attest that the information provided is true
-// function checkBox(checkCheckBox) {
-//     if (checkCheckBox.agree.checked == false) {
-//         alert('Please check the box to continue.');
-//         return false;
-//     } else return true;
-// }
