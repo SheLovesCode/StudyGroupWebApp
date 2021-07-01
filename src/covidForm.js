@@ -1,8 +1,14 @@
+// Function redirects to the given url
+function redirect(url) {
+    window.location.href = url;
+}
+
 function generateAcceptDeclineBtns(allowedToMeet) {
     // People who are allowed to meet in person who aren't high risk
     if (allowedToMeet == "YES") {
         document.querySelector("#allowedModal").style.display = "flex";
     }
+
     // High risk persons
     else if (allowedToMeet == "MAYBE") {
         let covidModalContent = document.getElementById('allowedModalContent');
@@ -17,14 +23,37 @@ function generateAcceptDeclineBtns(allowedToMeet) {
         document.querySelector("#notAllowedModal").style.display = "flex";
     }
 
+    // Accept and Decline button listeners
+    document.getElementById("acceptBtn").onclick = function() {
+        var acceptOrDecline = true;
+        document.getElementById("allowedModal").style.display = "none";
+        redirect('../group');
+    }
+
+    // Accept and Decline button listeners
+    document.getElementById("acceptBtn").onclick = function() {
+        var acceptOrDecline = false;
+        document.getElementById("allowedModal").style.display = "none";
+        redirect('../group');
+    }
+
+    // Accept and Decline button listeners
+    document.getElementById("declineBtn").onclick = function() {
+        var acceptOrDecline = true;
+        document.getElementById("allowedModal").style.display = "none";
+        redirect('../group');
+    }
+
     // Close the modal if the close button is clicked
     document.getElementById("allowedCloseBtn").onclick = function() {
         document.getElementById("allowedModal").style.display = "none";
+        redirect('../group');
     }
 
     // Close the modal if the close button is clicked
     document.getElementById("notAllowedCloseBtn").onclick = function() {
         document.getElementById("notAllowedModal").style.display = "none";
+        redirect('../group');
     }
 
     console.log("Accepting or declining");
