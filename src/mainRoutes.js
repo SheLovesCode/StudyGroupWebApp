@@ -26,30 +26,27 @@ mainRouter.get('/', function (req, res) {
   res.render('../views/register.ejs')
 })
 
-mainRouter.get('/home', function (req, res) {
+mainRouter.get('/login/home', function (req, res) {
   console.log(req.session.user)
   const user = req.session.user
   res.render('../views/home.ejs', { name: user.username })
 })
 
-mainRouter.get('/creategroup', function (req, res) {
+mainRouter.get('/login/home/creategroup', function (req, res) {
   res.sendFile(path.join(__dirname, '../views', 'createGroupForm.html'))
 })
 
-mainRouter.post('/creategroup', function (req, res) {
+mainRouter.post('/login/home/creategroup', function (req, res) {
   groupManager.obtainExistingGroups()
   groupManager.addGroup(req.body, req, res)
 })
 
-mainRouter.get('/group', function (req, res) {
+mainRouter.get('/login/home/group', function (req, res) {
   res.sendFile(path.join(__dirname, '../views', 'grouppage.html'))
 })
 
 mainRouter.get('/group/content', function (req, res) {
   res.sendFile(path.join(__dirname, '../views', 'insidegroups.html'))
-  mainRouter.get('/group/team.html', function (req, res) {
-    res.sendFile(path.join(__dirname, '../views', '/team.html'))
-  })
   mainRouter.get('/group/insidegroups.html', function (req, res) {
     res.sendFile(path.join(__dirname, '../views', '/insidegroups.html'))
   })

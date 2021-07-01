@@ -35,28 +35,28 @@ module.exports.addGroup = async function (groupDetails, req, res) {
     if (group.email === '' || group.studyGroup === '') {
       // console.log('The email address or the group name was not entered')
       alert('The email address or the group name was not entered')
-      res.redirect('/creategroup')
+      res.redirect('/login/home/creategroup')
       return
     }
     // Checking if the User inputted a correct email
     if (!validateGrpCrd.isEmailValid(group.email)) {
       // console.log('The email is not valid')
       alert('The email is not valid')
-      res.redirect('/creategroup')
+      res.redirect('/login/home/creategroup')
       return
     }
     // Checking if the User inputted a a group name that already exist
     if (doesGroupExist === true) {
       // console.log('The group already exist')
       alert('The group already exist')
-      res.redirect('/creategroup')
+      res.redirect('/login/home/creategroup')
       return
     }
     // Checking if the User inputted a a group name that already exist
     if (!validateGrpCrd.isGroupNameValid(studyGroupName)) {
       // console.log('The study group name is not valid')
       alert('The study group name is not valid no special character in the name and the numeric cant be the first letter')
-      res.redirect('/creategroup')
+      res.redirect('/login/home/creategroup')
       return
     }
     AddToGroupMember(res, group.email, group.studyGroup)
@@ -71,11 +71,11 @@ module.exports.addGroup = async function (groupDetails, req, res) {
     await pool.request().query(query)
     // console.log('Successfully added')
     alert('Successfully added')
-    res.redirect('/home')
+    res.redirect('/login/home')
   } catch (err) {
     alert('Error with query try again')
     console.log(err)
-    res.redirect('/creategroup')
+    res.redirect('/login/home/creategroup')
   }
 }
 
@@ -112,6 +112,6 @@ async function AddToGroupMember (res, member, groupname) {
   } catch (err) {
     alert('Error with query try again')
     console.log(err)
-    res.redirect('/creategroup')
+    res.redirect('/login/home/creategroup')
   }
 }
