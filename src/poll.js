@@ -1,5 +1,9 @@
 'use strict'
 
+// const { response } = require("express")
+
+// const { options } = require("./mainRoutes")
+
 const myUsernames = []
 const myGroupMembers = ['1911499@students.wits.ac.za', '1870356@students.wits.ac.za']
 // When Create Poll button is pressed, a "Successful Creation of Termination Poll" message must be sent .
@@ -8,7 +12,7 @@ createTerminationPollButton.addEventListener('click', function myFunction () {
   const Username = document.querySelector('#myUsername').value
   const Reason = document.querySelector('#myReason').value
   const Message = informationChecker(Username, Reason)
-  if (Message != 'Please enter all information') {
+  if (Message !== 'Please enter all information') {
     document.forms[0].reset()
     myUsernames.push(Username)
     myGroupMembers.forEach(function (myEmail) {
@@ -17,6 +21,25 @@ createTerminationPollButton.addEventListener('click', function myFunction () {
   }
   alert(Message)
 }, false)
+
+sendingToDB().then(response => {
+  console.log(response)
+})
+
+async function sendingToDB () {
+  const text = {
+    groupname: 'group1'
+  }
+  const options = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(text)
+  }
+  const response = await fetch('/api', options)
+  return response.json()
+}
 
 function informationChecker (Username, Reason) {
   if (Username === '' || Reason === '') {

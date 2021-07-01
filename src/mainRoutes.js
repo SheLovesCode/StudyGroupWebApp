@@ -7,8 +7,9 @@ const db = require('../db.js')
 const accountManager = require('../src/database/dbAccountManagement.js')
 const alert = require('alert')
 const groupManager = require('../src/createGroup')
- 
-function checkIfSignedIn(req, res, next) {
+const { request } = require('http')
+
+function checkIfSignedIn (req, res, next) {
   if (req.session.user) {
     console.log('There')
     console.log(req.session.user)
@@ -115,6 +116,16 @@ mainRouter.get('/group/terminationPoll', function (req, res) {
 
 mainRouter.get('/register', (req, res) => {
   res.render('../views/register.ejs')
+})
+
+mainRouter.post('/api', function (req, res) {
+  console.log('**************')
+  console.log(req.body)
+  console.log('**************')
+  res.json({
+    status: 'success',
+    name: req.body
+  })
 })
 
 mainRouter.post('/register', async function (req, res) {
