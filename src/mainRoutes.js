@@ -43,12 +43,6 @@ mainRouter.post('/creategroup', function (req, res) {
 
 mainRouter.get('/group', function (req, res) {
   res.sendFile(path.join(__dirname, '../views', 'grouppage.html'))
-  mainRouter.get('/public/page.css', function (req, res) {
-    res.sendFile(path.join(__dirname, '../public', '/page.css'))
-  })
-  mainRouter.get('/utils/hello-and-hi.jpg', function (req, res) {
-    res.sendFile(path.join(__dirname, '../utils', '/hello-and-hi.jpg'))
-  })
 })
 
 mainRouter.get('/group/content', function (req, res) {
@@ -70,12 +64,6 @@ mainRouter.get('/group/content', function (req, res) {
   })
   mainRouter.get('/src/poll.js', function (req, res) {
     res.sendFile(path.join(__dirname, '../src', '/poll.js'))
-  })
-  mainRouter.get('/public/insideGroups.css', function (req, res) {
-    res.sendFile(path.join(__dirname, '../public', '/insideGroups.css'))
-  })
-  mainRouter.get('/utils/hello-and-hi.jpg', function (req, res) {
-    res.sendFile(path.join(__dirname, '../utils', '/hello-and-hi.jpg'))
   })
 })
 
