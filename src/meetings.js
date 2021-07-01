@@ -34,6 +34,6 @@ document.getElementById('faceMeetingBtn').onclick = function () {
   // When the student opts to fill in the Covid Form
   document.getElementById('getCovidForm').onclick = function () {
     console.log('GET COVID FORM')
-    window.location.href = '../login/home/CovidScreening'
+    window.location.href = '../CovidScreening'
   }
 }
