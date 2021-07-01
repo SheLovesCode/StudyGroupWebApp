@@ -7,8 +7,8 @@ const db = require('../db.js')
 const accountManager = require('../src/database/dbAccountManagement.js')
 const alert = require('alert')
 const groupManager = require('../src/createGroup')
- 
-function checkIfSignedIn(req, res, next) {
+
+function checkIfSignedIn (req, res, next) {
   if (req.session.user) {
     console.log('There')
     console.log(req.session.user)
@@ -27,10 +27,9 @@ mainRouter.get('/', function (req, res) {
 })
 
 mainRouter.get('/home', function (req, res) {
-  res.sendFile(path.join(__dirname, '../views', 'home.html'))
-  mainRouter.get('/public/home.css', function (req, res) {
-    res.sendFile(path.join(__dirname, '../public', '/home.css'))
-  })
+  console.log(req.session.user)
+  const user = req.session.user
+  res.render('../views/home.ejs', { name: user.username })
 })
 
 mainRouter.get('/creategroup', function (req, res) {
@@ -134,6 +133,7 @@ mainRouter.get('/profile', function (req, res) {
 
 mainRouter.get('/login', function (req, res) {
   console.log(req.body)
+  console.log(req.session.user)
   res.render('../views/login.ejs')
 })
 
