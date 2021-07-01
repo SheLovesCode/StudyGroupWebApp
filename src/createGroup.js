@@ -65,7 +65,9 @@ module.exports.addGroup = async function (groupDetails, req, res) {
     const cmdValue = `VALUES ('${group.email}','${group.studyGroup}',${group.groupRating});`
     const query = cmd + cmdValue
     // Create a connection
-    const pool = await db.pools
+    const sql = db.sql
+    const config = db.config
+    const pool = await sql.connect(config)
     await pool.request().query(query)
     // console.log('Successfully added')
     alert('Successfully added')
@@ -81,7 +83,9 @@ module.exports.obtainExistingGroups = async function () {
   // console.log('Storing Current Study Groups in List')
   try {
     // Making a connection to obtain the available groups in the database
-    const pool = await db.pools
+    const sql = db.sql
+    const config = db.config
+    const pool = await sql.connect(config)
     const groups = await pool.request().query('SELECT groupname FROM Groups')
     validateGrpCrd.clearGroupList()
     // Storing all the database study groups in the list
