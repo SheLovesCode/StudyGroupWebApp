@@ -55,8 +55,6 @@ function generateAcceptDeclineBtns(allowedToMeet) {
         document.getElementById("notAllowedModal").style.display = "none";
         redirect('../group');
     }
-
-    console.log("Accepting or declining");
 }
 
 function checkRadioButtons() {
@@ -81,7 +79,6 @@ function covidScreening() {
     const C2 = document.covidForm.age.value;
 
     if (checkRadioButtons() === 6) {
-        // Still need to account for when no radio input is selected
         // Ensuring that every question has been answered
         if (C1 == "NO" && C2 == "NO" && A1 == "NO" && A2 == "NO" && B1 == "NO" && B2 == "NO") {
             allowedToMeet = "YES";
