@@ -5,7 +5,8 @@ document.getElementById("sendFaceInviteBtn").onclick = function() {
 
 // Extract the div that contains the main_container so we can append to that instead of the body
 const mainContainer = document.getElementById('mainContainer');
-const meetingInformation = document.getElementsByClassName("faceMeeting");
+const meetingDate = document.getElementById("meetingDate");
+const meetingTime = document.getElementById("meetingTime");
 
 document.getElementById("faceMeetingBtn").onclick = function() {
     // Close the modal when the student submits the invitation details
@@ -15,7 +16,7 @@ document.getElementById("faceMeetingBtn").onclick = function() {
     let newMeeting = document.createElement('div');
     newMeeting.id = "faceToFaceDiv";
     newMeeting.className = "meetingDivs"; // Will be used to style div
-    newMeeting.innerText = "Date: " + meetingInformation[0].value + " at " + meetingInformation[1].value + "\n";
+    newMeeting.innerText = "Date: " + meetingDate.value + " at " + meetingTime.value + "\n";
     mainContainer.appendChild(newMeeting);
 
     // Add paragraph to the div
