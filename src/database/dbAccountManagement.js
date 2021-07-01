@@ -31,7 +31,7 @@ const passwordCompare = function (index, password, req, res) {
   const user = accountProcess.getList()[index]
   if (user.password === password) {
     req.session.user = { firstName: user.firstName, username: user.username }
-    res.redirect('/home')
+    res.redirect('/login/home')
   } else {
     res.redirect('/login')
   }
