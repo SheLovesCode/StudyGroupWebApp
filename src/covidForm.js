@@ -59,6 +59,17 @@ function generateAcceptDeclineBtns(allowedToMeet) {
     console.log("Accepting or declining");
 }
 
+function checkRadioButtons() {
+    var radioButtons = document.querySelectorAll('input[type="radio"]');
+    let checkedRadioBtns = 0;
+    for (const radioBtn of radioButtons) {
+        if (radioBtn.checked) {
+            checkedRadioBtns++;
+        }
+    }
+    console.log("Count: ", checkedRadioBtns);
+}
+
 function covidScreening() {
 
     let allowedToMeet = " ";
@@ -69,6 +80,8 @@ function covidScreening() {
     const B2 = document.covidForm.exposed.value;
     const C1 = document.covidForm.medical.value;
     const C2 = document.covidForm.age.value;
+
+    checkRadioButtons();
 
     // Still need to account for when no radio input is selected
     // Ensuring that every question has been answered
