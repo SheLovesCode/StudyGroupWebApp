@@ -4,14 +4,14 @@ document.getElementById("sendFaceInviteBtn").onclick = function() {
 }
 
 // Extract the div that contains the main_container so we can append to that instead of the body
-let meetingInformation = document.getElementsByClassName("faceMeeting");
+const mainContainer = document.getElementById('mainContainer');
+const meetingInformation = document.getElementsByClassName("faceMeeting");
 
 document.getElementById("faceMeetingBtn").onclick = function() {
     // Close the modal when the student submits the invitation details
     document.querySelector(".modal").style.display = "none";
 
     // Creating meeting div
-    let mainContainer = document.getElementById('mainContainer');
     let newMeeting = document.createElement('div');
     newMeeting.id = "faceToFaceDiv";
     newMeeting.className = "meetingDivs"; // Will be used to style div
@@ -24,7 +24,7 @@ document.getElementById("faceMeetingBtn").onclick = function() {
     newMeeting.appendChild(instructions);
 
     // Add a button to that div so users can be taken to the Covid Form
-    let covidFormBtn = document.createElement('button');
+    var covidFormBtn = document.createElement('button');
     covidFormBtn.id = "getCovidForm";
     covidFormBtn.innerHTML = "Complete COVID-19 Screening Form";
     newMeeting.appendChild(covidFormBtn);
