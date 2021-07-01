@@ -32,6 +32,7 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 
 app.use('/cdn', express.static('public'))
+app.use('/src', express.static('./src'))
 app.use(express.static('public'))
 app.use(express.static(publicPath))
 app.set('view engine', 'ejs')

@@ -7,8 +7,8 @@ const db = require('../db.js')
 const accountManager = require('../src/database/dbAccountManagement.js')
 const alert = require('alert')
 const groupManager = require('../src/createGroup')
- 
-function checkIfSignedIn(req, res, next) {
+
+function checkIfSignedIn (req, res, next) {
   if (req.session.user) {
     console.log('There')
     console.log(req.session.user)
@@ -122,14 +122,27 @@ mainRouter.post('/register', async function (req, res) {
   accountManager.addUser(req.body, req, res)
 })
 
+/*
 mainRouter.get('/profile', function (req, res) {
-  res.sendFile(path.join(__dirname, '../views', 'profile.html'))
-  mainRouter.get('/public/profile.css', function (req, res) {
-    res.sendFile(path.join(__dirname, '../public', '/profile.css'))
+  const User = req.session.user
+  res.sendFile(path.join(__dirname, '../views', 'profile.ejs'))
+  mainRouter.get('/public/form.css', function (req, res) {
+    res.sendFile(path.join(__dirname, '../public', '/form.css'))
   })
   mainRouter.get('/src/profile.js', checkIfSignedIn, function (req, res) {
     res.sendFile(path.join(__dirname, '../src', '/profile.js'))
   })
+}) */
+
+mainRouter.get('/profile', function (req, res) {
+  const User = req.session.user
+  console.log(req.body)
+  res.render('../views/profile.ejs', { userDetails: User })
+})
+
+mainRouter.post('/mApi', function (req, res) {
+  console.log(req.body)
+  accountManager.updateAddress(req.body, req, res)  
 })
 
 mainRouter.get('/login', function (req, res) {

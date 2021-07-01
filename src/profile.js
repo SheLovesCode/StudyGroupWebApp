@@ -1,26 +1,30 @@
 'use strict'
 
-const physicalAddressList = []
-const physicalAddress = document.getElementById('physicalAddress')
-
-const updatePhysicalAddress = (ev) => {
-  ev.preventDefault() // to stop the event from submitting
-  const physicalAddr = physicalAddress.value
-  if (emailAddr === '') {
-    document.forms[0].reset()
-    alert('The physical address is not entered')
-  }  else {
-    const move = {
-      id: Date.now(),
-      physicalAddress: physicalAddr
-    }
-    physicalAddressList.push(move)
-    document.forms[0].reset()
-    alert('Physical Address : ' + physicalAddr + ' succesfully added')
+async function sendingToDB (physicalAddress) {
+  const ob = {
+    address: physicalAddress
   }
+  const options = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(ob)
+  }
+  const response = await fetch('/mApi', options)
+  return response.json()
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-  document.getElementById('updateBtn').addEventListener('click', updatePhysicalAddress)
-})
-module.exports = physicalAddr
+function updatePhysicalAddress () {
+  const physicalAddress = document.getElementById('physicalAddress').value
+  sendingToDB(physicalAddress).then(response => {
+    console.log('dddd')
+  })
+  alert('The address,' + physicalAddress + ',was updated.')
+}
+
+function goHome () {
+  window.location = 'home'
+  document.write('Please Wait...Taking you home...')
+  setTimeout(goHome(), 4000)
+}
