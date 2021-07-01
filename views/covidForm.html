@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title> COVID-19 SCREENING TOOL</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" href="../public/covidForm.css">
+    <link rel="stylesheet" href="/covidForm.css">
 </head>
 
 <body>
@@ -58,15 +58,29 @@
 
         <input type="button" name="" value="Submit" onclick="covidScreening()">
     </form>
+
     <!--Create Popup Modal -->
-    <div class="modal">
-        <div class="modalContent">
-            <p>To accept/decline this invitation please click the button below</p>
+    <div class="covidModal" id="allowedModal">
+        <div class="covidModalContent" id="allowedModalContent">
+            <p>You're allowed to meet your group members in person</p>
+            <p>Please indicate whether you would like to accept or decline the invitation</p>
+            <p>To be rerouted to your group home page, please click the close button </p>
             <button class="acceptDecline" id="acceptBtn">Accept Invitation</button>
-            <button id="declineBtn">Decline Invitation</button>
-            <button class="closeBtn" id="faceMeetingModalBtn">&times;</button>
+            <button class="acceptDecline" id="declineBtn">Decline Invitation</button>
+            <button class="closeBtn" id="allowedCloseBtn">&times;</button>
         </div>
     </div>
+
+    <!--Create Popup Modal -->
+    <div class="covidModal" id="notAllowedModal">
+        <div class="covidModalContent">
+            <p>Unfortunately, you're at risk of having contracted COVID-19</p>
+            <p>So you will not be allowed to meet your group in person</p>
+            <p> Please follow the Department of Health's guidelines </p>
+            <button class="closeBtn" id="notAllowedCloseBtn">&times;</button>
+        </div>
+    </div>
+
     <script type="text/javascript" src="/covidForm.js"></script>
     <script type="module" src="./acceptDecline.js"></script>
 </body>
