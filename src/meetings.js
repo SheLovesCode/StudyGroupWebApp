@@ -7,6 +7,8 @@ document.getElementById("sendFaceInviteBtn").onclick = function() {
 let meetingInformation = document.getElementsByClassName("faceMeeting");
 
 document.getElementById("faceMeetingBtn").onclick = function() {
+    // Close the modal when the student submits the invitation details
+    document.querySelector(".modal").style.display = "none";
 
     // Creating meeting div
     let mainContainer = document.getElementById('mainContainer');
