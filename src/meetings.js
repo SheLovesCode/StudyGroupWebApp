@@ -27,15 +27,15 @@ document.getElementById("faceMeetingBtn").onclick = function() {
     covidFormBtn.innerHTML = "Complete COVID-19 Screening Form";
     newMeeting.appendChild(covidFormBtn);
 
-    // Close the modal if the close button is clicked
-    document.getElementById("faceMeetingModalBtn").onclick = function() {
-        document.querySelector(".modal").style.display = "none";
-    }
-
     // When the student opts to fill in the Covid Form
     document.getElementById("getCovidForm").onclick = function() {
         console.log("GET COVID FORM")
         window.location.href = '../CovidScreening';
 
     }
+}
+
+// Close the modal if the close button is clicked
+document.getElementById("faceMeetingModalBtn").onclick = function() {
+    document.querySelector(".modal").style.display = "none";
 }
