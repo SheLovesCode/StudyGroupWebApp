@@ -59,7 +59,7 @@ module.exports.addGroup = async function (groupDetails, req, res) {
       res.redirect('/creategroup')
       return
     }
-
+    AddToGroupMember(res, group.email, group.studyGroup)
     // Making the query command for the database
     const cmd = 'INSERT INTO Groups (groupcreator,groupname,grouprating) '
     const cmdValue = `VALUES ('${group.email}','${group.studyGroup}',${group.groupRating});`
@@ -94,5 +94,24 @@ module.exports.obtainExistingGroups = async function () {
     })
   } catch (err) {
     console.log(err)
+  }
+}
+
+async function AddToGroupMember (res, member, groupname) {
+  try {
+    const cmd = 'INSERT INTO GroupMembership (groupname,member) '
+    const cmdValue = `VALUES ('${groupname}','${member}');`
+    const query = cmd + cmdValue
+    // Create a connection
+    const sql = db.sql
+    const config = db.config
+    const pool = await sql.connect(config)
+    await pool.request().query(query)
+    console.log('Successfully added to Group Membership')
+    alert('Successfully added')
+  } catch (err) {
+    alert('Error with query try again')
+    console.log(err)
+    res.redirect('/creategroup')
   }
 }
