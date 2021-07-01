@@ -34,9 +34,6 @@ mainRouter.get('/home', function (req, res) {
 
 mainRouter.get('/creategroup', function (req, res) {
   res.sendFile(path.join(__dirname, '../views', 'createGroupForm.html'))
-  mainRouter.get('/public/form.css', function (req, res) {
-    res.sendFile(path.join(__dirname, '../public', '/form.css'))
-  })
 })
 
 mainRouter.post('/creategroup', function (req, res) {
