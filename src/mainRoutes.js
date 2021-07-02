@@ -24,7 +24,7 @@ function checkIfSignedIn (req, res, next) {
   }
 }
 mainRouter.get('/', function (req, res) {
-  res.render('../views/register.ejs')
+  res.render('../views/login.ejs')
 })
 
 mainRouter.get('/login/home', function (req, res) {
