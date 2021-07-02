@@ -27,6 +27,78 @@ mainRouter.get('/', function(req, res) {
     res.render('../views/register.ejs')
 })
 
+mainRouter.get('/login/home', function(req, res) {
+    console.log(req.session.user)
+    const user = req.session.user
+    res.render('../views/home.ejs', { name: user.username })
+})
+
+mainRouter.get('/login/home/creategroup', function(req, res) {
+    res.sendFile(path.join(__dirname, '../views', 'createGroupForm.html'))
+})
+
+mainRouter.post('/login/home/creategroup', function(req, res) {
+    groupManager.obtainExistingGroups()
+    groupManager.addGroup(req.body, req, res)
+})
+
+mainRouter.get('/login/home/group', function(req, res) {
+    res.sendFile(path.join(__dirname, '../views', 'grouppage.html'))
+})
+
+mainRouter.get('/login/home/group/chat', function(req, res) {
+    res.sendFile(path.join(__dirname, '../views', 'insidegroups.html'))
+})
+
+mainRouter.get('/login/home/group/notes', function(req, res) {
+    res.sendFile(path.join(__dirname, '../views', '/classNotes.html'))
+})
+
+mainRouter.get('/login/home/group/files', function(req, res) {
+    res.sendFile(path.join(__dirname, '../views', '/files.html'))
+})
+
+mainRouter.get('/login/home/group/team', function(req, res) {
+    res.sendFile(path.join(__dirname, '../views', '/team.html'))
+})
+
+mainRouter.get('/login/home/group/poll', function(req, res) {
+    res.sendFile(path.join(__dirname, '../views', '/poll.html'))
+    mainRouter.get('/src/poll.js', function(req, res) {
+        res.sendFile(path.join(__dirname, '../src', '/poll.js'))
+    })
+})
+
+mainRouter.get('/sendInvite', function(req, res) {
+    res.sendFile(path.join(__dirname, '../views', 'sendInvite.html'))
+    mainRouter.get('/public/form.css', function(req, res) {
+        res.sendFile(path.join(__dirname, '../public', '/form.css'))
+    })
+    mainRouter.get('/src/sendInvite.js', function(req, res) {
+        res.sendFile(path.join(__dirname, '../src', '/sendInvite.js'))
+    })
+})
+
+mainRouter.get('/group/applicationPoll', function(req, res) {
+    res.sendFile(path.join(__dirname, '../views', 'applicationPoll.html'))
+    mainRouter.get('/public/votingStyle.css', function(req, res) {
+        res.sendFile(path.join(__dirname, '../public', '/votingStyle.css'))
+    })
+    mainRouter.get('/src/applicationPoll.js', function(req, res) {
+        res.sendFile(path.join(__dirname, '../src', '/applicationPoll.js'))
+    })
+})
+
+mainRouter.get('/group/terminationPoll', function(req, res) {
+    res.sendFile(path.join(__dirname, '../views', 'terminationPoll.html'))
+    mainRouter.get('/public/votingStyle.css', function(req, res) {
+        res.sendFile(path.join(__dirname, '../public', '/votingStyle.css'))
+    })
+    mainRouter.get('/src/terminationPoll.js', function(req, res) {
+        res.sendFile(path.join(__dirname, '../src', '/terminationPoll.js'))
+    })
+})
+
 mainRouter.get('/home', function(req, res) {
     res.sendFile(path.join(__dirname, '../views', 'home.html'))
     mainRouter.get('/public/home.css', function(req, res) {
@@ -41,19 +113,33 @@ mainRouter.get('/creategroup', function(req, res) {
     })
 })
 
-mainRouter.post('/creategroup', function(req, res) {
-    groupManager.obtainExistingGroups()
-    groupManager.addGroup(req.body, req, res)
+/*
+mainRouter.get('/profile', function (req, res) {
+  const User = req.session.user
+  res.sendFile(path.join(__dirname, '../views', 'profile.ejs'))
+  mainRouter.get('/public/form.css', function (req, res) {
+    res.sendFile(path.join(__dirname, '../public', '/form.css'))
+  })
+  mainRouter.get('/src/profile.js', checkIfSignedIn, function (req, res) {
+    res.sendFile(path.join(__dirname, '../src', '/profile.js'))
+  })
+}) */
+
+mainRouter.get('/profile', function(req, res) {
+    const User = req.session.user
+    console.log(req.body)
+    res.render('../views/profile.ejs', { userDetails: User })
 })
 
-mainRouter.get('/group', function(req, res) {
-    res.sendFile(path.join(__dirname, '../views', 'grouppage.html'))
-    mainRouter.get('/public/page.css', function(req, res) {
-        res.sendFile(path.join(__dirname, '../public', '/page.css'))
-    })
-    mainRouter.get('/utils/hello-and-hi.jpg', function(req, res) {
-        res.sendFile(path.join(__dirname, '../utils', '/hello-and-hi.jpg'))
-    })
+mainRouter.post('/mApi', function(req, res) {
+    const username = req.session.user.username
+    accountManager.updateAddress(req.body, req, res, username)
+})
+
+mainRouter.get('/login', function(req, res) {
+    console.log(req.body)
+    console.log(req.session.user)
+    res.render('../views/login.ejs')
 })
 
 mainRouter.get('/group/content', function(req, res) {
@@ -115,7 +201,11 @@ mainRouter.get('/group/terminationPoll', function(req, res) {
 })
 
 mainRouter.get('/register', (req, res) => {
-    res.render('../views/register.ejs')
+        res.render('../views/register.ejs')
+    })
+    // Covid Screening after invitation
+mainRouter.get('/login/home/CovidScreening', function(req, res) {
+    res.sendFile(path.join(__dirname, '../views', 'covidForm.html'))
 })
 
 mainRouter.post('/register', async function(req, res) {

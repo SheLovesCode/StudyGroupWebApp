@@ -45,8 +45,8 @@ function displayStoredMeetings(responseContainer) {
 }
 
 // When the button is clicked, display the modal
-document.getElementById("sendFaceInviteBtn").onclick = function() {
-    document.querySelector(".modal").style.display = "flex";
+document.getElementById('sendFaceInviteBtn').onclick = function() {
+    document.querySelector('.modal').style.display = 'flex'
 }
 
 // Extract the div that contains the main_container so we can append to that instead of the body

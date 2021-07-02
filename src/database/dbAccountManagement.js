@@ -30,8 +30,8 @@ async function getList () {
 const passwordCompare = function (index, password, req, res) {
   const user = accountProcess.getList()[index]
   if (user.password === password) {
-    req.session.user = { firstName: user.firstName, username: user.username }
-    res.redirect('/home')
+    req.session.user = { username: user.username, address: user.address, email: user.email }
+    res.redirect('/login/home')
   } else {
     res.redirect('/login')
   }
@@ -98,5 +98,24 @@ module.exports.login = async function (details, req, res) {
     }
   } catch (err) {
     console.log(err)
+  }
+}
+
+module.exports.updateAddress = async function (details, req, res, username) {
+  try {
+    console.log('shdjdkdldlldl')
+    console.log(details.address.length)
+    if (!accountProcess.isAddressValid(details.address)) {
+      res.redirect('/profile')
+      return
+    }
+    const sql = db.sql
+    const config = db.config
+    const pool = await sql.connect(config)
+    await pool.request().query(`UPDATE Users SET address = \'${details.address}\' WHERE username = username`) // User details added to the table
+    req.session.user = { address: details.address }
+  } catch (err) {
+    console.log(err)
+    res.redirect('/register')
   }
 }

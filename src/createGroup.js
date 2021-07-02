@@ -35,45 +35,47 @@ module.exports.addGroup = async function (groupDetails, req, res) {
     if (group.email === '' || group.studyGroup === '') {
       // console.log('The email address or the group name was not entered')
       alert('The email address or the group name was not entered')
-      res.redirect('/creategroup')
+      res.redirect('/login/home/creategroup')
       return
     }
     // Checking if the User inputted a correct email
     if (!validateGrpCrd.isEmailValid(group.email)) {
       // console.log('The email is not valid')
       alert('The email is not valid')
-      res.redirect('/creategroup')
+      res.redirect('/login/home/creategroup')
       return
     }
     // Checking if the User inputted a a group name that already exist
     if (doesGroupExist === true) {
       // console.log('The group already exist')
       alert('The group already exist')
-      res.redirect('/creategroup')
+      res.redirect('/login/home/creategroup')
       return
     }
     // Checking if the User inputted a a group name that already exist
     if (!validateGrpCrd.isGroupNameValid(studyGroupName)) {
       // console.log('The study group name is not valid')
       alert('The study group name is not valid no special character in the name and the numeric cant be the first letter')
-      res.redirect('/creategroup')
+      res.redirect('/login/home/creategroup')
       return
     }
-
+    AddToGroupMember(res, group.email, group.studyGroup)
     // Making the query command for the database
     const cmd = 'INSERT INTO Groups (groupcreator,groupname,grouprating) '
     const cmdValue = `VALUES ('${group.email}','${group.studyGroup}',${group.groupRating});`
     const query = cmd + cmdValue
     // Create a connection
-    const pool = await db.pools
+    const sql = db.sql
+    const config = db.config
+    const pool = await sql.connect(config)
     await pool.request().query(query)
     // console.log('Successfully added')
     alert('Successfully added')
-    res.redirect('/home')
+    res.redirect('/login/home')
   } catch (err) {
     alert('Error with query try again')
     console.log(err)
-    res.redirect('/creategroup')
+    res.redirect('/login/home/creategroup')
   }
 }
 
@@ -81,7 +83,9 @@ module.exports.obtainExistingGroups = async function () {
   // console.log('Storing Current Study Groups in List')
   try {
     // Making a connection to obtain the available groups in the database
-    const pool = await db.pools
+    const sql = db.sql
+    const config = db.config
+    const pool = await sql.connect(config)
     const groups = await pool.request().query('SELECT groupname FROM Groups')
     validateGrpCrd.clearGroupList()
     // Storing all the database study groups in the list
@@ -90,5 +94,24 @@ module.exports.obtainExistingGroups = async function () {
     })
   } catch (err) {
     console.log(err)
+  }
+}
+
+async function AddToGroupMember (res, member, groupname) {
+  try {
+    const cmd = 'INSERT INTO GroupMembership (groupname,member) '
+    const cmdValue = `VALUES ('${groupname}','${member}');`
+    const query = cmd + cmdValue
+    // Create a connection
+    const sql = db.sql
+    const config = db.config
+    const pool = await sql.connect(config)
+    await pool.request().query(query)
+    console.log('Successfully added to Group Membership')
+    alert('Successfully added')
+  } catch (err) {
+    alert('Error with query try again')
+    console.log(err)
+    res.redirect('/login/home/creategroup')
   }
 }

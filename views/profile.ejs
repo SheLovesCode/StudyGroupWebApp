@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>My Profile</title>
+<link rel="stylesheet" type="text/css" href="/css/form.css">
+<script src="src/profile.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h2>Profile</h2>
+        </div>
+    <form class="form" id="form">
+        <div class="form-control">       
+            <label for="Email">Username:</label>
+            <p><%= userDetails.username%></p>
+        </div>
+        <div class="form-control">
+            <label for="Email">Email Address:</label>
+            <p><%= userDetails.email%></p>
+        </div>
+        <div class="form-control">
+            <label for="Physical Address">Physical Address:</label>
+            <p><%= userDetails.address%></p>
+            <input type="text" id="physicalAddress" placeholder="Edit Physical Address" >
+            <button onclick="updatePhysicalAddress()" id="updateBtn">Update</button>
+        </div>
+        <div>
+            <!--<a href="/existingGroups" class="btn">View Existing Groups</a>-->
+        </div>
+        <div>
+            <a href="/group" class="btn">View MY Groups</a>
+            <button onclick="goHome()" id="Homebtn">Go Home</button>
+        </div>
+        <div id="msg">
+        
+            <pre></pre>
+        </div>
+    </form>
+    </div>
+</body>
+</html>
