@@ -1,6 +1,8 @@
 'use strict'
 
 const db = require('../../db')
+
+// Certain functions are called based on the pollObj.input value
 module.exports.selectFunction = async function (pollObj, req, res) {
   if (pollObj.input === 0) {
     getGroupMembers(pollObj, req, res)
@@ -17,6 +19,7 @@ module.exports.selectFunction = async function (pollObj, req, res) {
   }
 }
 
+// Get the group members of the group from database
 async function getGroupMembers (pollObj, req, res) {
   try {
     const sql = db.sql
@@ -29,14 +32,13 @@ async function getGroupMembers (pollObj, req, res) {
       groupMemberCount += 1
       memberList.push(user.member)
     })
-    console.log(groupMemberCount)
     await pool.request().query(`UPDATE ${pollObj.table} SET voteCount = ${groupMemberCount} WHERE groupname = '${pollObj.groupname}'`)
     res.json(memberList)
   } catch (err) {
-    console.log(err)
   }
 }
 
+// creates termination poll row in db
 async function createTerminationPoll (pollObj, req, res) {
   try {
     const sql = db.sql
@@ -44,10 +46,10 @@ async function createTerminationPoll (pollObj, req, res) {
     const pool = await sql.connect(config)
     await pool.request().query(`INSERT INTO TerminationPoll (username, groupname, reason, terminationStatus, voteCount, yesCount, noCount) VALUES ('${pollObj.member}','${pollObj.groupname}', '${pollObj.reason}', 'In Progress', 0, 0, 0)`)
   } catch (err) {
-    console.log(err)
   }
 }
 
+// updates the termination table
 async function setTermination (pollObj, req, res) {
   try {
     const sql = db.sql
@@ -55,10 +57,10 @@ async function setTermination (pollObj, req, res) {
     const pool = await sql.connect(config)
     await pool.request().query(`UPDATE ${pollObj.table} SET yesCount = ${pollObj.yesVotes}, noCount = ${pollObj.noVotes} WHERE username = '${pollObj.member}' AND groupname = '${pollObj.groupname}'`)
   } catch (err) {
-    console.log(err)
   }
 }
 
+// removes the row from table once the voting has been completed
 async function deleteTerminationPoll (pollObj, req, res) {
   try {
     const sql = db.sql
@@ -66,10 +68,10 @@ async function deleteTerminationPoll (pollObj, req, res) {
     const pool = await sql.connect(config)
     await pool.request().query(`DELETE FROM ${pollObj.table} WHERE username = '${pollObj.member}' AND groupname = '${pollObj.groupname}'`)
   } catch (err) {
-    console.log(err)
   }
 }
 
+// returns all the pending termination and application polls
 async function getTerminationPolls (pollObj, req, res) {
   try {
     const sql = db.sql
@@ -82,10 +84,10 @@ async function getTerminationPolls (pollObj, req, res) {
     })
     res.json(memberList)
   } catch (err) {
-    console.log(err)
   }
 }
 
+// adds member to group in db
 async function addMember (pollObj, req, res) {
   try {
     const sql = db.sql
@@ -93,6 +95,5 @@ async function addMember (pollObj, req, res) {
     const pool = await sql.connect(config)
     await pool.request().query(`INSERT INTO GroupMembership (groupname, member, memberrating) VALUES ('${pollObj.groupname}','${pollObj.member}', 0)`)
   } catch (err) {
-    console.log(err)
   }
 }

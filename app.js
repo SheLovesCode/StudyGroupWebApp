@@ -40,7 +40,6 @@ app.use(express.static('public'))
 app.use(express.static(publicPath))
 app.set('view engine', 'ejs')
 app.set('view engine', 'pug')
-// app.use(express.urlencoded({ extended: false }))
 app.use(flash())
 app.use(cookieParser())
 app.use(session({
@@ -57,25 +56,19 @@ app.use(mainRouter)
 // as the socket declared in index.html
 // the socket parameter will now be used to access the io() object in this function
 io.on('connection', function (socket) {
-  // Print out that the user has connected
-  console.log('a user has connected')
-
   // Events created when a new user joins the group: for the new user and for the rest of the group
   // socket.emit('createNewMessage', createChatMessage('Diana', 'Welcome to the group chat'));
   // socket.broadcast.emit('createNewMessage', createChatMessage('Diana', 'New user has joined'));
 
   // Print out chat message server side
   socket.on('createMessage', function (chatMessage) {
-    console.log('createMessage:', chatMessage) // Print out chat message in the console
     io.emit('createNewMessage', createChatMessage(chatMessage)) // Print out message in the group chat
   })
 
   // Print out that the user has disconnected
   socket.on('disconnect', function () {
-    console.log('A user has disconnected')
   })
 })
 
 server.listen(port, function () {
-  console.log(`Server is up on ${port}`)
 })

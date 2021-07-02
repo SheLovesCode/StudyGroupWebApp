@@ -26,14 +26,12 @@ let connectionError = null
 const pools = new mssql.ConnectionPool(config)
   .connect()
   .then(pool => {
-    console.log('Connected to DB')
     return pool
   })
   .catch(err => {
     // Handle errors
     isConnected = false
     connectionError = err
-    console.log(err)
   })
 module.exports = {
   sql: mssql,

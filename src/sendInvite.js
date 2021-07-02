@@ -8,6 +8,7 @@ const sendInvite = (event) => {
   const emailAddress = email.value
   const studyGroupName = studyGroup.value
 
+  // Testing the inputted emails
   if (emailAddress === '' || studyGroupName === '') {
     document.forms[0].reset()
     alert('The email address or the group name was not entered')

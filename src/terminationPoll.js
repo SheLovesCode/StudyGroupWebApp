@@ -7,7 +7,6 @@ let myGroupMembers = []
 // Sends the members of sendingToDB to mainroutes to interact with backend DB
 sendingToDB(4).then(response => { // 4 => getTerminationPoll from TerminationPoll table
   myUsernames = response
-  console.log(myUsernames)
 })
 let emailContent = ''
 sendingToDB(0, 'TerminationPoll').then(response => { // 0 => getGroupMembers from GroupMember table
@@ -159,6 +158,5 @@ function sendEmail (emailAddress, emailContent) {
     Subject: 'Termination Poll Results',
     Body: `${emailContent}`
   }).then(
-    // message => alert(`Successfully sent to ${emailAddress}`)
   )
 }

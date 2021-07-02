@@ -35,7 +35,6 @@
             sendingDeletedGroup().then(response => {
                 //myGroupMembers = response
                 usersGroup = response
-                //console.log(usersGroup)
                 displayGroups(usersGroup)
 
         });
@@ -95,7 +94,6 @@
                 text = "You left the group "+ clicked_id;
                 alert(text)
                 var id_count = document.getElementById(clicked_id)
-                console.log(id_count)
                 for(i=0;i<5;i++) id_count.remove()
 
                 sendingDeletedGroup(clicked_id)

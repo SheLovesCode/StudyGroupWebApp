@@ -26,9 +26,9 @@ async function loadCharacters () {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
-    }
+    },
+    body: JSON.stringify(ob)
   }
-  body: JSON.stringify(ob)
   const response = await fetch('/nApi', options)
   return response.json()
 }

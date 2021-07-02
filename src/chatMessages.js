@@ -1,7 +1,7 @@
 // Script contains the functions to generate the messages sent by a user
 
-let createChatMessage = function(text) {
-    return text;
+const createChatMessage = function (text) {
+  return text
 }
 
-module.exports = createChatMessage;
+module.exports = createChatMessage

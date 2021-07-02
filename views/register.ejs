@@ -27,7 +27,6 @@ $(document).ready(function () {
           window.alert("Please use suggestions provided for cordinates to be captured");
           return
         }
-        else  console.log(near_place.formatted_address)
 
         document.getElementById('latitude_input').value = near_place.geometry.location.lat();
         document.getElementById('longitude_input').value = near_place.geometry.location.lng();
