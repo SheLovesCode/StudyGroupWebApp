@@ -28,7 +28,7 @@ mainRouter.get('/', function (req, res) {
 })
 
 mainRouter.get('/login/home', function (req, res) {
-  console.log(req.session.user)
+  // console.log(req.session.user)
   const user = req.session.user
   res.render('../views/home.ejs', { name: user.username })
 })
@@ -260,6 +260,17 @@ mainRouter.delete('/logout', checkIfSignedIn, function (req, res) {
   res.redirect('/login')
 })
 
+mainRouter.post('/test', function (req, res) {
+  const useremail = req.session.user.email
+  groupManager.getExistingGroups(useremail, req, res)
+  console.log('/**********************/ body')
+  console.log(req.body)
+  console.log('/************************/ Group being removed')
+  console.log(req.body.groupname)
+  console.log('/************************/')
+  const groupRemoved = req.body.groupname
+  groupManager.removeExistingGroup(useremail, groupRemoved, req, res)
+})
 // Covid Screening after invitation
 mainRouter.get('/CovidScreening', function (req, res) {
   res.sendFile(path.join(__dirname, '../views', 'covidForm.html'))

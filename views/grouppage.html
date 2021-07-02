@@ -5,32 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="utf-8">
     <link rel="stylesheet" type="text/css" href="/css/page.css">
-    <script src="https://kit.fontawesome.com/67c66657c7.js"></script>
-                <script>
-                function changeLanguage(language) {
-                    var element = document.getElementById("url");
-                    element.value = language;
-                    element.innerHTML = language;
-                }
-
-                function showDropdown() {
-                    document.getElementById("myDropdown").classList.toggle("show");
-                }
-
-                // Close the dropdown if the user clicks outside of it
-                window.onclick = function(event) {
-                    if (!event.target.matches('.dropbtn')) {
-                        var dropdowns = document.getElementsByClassName("dropdown-content");
-                        var i;
-                        for (i = 0; i < dropdowns.length; i++) {
-                            var openDropdown = dropdowns[i];
-                            if (openDropdown.classList.contains('show')) {
-                                openDropdown.classList.remove('show');
-                            }
-                        }
-                    }
-                }
-            </script>
 </head>
 <body>
     <h1>Study Groups</h1>
@@ -53,44 +27,102 @@
         </label>
     </nav>
     <section></section>
-    <div class="container">
-        <div class="box">
-            <div class="info">
-            <h2>WITS ELITE</h2>
-            <a href="/login/home/group/chat" class="btn">Click Me</a>
-            </div>
-        </div>
-        <div class="box">
-            <div class="info">
-                <h2>1234 START</h2>
-                <a href="/login/home/group/chat" class="btn">Click Me</a>
-            </div>
-        </div>
-        <div class="box">
-            <div class="info">
-                <h2>WAS GUD</h2>
-                <a href="/login/home/group/chat" class="btn">Click Me</a>
-            </div>
-        </div>
-        <div class="box">
-            <div class="info">
-                <div class="dropdown">
-                    <ul class="dropbtn icons btn-right showLeft" onclick="showDropdown()">
-                        <li></li>
-                        <li></li>
-                        <li></li>
-                    </ul>
-                    <div id="myDropdown" class="dropdown-content">
-                        <a href="#">Manage Group</a>
-                        <a href="#">Leave Group</a>
-                        <a href="#">Add Member</a>
-                        <a href="#">Get link to group</a>
-                    </div>
-                </div>
-                <h2>LECTURER.INC</h2>
-                <a href="/login/home/group/chat" class="btn">Click Me</a>
-            </div>
-        </div>
+    <div id="container-class" class="container">
+        <script>
+            //Creating an array to store the incoming groups the user belongs to
+            let usersGroup = []
+            // Enabling the retrieval of the groups the user belongs to
+            sendingDeletedGroup().then(response => {
+                //myGroupMembers = response
+                usersGroup = response
+                //console.log(usersGroup)
+                displayGroups(usersGroup)
+
+        });
+        // Display the study groups the user belongs to
+            const displayGroups = (groupname) => {
+                // When there is no groups that the user belongs to the user sees nothing
+                if (groupname.length > 0) {
+                const class_container = document.getElementById('container-class')
+                const htmlString = groupname
+                
+                .map((groupname) => {
+    
+                    return `
+                    
+                        <div id="${groupname}" class="box">
+                            <div id="${groupname}" class="info">
+                                <h2 id="${groupname}">${groupname}</h2>
+                                <a id="${groupname}" href="/login/home/group/chat" class="btn">Enter Group</a>
+                                <a href="#" id="${groupname}" class="leave" onclick="myFunction(this.id); return false;">Leave Group</a>
+                            </div>
+                        </div>
+    
+                    `
+    
+                })
+                                
+                .join('')    
+                class_container.innerHTML = htmlString
+                
+            } else {
+                
+                const class_container = document.getElementById('container-class')
+                const htmlString = groupname
+                
+                .map((groupname) => {
+    
+                    return `
+                        <div class="box">
+                            <div class="info">
+                                <h2>You do not belong to any group</h2>
+                            </div>
+                        </div>
+                    `
+    
+                })
+                                
+                .join('')
+                class_container.innerHTML = htmlString
+            }
+            }
+            // Function enabling the retrival of the HTML ID's in order to remove the corresponsding
+            // Tags when the User wants to leave a group 
+            function myFunction(clicked_id) {
+                var text;
+                var state = confirm("Are you sure you want to leave "+clicked_id+" \nOK or Cancel.");
+                if (state == true) {
+                text = "You left the group "+ clicked_id;
+                alert(text)
+                var id_count = document.getElementById(clicked_id)
+                console.log(id_count)
+                for(i=0;i<5;i++) id_count.remove()
+
+                sendingDeletedGroup(clicked_id)
+                } 
+                else {
+                text = "Cancelling the porcedure!";
+                alert(text)
+                }
+            }
+            // Asynchronous function enabling the ability to send the client information to the database(server)
+            //As a response object
+            async function sendingDeletedGroup (group='YEEEE') {
+            const text = {
+                groupname: group
+            }
+            const options = {
+                method: 'POST',
+                headers: {
+                'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(text)
+            }
+            const response = await fetch('/test', options)
+            return response.json()
+            }
+
+        </script>
     </div>
 </body>
 </html>
