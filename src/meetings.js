@@ -3,7 +3,7 @@ const mainContainer = document.getElementById('mainContainer');
 var storedMeetingDetails = [];
 var responseContainer = [];
 var userEmail = "munyaradzi.diana@gmail.com";
-let currentGroupName = "Trash";
+let currentGroupName = "TRASH";
 
 
 getfromDB().then(response => {

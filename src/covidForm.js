@@ -27,21 +27,23 @@ function generateAcceptDeclineBtns(allowedToMeet) {
     document.getElementById("acceptBtn").onclick = function() {
         var acceptOrDecline = true;
         document.getElementById("allowedModal").style.display = "none";
-        redirect('../group');
+        //redirect('../group');
+        console.log("I've accepted");
     }
 
-    // Accept and Decline button listeners
-    document.getElementById("acceptBtn").onclick = function() {
-        var acceptOrDecline = false;
-        document.getElementById("allowedModal").style.display = "none";
-        redirect('../group');
-    }
+    // // Accept and Decline button listeners
+    // document.getElementById("acceptBtn").onclick = function() {
+    //     var acceptOrDecline = false;
+    //     document.getElementById("allowedModal").style.display = "none";
+    //     redirect('../group');
+    // }
 
     // Accept and Decline button listeners
     document.getElementById("declineBtn").onclick = function() {
         var acceptOrDecline = true;
         document.getElementById("allowedModal").style.display = "none";
-        redirect('../group');
+        //redirect('../group');
+        console.log("I've declined")
     }
 
     // Close the modal if the close button is clicked

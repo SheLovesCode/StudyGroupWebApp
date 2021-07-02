@@ -158,8 +158,6 @@ mainRouter.get('/CovidScreening', function(req, res) {
 })
 
 mainRouter.post('/meetingDetails', (req, res) => {
-    console.log("Username: ", req.sesssion.user.username);
-
     console.log(req.body.status);
     if (req.body.status === "Read") {
         dbMeetings.getMeetingDetails(req, res);
