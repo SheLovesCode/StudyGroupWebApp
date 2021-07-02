@@ -3,8 +3,8 @@
 const generateList = document.getElementById('view')
 let myUsernames = []
 let myGroupMembers = []
-
-sendingToDB(4).then(response => {
+// Sends the members of sendingToDB to mainroutes to interact with backend DB
+sendingToDB(4).then(response => { // 4 => getTerminationPoll from TerminationPoll table
   myUsernames = response
   console.log(myUsernames)
 })
@@ -12,23 +12,27 @@ let emailContent = ''
 sendingToDB(0, 'ApplicationPoll').then(response => {
   myGroupMembers = response
 })
+
+// When the view button is pressed, generate the various termination polls
 generateList.addEventListener('click', function myFunction () {
   generateList.remove()
   const heading = document.getElementById('myHeading')
   const pollBtn = document.createElement('button')
-  pollBtn.innerHTML = 'Go Back to Poll'
-  heading.appendChild(pollBtn)
   let numOfPollsLeft = myUsernames.length
   if (numOfPollsLeft === 0) {
     heading.innerHTML = 'No polls to review'
   }
+  pollBtn.innerHTML = 'Go Back to Poll'
+  heading.appendChild(pollBtn)
 
+  // Create poll question with reason
   myUsernames.forEach(function (element) {
     const pollQuestion = document.createElement('li')
     const pollElements = createPoll(element.username, element.reason)
     pollQuestion.innerText = pollElements
     heading.append(pollQuestion)
 
+    // Yes and no buttons generated to accept
     const yesBtn = document.createElement('button')
     const noBtn = document.createElement('button')
     yesBtn.innerHTML = 'Yes'
@@ -36,12 +40,15 @@ generateList.addEventListener('click', function myFunction () {
     heading.appendChild(yesBtn)
     heading.appendChild(noBtn)
 
+    // When yes is clicked, it increments the votes, updates db and checks if a consensus as been reached
     yesBtn.addEventListener('click', function myFunction () {
       element.yesCount += 1
       sendingToDB(2, 'ApplicationPoll', element.yesCount, element.noCount, element.username, element.groupname)
       yesBtn.remove()
       noBtn.remove()
       pollQuestion.remove()
+
+      // Checking for final verdict when all members have voted. Member get's removed if more yes votes than no
       const totalVotes = element.yesCount + element.noCount
       console.log(totalVotes)
       console.log(element.yesCount, element.noCount)
@@ -59,6 +66,7 @@ generateList.addEventListener('click', function myFunction () {
         })
         heading.innerHTML = 'No polls to review'
       }
+      // Last poll to vote for
       if (numOfPollsLeft === 1) {
         heading.innerHTML = 'No polls to review'
         heading.appendChild(pollBtn)
@@ -66,17 +74,20 @@ generateList.addEventListener('click', function myFunction () {
       } else {
         numOfPollsLeft -= 1
       }
+      // Generate routing back to home
       pollBtn.addEventListener('click', function myFunction () {
         window.location = '/group/poll.html'
       })
     }, false)
 
+    // Same procedure for no button
     noBtn.addEventListener('click', function myFunction () {
       element.noCount += 1
       sendingToDB(2, 'ApplicationPoll', element.yesCount, element.noCount, element.username, element.groupname)
       yesBtn.remove()
       noBtn.remove()
       pollQuestion.remove()
+      // send verdict when everyone has voted
       const totalVotes = (element.yesCount + element.noCount)
       if (totalVotes === element.voteCount) {
         if (element.yesCount > element.noCount) {
@@ -99,15 +110,16 @@ generateList.addEventListener('click', function myFunction () {
         numOfPollsLeft -= 1
       }
       pollBtn.addEventListener('click', function myFunction () {
-        window.location = '/group/poll.html'
+        window.location = '/login/home/group/poll'
       })
     }, false)
   })
 
   pollBtn.addEventListener('click', function myFunction () {
-    window.location = '/group/poll.html'
+    window.location = '/login/home/group/poll'
   })
 
+  // Creation of termination poll question and reason
   function createPoll (Name, Reason) {
     const poll = {
       question: 'Do you want to accept the membership of ' + Name + '?'
@@ -116,6 +128,7 @@ generateList.addEventListener('click', function myFunction () {
   }
 }, false)
 
+// Function to interact with backend
 async function sendingToDB (inputType, tableName = 'ApplicationPoll', yesNum = 0, noNum = 0, user = '', group = '') {
   const text = {
     input: inputType,
@@ -136,6 +149,7 @@ async function sendingToDB (inputType, tableName = 'ApplicationPoll', yesNum = 0
   return response.json()
 }
 
+// Sends email to all group members as a notification of poll result
 function sendEmail (emailAddress, emailContent) {
   Email.send({
     Host: 'smtp.gmail.com',
