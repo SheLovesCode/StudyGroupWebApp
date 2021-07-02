@@ -42,20 +42,36 @@
     <div class="main_container" id="mainContainer">
         <!-- Send COVID screening tool form -->
         <button class="meetingBtn" type="submit" id="sendFaceInviteBtn">Create Face-to-Face Meeting Invite</button>
-
+        <div id="faceMeetings">
+            <p>Upcoming Face-to-Face Meetings</p>
+        </div>
         <!--Create Popup Modal -->
-        <div class="modal">
+        <div class="modal" id="faceModal">
             <div class="modalContent">
                 <p> Please enter the Date and Time of the meeting below: </p>
                 <input type="date" id="meetingDate" required>
                 <input type="time" id="meetingTime" required>
                 <input type="submit" id="faceMeetingBtn" value="Send Invite">
-                <button class="closeBtn" id="faceMeetingModalBtn">&times;</button>
+                <button class="closeBtn" id="closeFaceModalBtn">&times;</button>
             </div>
         </div>
 
         <!-- Send Online Meeting Invite -->
         <button class="meetingBtn" id="sendOnlineInviteBtn">Create Online Meeting Invite</button>
+        <!--Create Popup Modal for online meeting -->
+        <div id="onlineMeetings">
+            <p>Upcoming Online Meetings</p>
+        </div>
+        <div class="modal" id="onlineModal">
+            <div class="modalContent">
+                <p> Please enter the Date, Time and the Teams/Zoom Link for the meeting: </p>
+                <input type="date" id="onlineMeetingDate" required>
+                <input type="time" id="onlineMeetingTime" required>
+                <input type="text" id="onlineLink" placeholder="Online Meeting URL" required>
+                <input type="submit" id="onlineMeetingBtn" value="Send Invite">
+                <button class="closeBtn" id="closeOnlineModalBtn">&times;</button>
+            </div>
+        </div>
 
     </div>
     <script type="text/javascript" src="/meetings.js"></script>
