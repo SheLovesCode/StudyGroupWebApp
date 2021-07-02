@@ -6,6 +6,45 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Register</title>
   <link rel="stylesheet" type="text/css" href="/css/main.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places&key=AIzaSyBsxT7PVr2qXHwkUR6N-DJ0WQ3DBS5pxZU"></script>
+
+  <script>
+    var searchInput = 'search_input';
+
+$(document).ready(function () {
+  
+    var autocomplete;
+    autocomplete = new google.maps.places.Autocomplete((document.getElementById(searchInput)), {
+        types: ['geocode'], componentRestrictions: {
+        country: "SA"
+    }
+    });
+	
+    google.maps.event.addListener(autocomplete, 'place_changed', function () {
+        var near_place = autocomplete.getPlace();
+        if(near_place.formatted_address == undefined){
+          window.alert("Please use suggestions provided for cordinates to be captured");
+          return
+        }
+        else  console.log(near_place.formatted_address)
+
+        document.getElementById('latitude_input').value = near_place.geometry.location.lat();
+        document.getElementById('longitude_input').value = near_place.geometry.location.lng();
+		
+        document.getElementById('latitude_view').innerHTML = near_place.geometry.location.lat();
+        document.getElementById('longitude_view').innerHTML = near_place.geometry.location.lng();
+    });
+});
+
+$(document).on('change', '#'+searchInput, function () {
+    document.getElementById('latitude_input').value = '';
+    document.getElementById('longitude_input').value = '';
+	
+    document.getElementById('latitude_view').innerHTML = '';
+    document.getElementById('longitude_view').innerHTML = '';
+});
+  </script>
 </head>
 <body>
   <div class="container">
@@ -31,10 +70,17 @@
       <label for="password"> Password </label>
       <input type="password" id="password" name="password" required>
     </div>
-    
     <div class="form-control">
       <label for="address"> Address </label>
-      <input type="address" id="address" name="address" required>
+      <input type="text" class="form-control" id="search_input" placeholder="Type address and select..." name="address" required>
+      <input type="hidden" id="latitude_input" />
+      <input type="hidden" id="longitude_input" />
+    </div>
+
+    <!-- Display latitude and longitude -->
+    <div class="form-control">
+      <p><b>Latitude:</b> <span id="latitude_view"></span></p>
+      <p><b>Longitude:</b> <span id="longitude_view"></span></p>
     </div>
     
     <button type="submit">Register</button>

@@ -5,6 +5,45 @@
 <title>My Profile</title>
 <link rel="stylesheet" type="text/css" href="/css/form.css">
 <script src="src/profile.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places&key=AIzaSyBsxT7PVr2qXHwkUR6N-DJ0WQ3DBS5pxZU"></script>
+
+  <script>
+    var searchInput = 'physicalAddress';
+
+$(document).ready(function () {
+  
+    var autocomplete;
+    autocomplete = new google.maps.places.Autocomplete((document.getElementById(searchInput)), {
+        types: ['geocode'], componentRestrictions: {
+        country: "SA"
+    }
+    });
+	
+    google.maps.event.addListener(autocomplete, 'place_changed', function () {
+        var near_place = autocomplete.getPlace();
+        if(near_place.formatted_address == undefined){
+          window.alert("Please use suggestions provided for cordinates to be captured");
+          return
+        }
+        else  console.log(near_place.formatted_address)
+
+        document.getElementById('latitude_input').value = near_place.geometry.location.lat();
+        document.getElementById('longitude_input').value = near_place.geometry.location.lng();
+		
+        document.getElementById('latitude_view').innerHTML = near_place.geometry.location.lat();
+        document.getElementById('longitude_view').innerHTML = near_place.geometry.location.lng();
+    });
+});
+
+$(document).on('change', '#'+searchInput, function () {
+    document.getElementById('latitude_input').value = '';
+    document.getElementById('longitude_input').value = '';
+	
+    document.getElementById('latitude_view').innerHTML = '';
+    document.getElementById('longitude_view').innerHTML = '';
+});
+  </script>
 </head>
 <body>
     <div class="container">
@@ -20,7 +59,7 @@
             <label for="Email">Email Address:</label>
             <p><%= userDetails.email%></p>
         </div>
-        <div class="form-control">
+        <!-- <div class="form-control">
             <label for="Physical Address">Physical Address:</label>
             <p><%= userDetails.address%></p>
             <input type="text" id="physicalAddress" placeholder="Edit Physical Address" >
@@ -29,8 +68,23 @@
         <div>
             <a href="/existingGroups" class="btn">View Existing Groups</a>
         </div>
-        <div>
-            <a href="/group" class="btn">View MY Groups</a>
+        <div> -->
+            <div class="form-control">
+                <label for="address"> Address: </label>
+                <p><%= userDetails.address%></p>
+                <input type="text" class="form-control" id="physicalAddress" placeholder="Type address and select..." name="address" required>
+                <button onclick="updatePhysicalAddress()" id="updateBtn">Update</button>
+                <input type="hidden" id="latitude_input" />
+                <input type="hidden" id="longitude_input" />
+              </div>
+          
+              <!-- Display latitude and longitude -->
+              <div class="form-control">
+                <p><b>Latitude:</b> <span id="latitude_view"></span></p>
+                <p><b>Longitude:</b> <span id="longitude_view"></span></p>
+
+            <a href="/existingGroups" class="btn">View Existing Groups</a>
+            <a href="login/home/group" class="btn">View MY Groups</a>
             <button onclick="goHome()" id="Homebtn">Go Home</button>
         </div>
         <div id="msg">

@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Inside Group Page</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="utf-8">
     <link rel="stylesheet" type="text/css" href="/css/insideGroups.css">
     <script src="https://kit.fontawesome.com/67c66657c7.js"></script>
+    <script src="https://smtpjs.com/v3/smtp.js"></script>
 </head>
+
 <body>
     <input type="checkbox" id="check">
     <nav>
@@ -36,10 +39,28 @@
             <li><a href="/login/home/group/poll" id="onlink">Polls</a></li>
         </ul>
     </div>
-    
+
     <div class="main_container">
+        <div class="container">
+            <div class="header">
+                <h2>Do you want to create a member termination poll?</h2>
+            </div>
+          <label>If you are not satisfied with a group member you can create a poll to terminate their membership here.</label>
+        <form class="form" id="form">
+            <div class="form-control">       
+                <input type="text" id="myUsername" placeholder="Proposed member username" name="username" required>
+            </div>
+            <div class="form-control">
+                <input type="text" id="myReason" placeholder="Enter your reason for membership termination request" required/>
+            </div>
+                <button id="createPollbtn">Create Poll</button>
+            <div id="msg">
+                <pre></pre>
+            </div>
+        </form>
+        </div>
         <button id="Applicationbtn">View Pending Membership Applications</button>
         <button id="Terminationbtn">View Pending Membership Termination Polls</button>
-        <script defer src="../src/poll.js"></script>
+        <script defer src="/src/poll.js"></script>
     </div>
 </body>
