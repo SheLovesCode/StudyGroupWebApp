@@ -107,7 +107,6 @@ mainRouter.post('/register', async function (req, res) {
   accountManager.addUser(req.body, req, res)
 })
 
-
 mainRouter.get('/existingGroups', function (req, res) {
   const User = req.session.user
   res.sendFile(path.join(__dirname, '../views', 'existingGroups.html'))
@@ -117,22 +116,21 @@ mainRouter.get('/existingGroups', function (req, res) {
   mainRouter.get('/src/existingGroups.js', checkIfSignedIn, function (req, res) {
     res.sendFile(path.join(__dirname, '../src', '/existingGroups.js'))
   })
-}) 
+})
 
 mainRouter.get('/profile', function (req, res) {
   const User = req.session.user
-  console.log(req.body)
   res.render('../views/profile.ejs', { userDetails: User })
 })
 
 mainRouter.post('/mApi', function (req, res) {
   console.log(req.body)
-  accountManager.updateAddress(req.body, req, res)  
+  accountManager.updateAddress(req.body, req, res)
 })
 
 mainRouter.post('/nApi', function (req, res) {
   console.log(req.body)
-  accountManager.getGroups(req.body, req, res)  
+  accountManager.getGroups(req.body, req, res)
 })
 
 mainRouter.get('/login', function (req, res) {

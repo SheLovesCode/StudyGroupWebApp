@@ -2,6 +2,8 @@
 const charactersList = document.getElementById('charactersList')
 const searchBar = document.getElementById('searchBar')
 let hpCharacters = []
+const groupList = []
+const username = ' '
 
 searchBar.addEventListener('keyup', (e) => {
   const searchString = e.target.value.toLowerCase()
@@ -44,12 +46,34 @@ const displayCharacters = (characters) => {
 
 loadCharacters().then(response => {
   hpCharacters = response
+  createGroupList(hpCharacters)
   displayCharacters(hpCharacters)
 })
 
 function applyGroup () {
+  username = document.getElementById('username').value
   const group = document.getElementById('groupname').value
-  console.log('sjjsj')
   console.log(group)
-  console.log('sjjsj')
+  let isValiGroup = false
+  for (let i = 0; i <= groupList.length; i++) {
+    console.log(groupList[i])
+    console.log(group)
+    if (groupList[i] === group) {
+      console.log(groupList)
+      isValiGroup = true
+    }
+  }
+  if (!isValiGroup) {
+    alert('Group does not exist')
+  } else {
+
+  }
 }
+
+function createGroupList (hpCharacters) {
+  hpCharacters.forEach(element => {
+    console.log(element.groupname)
+    groupList.push(element.groupname)
+  })
+}
+
