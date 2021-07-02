@@ -29,19 +29,23 @@
     <section></section>
     <div id="container-class" class="container">
         <script>
+            //Creating an array to store the incoming groups the user belongs to
             let usersGroup = []
-
-            sendingToDB().then(response => {
+            // Enabling the retrieval of the groups the user belongs to
+            sendingDeletedGroup().then(response => {
                 //myGroupMembers = response
                 usersGroup = response
-                console.log(usersGroup)
+                //console.log(usersGroup)
                 displayGroups(usersGroup)
 
         });
+        // Display the study groups the user belongs to
             const displayGroups = (groupname) => {
-                
+                // When there is no groups that the user belongs to the user sees nothing
+                if (groupname.length > 0) {
                 const class_container = document.getElementById('container-class')
                 const htmlString = groupname
+                
                 .map((groupname) => {
     
                     return `
@@ -57,31 +61,53 @@
                     `
     
                 })
+                                
                 .join('')    
                 class_container.innerHTML = htmlString
-            }
-            const numberOfTeams = usersGroup.length
-            function myFunction(clicked_id) {
                 
-                //alert("I am a pop up ! " + clicked_id);
-                var txt;
-                var r = confirm("Are you sure you want to leave "+clicked_id+"\nOK or Cancel.");
-                if (r == true) {
-                txt = "You pressed OK!";
-                alert(txt)
+            } else {
+                
+                const class_container = document.getElementById('container-class')
+                const htmlString = groupname
+                
+                .map((groupname) => {
+    
+                    return `
+                        <div class="box">
+                            <div class="info">
+                                <h2>You do not belong to any group</h2>
+                            </div>
+                        </div>
+                    `
+    
+                })
+                                
+                .join('')
+                class_container.innerHTML = htmlString
+            }
+            }
+            // Function enabling the retrival of the HTML ID's in order to remove the corresponsding
+            // Tags when the User wants to leave a group 
+            function myFunction(clicked_id) {
+                var text;
+                var state = confirm("Are you sure you want to leave "+clicked_id+" \nOK or Cancel.");
+                if (state == true) {
+                text = "You left the group "+ clicked_id;
+                alert(text)
                 var id_count = document.getElementById(clicked_id)
                 console.log(id_count)
                 for(i=0;i<5;i++) id_count.remove()
 
-                sendingToDB(clicked_id)
+                sendingDeletedGroup(clicked_id)
                 } 
-                
                 else {
-                txt = "You pressed Cancel!";
-                alert(txt)
+                text = "Cancelling the porcedure!";
+                alert(text)
                 }
             }
-            async function sendingToDB (group='YEEEE') {
+            // Asynchronous function enabling the ability to send the client information to the database(server)
+            //As a response object
+            async function sendingDeletedGroup (group='YEEEE') {
             const text = {
                 groupname: group
             }
