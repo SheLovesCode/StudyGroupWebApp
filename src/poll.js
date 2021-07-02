@@ -2,14 +2,16 @@
 
 let myGroupMembers = []
 let memberToBeTerminated = ''
-let inputType = 0
-sendingToDB(inputType).then(response => {
+sendingToDB(0, 'TerminationPoll').then(response => {
+  myGroupMembers = response
+  console.log(myGroupMembers)
+})
+sendingToDB(0, 'ApplicationPoll').then(response => {
   myGroupMembers = response
   console.log(myGroupMembers)
 })
 
-inputType = 3
-sendingToDB(inputType)
+sendingToDB(3, 'TerminationPoll')
 // When Create Poll button is pressed, a "Successful Creation of Termination Poll" message must be sent .
 const createTerminationPollButton = document.getElementById('createPollbtn')
 createTerminationPollButton.addEventListener('click', function myFunction () {
@@ -18,9 +20,7 @@ createTerminationPollButton.addEventListener('click', function myFunction () {
   const Message = informationChecker(memberToBeTerminated, Reason)
   if (Message !== 'Please enter all information') {
     document.forms[0].reset()
-    inputType = 1
-    sendingToDB(inputType, Reason)
-    inputType = 0
+    sendingToDB(1, 'TerminationPoll', Reason)
     myGroupMembers.forEach(function (myEmail) {
       sendEmail(myEmail, memberToBeTerminated)
     })
@@ -28,9 +28,10 @@ createTerminationPollButton.addEventListener('click', function myFunction () {
   alert(Message)
 }, false)
 
-async function sendingToDB (inputType, Reason) {
+async function sendingToDB (inputType, dbTable, Reason = '', groupName) {
   const text = {
     groupname: 'YEEEE',
+    table: dbTable,
     member: memberToBeTerminated,
     reason: Reason,
     input: inputType

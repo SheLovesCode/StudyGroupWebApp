@@ -9,7 +9,7 @@ sendingToDB(4).then(response => {
   console.log(myUsernames)
 })
 let emailContent = ''
-sendingToDB(0).then(response => {
+sendingToDB(0, 'TerminationPoll').then(response => {
   myGroupMembers = response
 })
 generateList.addEventListener('click', function myFunction () {
@@ -35,7 +35,7 @@ generateList.addEventListener('click', function myFunction () {
 
     yesBtn.addEventListener('click', function myFunction () {
       element.yesCount += 1
-      sendingToDB(2, element.yesCount, element.noCount, element.username, element.groupname)
+      sendingToDB(2, 'TerminationPoll', element.yesCount, element.noCount, element.username, element.groupname)
       yesBtn.remove()
       noBtn.remove()
       pollQuestion.remove()
@@ -43,13 +43,13 @@ generateList.addEventListener('click', function myFunction () {
       if (totalVotes === element.voteCount) {
         if (element.yesCount > element.noCount) {
           emailContent = element.member + 'has not found favour with the team and has been removed from the group!'
-          sendingToDB(3, element.yesCount, element.noCount, element.username, element.groupname)
+          sendingToDB(3, 'TerminationPoll', element.yesCount, element.noCount, element.username, element.groupname)
           myGroupMembers.forEach(function (groupEmail) {
             sendEmail(groupEmail, emailContent)
           })
         } else {
           emailContent = element.member + 'has found favour with the team and will continue to be part of the group!'
-          sendingToDB(3, element.yesCount, element.noCount, element.username, element.groupname)
+          sendingToDB(3, 'TerminationPoll', element.yesCount, element.noCount, element.username, element.groupname)
           myGroupMembers.forEach(function (groupEmail) {
             sendEmail(groupEmail, emailContent)
           })
@@ -62,26 +62,30 @@ generateList.addEventListener('click', function myFunction () {
       } else {
         numOfPollsLeft -= 1
       }
-    // Change db status
+      pollBtn.addEventListener('click', function myFunction () {
+        window.location = '/group/poll.html'
+      })
     }, false)
 
     noBtn.addEventListener('click', function myFunction () {
       element.noCount += 1
-      sendingToDB(2, element.yesCount, element.noCount, element.username, element.groupname)
+      sendingToDB(2, 'TerminationPoll', element.yesCount, element.noCount, element.username, element.groupname)
       yesBtn.remove()
       noBtn.remove()
       pollQuestion.remove()
-      const totalVotes = element.yesCount + element.noCount
+      const totalVotes = (element.yesCount + element.noCount)
       if (totalVotes === element.voteCount) {
         if (element.yesCount > element.noCount) {
           emailContent = element.member + 'has not found favour with the team and has been removed from the group!'
-          sendingToDB(3, element.yesCount, element.noCount, element.username, element.groupname)
+          console.log(element.member)
+          console.log(element.username)
+          sendingToDB(3, 'TerminationPoll', element.yesCount, element.noCount, element.username, element.groupname)
           myGroupMembers.forEach(function (groupEmail) {
             sendEmail(groupEmail, emailContent)
           })
-        } else {
+        } else if (element.yesCount <= element.noCount) {
           emailContent = element.member + 'has found favour with the team and will continue to be part of the group!'
-          sendingToDB(3, element.yesCount, element.noCount, element.username, element.groupname)
+          sendingToDB(3, 'TerminationPoll', element.yesCount, element.noCount, element.username, element.groupname)
           myGroupMembers.forEach(function (groupEmail) {
             sendEmail(groupEmail, emailContent)
           })
@@ -94,11 +98,14 @@ generateList.addEventListener('click', function myFunction () {
       } else {
         numOfPollsLeft -= 1
       }
+      pollBtn.addEventListener('click', function myFunction () {
+        window.location = '/group/poll.html'
+      })
     }, false)
+  })
 
-    pollBtn.addEventListener('click', function myFunction () {
-      window.location = '/group/poll.html'
-    })
+  pollBtn.addEventListener('click', function myFunction () {
+    window.location = '/group/poll.html'
   })
 
   function createPoll (Name, Reason) {
@@ -109,13 +116,14 @@ generateList.addEventListener('click', function myFunction () {
   }
 }, false)
 
-async function sendingToDB (inputType, yesNum = 0, noNum = 0, user = '', group = '') {
+async function sendingToDB (inputType, tableName = 'TerminationPoll', yesNum = 0, noNum = 0, user = '', group = '') {
   const text = {
     input: inputType,
     yesVotes: yesNum,
     noVotes: noNum,
     member: user,
-    groupname: group
+    groupname: group,
+    table: tableName
   }
   const options = {
     method: 'POST',

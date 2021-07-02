@@ -20,14 +20,15 @@ async function getGroupMembers (pollObj, req, res) {
     const sql = db.sql
     const config = db.config
     const pool = await sql.connect(config)
-    const member = await pool.request().query('SELECT member FROM GroupMembership WHERE groupname = ' + '\'' + pollObj.groupname + '\'')
+    const member = await pool.request().query(`SELECT member FROM GroupMembership WHERE groupname = '${pollObj.groupname}'`)
     let groupMemberCount = 0
     const memberList = []
     member.recordset.forEach(user => {
       groupMemberCount += 1
       memberList.push(user.member)
     })
-    await pool.request().query(`UPDATE TerminationPoll SET voteCount = ${groupMemberCount} WHERE groupname = '${pollObj.groupname}'`)
+    console.log(groupMemberCount)
+    await pool.request().query(`UPDATE ${pollObj.table} SET voteCount = ${groupMemberCount} WHERE groupname = '${pollObj.groupname}'`)
     res.json(memberList)
   } catch (err) {
     console.log(err)
@@ -50,7 +51,7 @@ async function setTermination (pollObj, req, res) {
     const sql = db.sql
     const config = db.config
     const pool = await sql.connect(config)
-    await pool.request().query(`UPDATE TerminationPoll SET yesCount = ${pollObj.yesVotes}, noCount = ${pollObj.noVotes} WHERE username = \'${pollObj.member}\' AND groupname = \'${pollObj.groupname}\'`)
+    await pool.request().query(`UPDATE ${pollObj.table} SET yesCount = ${pollObj.yesVotes}, noCount = ${pollObj.noVotes} WHERE username = '${pollObj.member}' AND groupname = '${pollObj.groupname}'`)
   } catch (err) {
     console.log(err)
   }
@@ -61,7 +62,7 @@ async function deleteTerminationPoll (pollObj, req, res) {
     const sql = db.sql
     const config = db.config
     const pool = await sql.connect(config)
-    await pool.request().query(`DELETE FROM TerminationPoll WHERE username = '${pollObj.member}' AND groupname = '${pollObj.groupname}'`)
+    await pool.request().query(`DELETE FROM ${pollObj.table} WHERE username = '${pollObj.member}' AND groupname = '${pollObj.groupname}'`)
   } catch (err) {
     console.log(err)
   }
@@ -72,7 +73,7 @@ async function getTerminationPolls (pollObj, req, res) {
     const sql = db.sql
     const config = db.config
     const pool = await sql.connect(config)
-    const terminationPolls = await pool.request().query('SELECT * FROM TerminationPoll')
+    const terminationPolls = await pool.request().query(`SELECT * FROM ${pollObj.table}`)
     const memberList = []
     terminationPolls.recordset.forEach(user => {
       memberList.push(user)
