@@ -3,16 +3,34 @@
 <head>
     <title>Member Poll</title>
     <link rel="stylsheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css">
-    <!-- <link rel="stylesheet" href="../public/votingStyle.css"> -->
+    <link rel="stylesheet" type="text/css" href="/css/votingStyle.css">
     <script src="https://smtpjs.com/v3/smtp.js"></script>
 </head>
 <body>
-    <h1 id = myHeading>Vote for each termination poll here</h1>
-    <button id="view">Generate List</button>
-<div class="poll">
-  <div class="question"></div>
-  <div class="answers"></div>
-</div>
-    <script defer src="../src/terminationPoll.js"></script>
+    <input type="checkbox" id="check">
+    <nav>
+        <div class="icon">My <b style="color: darkblue;">K</b>udu <b style="color: darkblue;">B</b>uddy</div>
+        <div class="search_box">
+            <input type="search" placeholder="Search here">
+            <span class="fa fa-search"></span>
+        </div>
+        <ol>
+            <li><a href="/login/home">home</a></li>
+            <li><a href="/profile">profile</a></li>
+            <li><a href="#">contact us</a></li>
+            <li><a href="#">about</a></li>
+        </ol>
+        <label for="check" class="bar">
+            <span class="fa fa-bars" id="bars"></span>
+            <span class="fa fa-times" id="times"></span>
+        </label>
+    </nav>
+    <section></section>
+        <div id="container-class" class="container">
+            <script defer src="../src/terminationPoll.js"></script>
+            <h1 id = myHeading>Vote in each termination poll here:</h1>
+            <button id="view">Generate List</button>
+        </div>
+
 </body>
 </html>

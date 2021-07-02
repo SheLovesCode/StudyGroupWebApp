@@ -74,7 +74,7 @@ nav .search_box span {
     padding: 8px;
     position: relative;
     cursor: pointer;
-    z-index: 1;
+    z-index: 1; 
 }
 
 nav .search_box span:hover {
@@ -343,7 +343,7 @@ input {
 
 .main_container {
     display: flex;
-    flex-direction: column;
+    flex-direction: column; 
     height: 100vh;
     width: 100%
 }
@@ -371,13 +371,17 @@ input {
 }
 
 button {
-    background: #265f82;
+    background:url(/utils/main.png);
     cursor: pointer;
-    transition: background .3s ease
+    transition: background .3s ease;
+    border-radius: 7px;
+    color: white;
+    align-items: center;
 }
 
 button:hover {
-    background: #1F4C69
+    background: #1F4C69;
+    color: cornflowerblue;
 }
 
 button:disabled {
@@ -442,4 +446,11 @@ button:disabled {
     outline: none;
     background: none;
     font-weight: bolder;
+}
+
+#createPollbtn{
+    padding-left: 615px;
+    padding-right: 615px;
+    
+    
 }
