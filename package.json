@@ -43,6 +43,6 @@
   "_id": "2021-012-project@1.0.0",
   "devDependencies": {
     "dotenv": "^10.0.0",
-    "nodemon": "^2.0.8"
+    "nodemon": "^2.0.9"
   }
 }
