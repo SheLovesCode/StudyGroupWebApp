@@ -1,5 +1,7 @@
 const validateGrpCrd = require('../src/groupProcess')
-
+/**
+ * Testing the credentials to add a new group to the database
+ */
 describe('Validating the Credentials to make a study Group', () => {
   test('Return False if the email entered has no @', () => {
     const email = 'student.gmail.com'
