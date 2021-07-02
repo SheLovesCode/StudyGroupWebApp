@@ -125,7 +125,7 @@ mainRouter.post('/register', async function (req, res) {
   console.log(req.body)
   accountManager.addUser(req.body, req, res)
 })
-
+// Existing groups routes
 mainRouter.get('/existingGroups', function (req, res) {
   const User = req.session.user
   res.sendFile(path.join(__dirname, '../views', 'existingGroups.html'))
@@ -136,27 +136,25 @@ mainRouter.get('/existingGroups', function (req, res) {
     res.sendFile(path.join(__dirname, '../src', '/existingGroups.js'))
   })
 })
-
+//profile
 mainRouter.get('/profile', function (req, res) {
   const User = req.session.user
   res.render('../views/profile.ejs', { userDetails: User })
 })
-
+// route for updating physical address
 mainRouter.post('/mApi', function (req, res) {
   const username = req.session.user.username
   accountManager.updateAddress(req.body, req, res, username)
 })
-
+// route for getting array with groups
 mainRouter.post('/nApi', function (req, res) {
-  console.log(req.body)
   accountManager.getGroups(req.body, req, res)
 })
-
+// route for obtaining username
 mainRouter.post('/jApi', function (req, res) {
-  console.log(req.body)
   accountManager.getUsername(req.body, req, res)
 })
-
+// route for sendingApplication to db table
 mainRouter.post('/pApi', function (req, res) {
   accountManager.sendApplication(req.body, req, res)
 })

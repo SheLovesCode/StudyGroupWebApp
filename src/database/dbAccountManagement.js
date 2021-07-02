@@ -141,12 +141,12 @@ module.exports.getGroups = async function (details, req, res) {
     console.log(err)
   }
 }
-
+// get the username of the one in session
 module.exports.getUsername = async function (details, req, res) {
   const username = req.session.user.username
   res.json(username)
 }
-
+// create row for application in db table
 module.exports.sendApplication = async function (details, req, res) {
   try {
     const sql = db.sql
