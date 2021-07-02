@@ -5,32 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="utf-8">
     <link rel="stylesheet" type="text/css" href="/css/page.css">
-    <script src="https://kit.fontawesome.com/67c66657c7.js"></script>
-                <script>
-                function changeLanguage(language) {
-                    var element = document.getElementById("url");
-                    element.value = language;
-                    element.innerHTML = language;
-                }
-
-                function showDropdown() {
-                    document.getElementById("myDropdown").classList.toggle("show");
-                }
-
-                // Close the dropdown if the user clicks outside of it
-                window.onclick = function(event) {
-                    if (!event.target.matches('.dropbtn')) {
-                        var dropdowns = document.getElementsByClassName("dropdown-content");
-                        var i;
-                        for (i = 0; i < dropdowns.length; i++) {
-                            var openDropdown = dropdowns[i];
-                            if (openDropdown.classList.contains('show')) {
-                                openDropdown.classList.remove('show');
-                            }
-                        }
-                    }
-                }
-            </script>
 </head>
 <body>
     <h1>Study Groups</h1>
@@ -53,44 +27,72 @@
         </label>
     </nav>
     <section></section>
-    <div class="container">
-        <div class="box">
-            <div class="info">
-            <h2>WITS ELITE</h2>
-            <a href="/login/home/group/chat" class="btn">Click Me</a>
-            </div>
-        </div>
-        <div class="box">
-            <div class="info">
-                <h2>1234 START</h2>
-                <a href="/login/home/group/chat" class="btn">Click Me</a>
-            </div>
-        </div>
-        <div class="box">
-            <div class="info">
-                <h2>WAS GUD</h2>
-                <a href="/login/home/group/chat" class="btn">Click Me</a>
-            </div>
-        </div>
-        <div class="box">
-            <div class="info">
-                <div class="dropdown">
-                    <ul class="dropbtn icons btn-right showLeft" onclick="showDropdown()">
-                        <li></li>
-                        <li></li>
-                        <li></li>
-                    </ul>
-                    <div id="myDropdown" class="dropdown-content">
-                        <a href="#">Manage Group</a>
-                        <a href="#">Leave Group</a>
-                        <a href="#">Add Member</a>
-                        <a href="#">Get link to group</a>
-                    </div>
-                </div>
-                <h2>LECTURER.INC</h2>
-                <a href="/login/home/group/chat" class="btn">Click Me</a>
-            </div>
-        </div>
+    <div id="container-class" class="container">
+        <script>
+            let usersGroup = []
+    
+            sendingToDB().then(response => {
+                //myGroupMembers = response
+                usersGroup = response
+                console.log(usersGroup)
+                displayCharacters(usersGroup)
+            })
+            const displayCharacters = (groupname) => {
+                
+                const class_container = document.getElementById('container-class')
+                const htmlString = groupname
+    
+                .map((groupname) => {
+    
+                    return `
+                    
+                        <div class="box">
+                            <div class="info">
+                                <h2>${groupname}</h2>
+                                <a href="/login/home/group/chat" class="btn">Enter Group</a>
+                                <a href="#" class="leave">Leave Group</a>
+                            </div>
+                        </div>
+    
+                    `
+    
+                })
+    
+                .join('')
+    
+                class_container.innerHTML = htmlString
+    
+    }
+            const numberOfTeams = usersGroup.length
+            /*function addClassForGroup(){
+                var class_container = document.getElementById('container-class');
+                class_container.className += 'box';
+                class_container.className +='info';
+            }*/
+            async function sendingToDB (email='1234',group='YEEEE') {
+            const text = {
+                memberemail : email,
+                groupname: group
+            }
+            const options = {
+                method: 'POST',
+                headers: {
+                'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(text)
+            }
+            const response = await fetch('/test', options)
+            return response.json()
+            }
+        </script>
     </div>
 </body>
 </html>
+
+<!--
+<li class="character">
+
+    <h2>${character.groupname}</h2>
+
+</li> 
+-->

@@ -115,3 +115,25 @@ async function AddToGroupMember (res, member, groupname) {
     res.redirect('/login/home/creategroup')
   }
 }
+
+module.exports.getExistingGroups = async function (memberemail, req, res) {
+  // console.log('Storing Current Study Groups in List')
+  console.log(memberemail)
+  try {
+    // Making a connection to obtain the available groups in the database
+    const sql = db.sql
+    const config = db.config
+    const pool = await sql.connect(config)
+    const groups = await pool.request().query('SELECT groupname FROM GroupMembership WHERE member = ' + '\'' + memberemail + '\'')
+    // Storing all the database study groups in the list
+    const groupList = []
+    groups.recordset.forEach(group => {
+      groupList.push(group.groupname)
+    })
+    console.log('*******')
+    console.log(groupList)
+    res.json(groupList)
+  } catch (err) {
+    console.log(err)
+  }
+}

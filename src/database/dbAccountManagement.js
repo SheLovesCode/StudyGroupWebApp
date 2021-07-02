@@ -30,7 +30,7 @@ async function getList () {
 const passwordCompare = function (index, password, req, res) {
   const user = accountProcess.getList()[index]
   if (user.password === password) {
-    req.session.user = { firstName: user.firstName, username: user.username }
+    req.session.user = { username: user.username, email: user.email }
     res.redirect('/login/home')
   } else {
     res.redirect('/login')
