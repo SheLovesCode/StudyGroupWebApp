@@ -68,8 +68,13 @@
                 var r = confirm("Are you sure you want to leave "+clicked_id+"\nOK or Cancel.");
                 if (r == true) {
                 txt = "You pressed OK!";
+                alert(txt)
+                var id_count = document.getElementById(clicked_id)
+                console.log(id_count)
+                for(i=0;i<5;i++) id_count.remove()
                 } else {
                 txt = "You pressed Cancel!";
+                alert(txt)
                 }
             }
             async function sendingToDB (email='1234',group='YEEEE') {
