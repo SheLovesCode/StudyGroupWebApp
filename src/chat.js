@@ -1,4 +1,5 @@
 const socket = io();
+const container = document.getElementById("message");
 
 socket.on('connect', function() {
     console.log('Connected to server');
@@ -20,6 +21,7 @@ socket.on('createNewMessage', function(printMessage) {
 
     let item = document.createElement('li');
     item.innerText = printMessage;
-    document.querySelector('body').appendChild(item);
+    //document.querySelector('body').appendChild(item);
+    container.appendChild(item);
     window.scrollTo(0, document.body.scrollHeight);
 });
