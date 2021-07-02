@@ -71,6 +71,11 @@ describe('Tests If Details Are Valid', () => {
     expect(accountProcess.isAddressValid(' ')).toEqual(true)
   })
 
+  test('A physical address which has no comma is invalid', () => {
+    accountProcess.clearList()
+    expect(accountProcess.isAddressReal('Makkah Mall, King Abdullah Road, Mecca Saudi Arabia')).toEqual(true)
+  })
+
   test('A password which is the same as the username is invalid', () => {
     accountProcess.clearList()
     expect(accountProcess.isPasswordValid('Steven', 'Steven')).toEqual(false)

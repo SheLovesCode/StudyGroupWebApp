@@ -1,40 +1,34 @@
 'use strict'
 
-let myGroupMembers = []
-let memberToBeTerminated = ''
-sendingToDB(0, 'TerminationPoll').then(response => {
-  myGroupMembers = response
-  console.log(myGroupMembers)
-})
-sendingToDB(0, 'ApplicationPoll').then(response => {
-  myGroupMembers = response
-  console.log(myGroupMembers)
-})
+// const { response } = require("express")
 
-sendingToDB(3, 'TerminationPoll')
+// const { options } = require("./mainRoutes")
+
+const memberToBeTerminated = ''
+let myGroupMembers = []
+sendingToDB().then(response => {
+  myGroupMembers = response
+  console.log(myGroupMembers)
+})
 // When Create Poll button is pressed, a "Successful Creation of Termination Poll" message must be sent .
 const createTerminationPollButton = document.getElementById('createPollbtn')
 createTerminationPollButton.addEventListener('click', function myFunction () {
-  memberToBeTerminated = document.querySelector('#myUsername').value
+  const Username = document.querySelector('#myUsername').value
   const Reason = document.querySelector('#myReason').value
-  const Message = informationChecker(memberToBeTerminated, Reason)
+  const Message = informationChecker(Username, Reason)
   if (Message !== 'Please enter all information') {
     document.forms[0].reset()
-    sendingToDB(1, 'TerminationPoll', Reason)
+    memberToBeTerminated.push(Username)
     myGroupMembers.forEach(function (myEmail) {
-      sendEmail(myEmail, memberToBeTerminated)
+      sendEmail(myEmail, Username)
     })
   }
   alert(Message)
 }, false)
 
-async function sendingToDB (inputType, dbTable, Reason = '', groupName) {
+async function sendingToDB () {
   const text = {
-    groupname: 'YEEEE',
-    table: dbTable,
-    member: memberToBeTerminated,
-    reason: Reason,
-    input: inputType
+    groupname: 'YEEEE'
   }
   const options = {
     method: 'POST',

@@ -24,7 +24,7 @@ function updatePhysicalAddress () {
 }
 
 function goHome () {
-  window.location = 'home'
+  window.location = '/login/home'
   document.write('Please Wait...Taking you home...')
   setTimeout(goHome(), 4000)
 }
