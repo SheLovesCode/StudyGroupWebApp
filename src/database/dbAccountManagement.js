@@ -21,9 +21,7 @@ async function getList () {
     users.recordset.forEach(user => {
       accountProcess.addUser(user)
     })
-    // console.log(users)
   } catch (err) {
-    console.log(err)
   }
 }
 
@@ -43,31 +41,26 @@ module.exports.addUser = async function (details, req, res) {
   try {
     // username unique
     if (!accountProcess.isUsernameValid(user.username)) {
-      console.log('Error: Username not valid')
       res.redirect('/register')
       return
     }
     // username valid
     if (!accountProcess.isUsernameUnique(user.username)) {
-      console.log('Error: Username not unique')
       res.redirect('/register')
       return
     }
     // email valid
     if (!accountProcess.isEmailValid(user.email)) {
-      console.log('Error: Email not valid')
       res.redirect('/register')
       return
     }
     // email unique
     if (!accountProcess.isEmailUnique(user.email)) {
-      console.log('Error: Email not valid')
       res.redirect('/register')
       return
     }
     // password valid
     if (!accountProcess.isPasswordValid(user.password, user.username)) {
-      console.log('Error: Password not valid')
       res.redirect('/register')
       return
     }
@@ -78,10 +71,8 @@ module.exports.addUser = async function (details, req, res) {
     await pool.request().query(createUserQuery(user)) // User details added to the table
 
     req.session.user = { name: user.username, email: user.email }
-    console.log(req.session.user)
     res.redirect('/login')
   } catch (err) {
-    console.log(err)
     res.redirect('/register')
   }
 }
@@ -90,22 +81,18 @@ module.exports.login = async function (details, req, res) {
   try {
     await getList()
     const index = accountProcess.usernameExists(details.loginUsername)
-    console.log(index)
     if (index !== -1) {
       passwordCompare(index, details.password, req, res)
     } else {
       res.redirect('/login')
     }
   } catch (err) {
-    console.log(err)
   }
 }
 
 // updates the address in the db for the individual in session
 module.exports.updateAddress = async function (details, req, res, username) {
   try {
-    console.log('shdjdkdldlldl')
-    console.log(details.address.length)
     if (!accountProcess.isAddressValid(details.address)) {
       res.redirect('/profile')
       return
@@ -120,7 +107,6 @@ module.exports.updateAddress = async function (details, req, res, username) {
     await pool.request().query(`UPDATE Users SET address = \'${details.address}\' WHERE username = \'${username}\'`) // User details added to the table
     req.session.user = { address: details.address }
   } catch (err) {
-    console.log(err)
     res.redirect('/register')
   }
 }
@@ -138,7 +124,6 @@ module.exports.getGroups = async function (details, req, res) {
     })
     res.json(groupList)
   } catch (err) {
-    console.log(err)
   }
 }
 // get the username of the one in session
@@ -154,6 +139,5 @@ module.exports.sendApplication = async function (details, req, res) {
     const pool = await sql.connect(config)
     await pool.request().query(`INSERT INTO ApplicationPoll (username, groupname, terminationStatus, voteCount, yesCount, noCount) VALUES ('${details.name}','${details.groupname}', 'In Progress', 0, 0, 0)`)
   } catch (err) {
-    console.log(err)
   }
 }

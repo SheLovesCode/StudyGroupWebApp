@@ -4,11 +4,9 @@ let myGroupMembers = []
 let memberToBeTerminated = ''
 sendingToDB(0, 'TerminationPoll').then(response => {
   myGroupMembers = response
-  console.log(myGroupMembers)
 })
 sendingToDB(0, 'ApplicationPoll').then(response => {
   myGroupMembers = response
-  console.log(myGroupMembers)
 })
 
 sendingToDB(3, 'TerminationPoll')
@@ -47,6 +45,7 @@ async function sendingToDB (inputType, dbTable, Reason = '', groupName) {
   return response.json()
 }
 
+// Checks that the username and reason are not empty
 function informationChecker (Username, Reason) {
   if (Username === '' || Reason === '') {
     return 'Please enter all information'

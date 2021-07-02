@@ -6,7 +6,6 @@ let myGroupMembers = []
 // Sends the members of sendingToDB to mainroutes to interact with backend DB
 sendingToDB(4).then(response => { // 4 => getTerminationPoll from TerminationPoll table
   myUsernames = response
-  console.log(myUsernames)
 })
 let emailContent = ''
 sendingToDB(0, 'ApplicationPoll').then(response => {
@@ -54,9 +53,6 @@ generateList.addEventListener('click', function myFunction () {
 
       // Checking for final verdict when all members have voted. Member get's removed if more yes votes than no
       const totalVotes = element.yesCount + element.noCount
-      console.log(totalVotes)
-      console.log(element.yesCount, element.noCount)
-      console.log(element.voteCount)
       if (totalVotes === element.voteCount) {
         if (element.yesCount < element.noCount) {
           emailContent = element.member + 'has not found favour with the team and has been rejected!'
@@ -78,6 +74,7 @@ generateList.addEventListener('click', function myFunction () {
       } else {
         numOfPollsLeft -= 1
       }
+
       // Generate routing back to home
       pollBtn.addEventListener('click', function myFunction () {
         window.location = '/group/poll.html'
@@ -91,6 +88,7 @@ generateList.addEventListener('click', function myFunction () {
       yesBtn.remove()
       noBtn.remove()
       pollQuestion.remove()
+
       // send verdict when everyone has voted
       const totalVotes = (element.yesCount + element.noCount)
       if (totalVotes === element.voteCount) {
@@ -164,6 +162,5 @@ function sendEmail (emailAddress, emailContent) {
     Subject: 'Termination Poll Results',
     Body: `${emailContent}`
   }).then(
-    // message => alert(`Successfully sent to ${emailAddress}`)
   )
 }

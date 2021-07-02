@@ -18,7 +18,6 @@ async function sendingToDB (physicalAddress) {
 function updatePhysicalAddress () {
   const physicalAddress = document.getElementById('physicalAddress').value
   sendingToDB(physicalAddress).then(response => {
-    console.log('dddd')
   })
   alert('The address,' + physicalAddress + ',was updated.')
 }

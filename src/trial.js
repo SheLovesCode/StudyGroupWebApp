@@ -1,14 +1,9 @@
 'use strict'
 
-// const { response } = require("express")
-
-// const { options } = require("./mainRoutes")
-
 const memberToBeTerminated = ''
 let myGroupMembers = []
 sendingToDB().then(response => {
   myGroupMembers = response
-  console.log(myGroupMembers)
 })
 // When Create Poll button is pressed, a "Successful Creation of Termination Poll" message must be sent .
 const createTerminationPollButton = document.getElementById('createPollbtn')

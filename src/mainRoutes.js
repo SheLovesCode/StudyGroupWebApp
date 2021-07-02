@@ -12,13 +12,8 @@ const dbMeetings = require('../src/database/dbMeetings')
 
 function checkIfSignedIn (req, res, next) {
   if (req.session.user) {
-    console.log('There')
-    console.log(req.session.user)
-    console.log('There')
     next()
   } else {
-    // const err = new Error('Not logged in')
-    // next(err)
     alert('User not logged in!')
     res.redirect('/login')
   }
@@ -28,7 +23,6 @@ mainRouter.get('/', function (req, res) {
 })
 
 mainRouter.get('/login/home', function (req, res) {
-  // console.log(req.session.user)
   const user = req.session.user
   res.render('../views/home.ejs', { name: user.username })
 })
@@ -117,12 +111,10 @@ const { request } = require('http')
 const dbPoll = require('../src/database/dbPoll.js')
 
 mainRouter.post('/api', function (req, res) {
-  console.log(req.body)
   dbPoll.selectFunction(req.body, req, res)
 })
 
 mainRouter.post('/register', async function (req, res) {
-  console.log(req.body)
   accountManager.addUser(req.body, req, res)
 })
 // Existing groups routes
@@ -160,8 +152,6 @@ mainRouter.post('/pApi', function (req, res) {
 })
 
 mainRouter.get('/login', function (req, res) {
-  console.log(req.body)
-  console.log(req.session.user)
   res.render('../views/login.ejs')
 })
 
@@ -232,7 +222,6 @@ mainRouter.get('/login/home/CovidScreening', function (req, res) {
 })
 
 mainRouter.post('/register', async function (req, res) {
-  console.log(req.body)
   accountManager.addUser(req.body, req, res)
 })
 
@@ -247,7 +236,6 @@ mainRouter.get('/profile', function (req, res) {
 })
 
 mainRouter.get('/login', function (req, res) {
-  console.log(req.body)
   res.render('../views/login.ejs')
 })
 
@@ -268,11 +256,6 @@ mainRouter.delete('/logout', checkIfSignedIn, function (req, res) {
 mainRouter.post('/test', function (req, res) {
   const useremail = req.session.user.email
   groupManager.getExistingGroups(useremail, req, res)
-  console.log('/**********************/ body')
-  console.log(req.body)
-  console.log('/************************/ Group being removed')
-  console.log(req.body.groupname)
-  console.log('/************************/')
   const groupRemoved = req.body.groupname
   groupManager.removeExistingGroup(useremail, groupRemoved, req, res)
 })
@@ -284,7 +267,6 @@ mainRouter.get('/CovidScreening', function (req, res) {
 // Meetings
 
 mainRouter.post('/meetingDetails', (req, res) => {
-  console.log(req.body.status)
   if (req.body.status === 'Read') {
     dbMeetings.getMeetingDetails(req, res)
   }
