@@ -1,3 +1,4 @@
+'use strict'
 
 const charactersList = document.getElementById('charactersList')
 const searchBar = document.getElementById('searchBar')
@@ -44,8 +45,5 @@ const displayCharacters = (characters) => {
 
 loadCharacters().then(response => {
   hpCharacters = response
-  console.log('sjjsj')
-  console.log(hpCharacters)
-  console.log('sjjsj')
   displayCharacters(hpCharacters)
 })
