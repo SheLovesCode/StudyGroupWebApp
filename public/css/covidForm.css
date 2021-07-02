@@ -1,0 +1,169 @@
+/* Send Invite Styling */
+* {
+    margin:0;
+    padding:0;
+    font-family: consolas;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    background: #001925;
+    border-top: 50px solid #023d58;
+    border-bottom: 50px solid #023d58;
+}
+
+h1 {
+    text-align:inherit;
+    color: #fff;
+    font-size: 100px;
+    margin: 0px 15px 15px 0px;
+    margin-left: 10px;
+    padding: 20px 10px 20px 10px;
+    position: relative;
+    float: left;
+    margin: auto !important;
+    display: block;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    text-align: center;
+}
+
+.head {
+
+    word-break: break-all ;
+    color: #001925;
+    font-size: 20px;
+    margin-left: 10px;
+    display:inline-block;
+  border-bottom: 4px solid #001925;
+  
+}
+
+.decl {
+    font-weight:bolder;
+    color: #001925;
+    font-size: 20px;
+  justify-content: center;
+    padding: 10px 10px 10px 10px;
+}
+
+p{
+    
+  word-break: break-all ;
+  color: #001925;
+  font-size: 20px;
+  margin-left: 20px;
+  justify-content: center;
+  display:inline-block;
+}
+
+form {
+    padding: 15px 50px 10px 30px;
+    position: relative;
+    background: #d3ebf9;
+    border-top: 50px solid rgb(246, 255, 255);
+    border-bottom: 50px solid rgb(246, 255, 255);
+}
+
+.form .list .p {
+  word-break: break-all ;
+  color: #FFF;
+  font-size: 20px;
+  margin-left: 10px;
+  display:inline-block;
+  border-bottom: 4px solid #FFF;
+}
+
+.list .p {
+    color: #001925;
+    font-size: 20px;
+    margin-left: 10px;
+    display:inline-block;
+}
+
+.list .ques {
+    position: relative;
+    display:block;
+    margin: 50px;
+    color: #001925;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.list .ques input [type="radio"]{
+    display: none;
+}
+
+.list .quest .p {
+    position: relative;
+    left: 40px;
+    transition: 0.5s;
+}
+
+input[type=button] {
+    text-decoration: none;
+    border: 2px solid #001925;
+    border-radius: 4px;
+    background: #001925;
+    color: #fff;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    padding: 10px;
+}
+
+input[type=button]:hover {
+    background-color: cornflowerblue;
+    color: #fff;
+    border: 2px solid #eee;   
+    border-radius: 4px;
+    text-shadow:none;
+}
+
+.covidModal {
+    background: rgba(7, 6, 6, 0.5);
+    width: 100%;
+    height: 100%;
+    /* Makes the modal a percentage of the actual screen instead of the container */
+    position: fixed;
+    /* Allows modal to move with screen when the screen is scrolled*/
+    top: 0;
+    left: 0;
+    right: 0;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid blue;
+    border: 10px;
+}
+
+.covidModalContent {
+    height: 45%;
+    width: 45%;
+    position: relative;
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 5px;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Closing button */
+
+.closeBtn {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    font-size: 2rem;
+    cursor: pointer;
+    border: none;
+    outline: none;
+    background: none;
+    font-weight: bolder;
+}
