@@ -44,8 +44,12 @@ const displayCharacters = (characters) => {
 
 loadCharacters().then(response => {
   hpCharacters = response
-  console.log('sjjsj')
-  console.log(hpCharacters)
-  console.log('sjjsj')
   displayCharacters(hpCharacters)
 })
+
+function applyGroup () {
+  const group = document.getElementById('groupname').value
+  console.log('sjjsj')
+  console.log(group)
+  console.log('sjjsj')
+}
