@@ -6,35 +6,35 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title> COVID-19 SCREENING TOOL</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="/covidForm.css">
+    <link rel="stylesheet" type="text/css" href="/css/covidForm.css">
 </head>
 
 <body>
     <h1>COVID-19 SCREENING TOOL</h1>
-    <p> Please complete the following as honestly as possible</p>
-    <form name="covidForm" id="covidForm">
-        <div>
-            <p>Symptom Check: Are you suffering from any of the following symptoms?</p>
-            <div>
+    <form name="covidForm" id="covidForm" class="form">
+        <p class="decl"> Please complete the following as honestly as possible</p>
+        <div class="list">
+            <p class="head">Are you suffering from any of the following symptoms?</p>
+            <div class="ques">
                 <p>Fever, dry cough, sore throat, red eyes, difficulty breathing, loss of smell or taste?</p>
                 <p><input type="radio" name="symptoms" value="YES">YES</p>
                 <p><input type="radio" name="symptoms" value="NO">NO</p>
             </div>
-            <div>
+            <div class="ques">
                 <p>Unusual body aches, fatigue, weakness, tiredness, nauseous, vomiting or diarrhoea?</p>
                 <p><input type="radio" name="seriousSymptoms" value="YES">YES</p>
                 <p><input type="radio" name="seriousSymptoms" value="NO">NO</p>
             </div>
         </div>
 
-        <div>
-            <p>Contact/Exposure Risk</p>
-            <div>
+        <div class="list">
+            <p class="head">Contact/Exposure Risk</p>
+            <div class="ques">
                 <p>In the past 10 days have you tested positive for COVID-19?</p>
                 <p><input type="radio" name="tested" value="YES">YES</p>
                 <p><input type="radio" name="tested" value="NO">NO</p>
             </div>
-            <div>
+            <div class="ques">
                 <p>In the last 10 days were you exposed to someone who is positively diagonosed with COVID-19, or someone who is in quarantine due to COVID-19?</p>
                 <p><input type="radio" name="exposed" value="YES">YES</p>
                 <p><input type="radio" name="exposed" value="NO">NO</p>
@@ -42,14 +42,14 @@
         </div>
 
         <!-- Less risky factors -->
-        <div>
-            <p>Other Risk Factors</p>
-            <div>
+        <div class="list">
+            <p class="head">Other Risk Factors</p>
+            <div class="ques">
                 <p>Do you suffer from any pre-existing medical condition/chronic illness that may have compromised your immune system such as respiratory disease, diabtes, heart disease, or any other chronic illness?</p>
                 <p><input type="radio" name="medical" value="YES">YES</p>
                 <p><input type="radio" name="medical" value="NO">NO</p>
             </div>
-            <div>
+            <div class="ques">
                 <p>Are you 60 years of age or older?</p>
                 <p><input type="radio" name="age" value="YES">YES</p>
                 <p><input type="radio" name="age" value="NO">NO</p>
