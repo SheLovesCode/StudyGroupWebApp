@@ -126,17 +126,17 @@ mainRouter.post('/register', async function (req, res) {
   accountManager.addUser(req.body, req, res)
 })
 
-/*
-mainRouter.get('/profile', function (req, res) {
+
+mainRouter.get('/existingGroups', function (req, res) {
   const User = req.session.user
-  res.sendFile(path.join(__dirname, '../views', 'profile.ejs'))
-  mainRouter.get('/public/form.css', function (req, res) {
-    res.sendFile(path.join(__dirname, '../public', '/form.css'))
+  res.sendFile(path.join(__dirname, '../views', 'existingGroups.html'))
+  mainRouter.get('/public/existingGroups.css', function (req, res) {
+    res.sendFile(path.join(__dirname, '../public', '/existingGroups.css'))
   })
-  mainRouter.get('/src/profile.js', checkIfSignedIn, function (req, res) {
-    res.sendFile(path.join(__dirname, '../src', '/profile.js'))
+  mainRouter.get('/src/existingGroups.js', checkIfSignedIn, function (req, res) {
+    res.sendFile(path.join(__dirname, '../src', '/existingGroups.js'))
   })
-}) */
+}) 
 
 mainRouter.get('/profile', function (req, res) {
   const User = req.session.user
@@ -147,6 +147,11 @@ mainRouter.get('/profile', function (req, res) {
 mainRouter.post('/mApi', function (req, res) {
   const username = req.session.user.username
   accountManager.updateAddress(req.body, req, res, username)
+})
+
+mainRouter.post('/nApi', function (req, res) {
+  console.log(req.body)
+  accountManager.getGroups(req.body, req, res)  
 })
 
 mainRouter.get('/login', function (req, res) {

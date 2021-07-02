@@ -101,6 +101,7 @@ module.exports.login = async function (details, req, res) {
   }
 }
 
+// updates the address in the db for the individual in session
 module.exports.updateAddress = async function (details, req, res, username) {
   try {
     console.log('shdjdkdldlldl')
@@ -109,13 +110,37 @@ module.exports.updateAddress = async function (details, req, res, username) {
       res.redirect('/profile')
       return
     }
+    if (!accountProcess.isAddressReal(details.address)) {
+      res.redirect('/profile')
+      return
+    }
     const sql = db.sql
     const config = db.config
     const pool = await sql.connect(config)
-    await pool.request().query(`UPDATE Users SET address = \'${details.address}\' WHERE username = username`) // User details added to the table
+    await pool.request().query(`UPDATE Users SET address = \'${details.address}\' WHERE username = \'${username}\'`) // User details added to the table
     req.session.user = { address: details.address }
   } catch (err) {
     console.log(err)
     res.redirect('/register')
+  }
+}
+// Selects all the groups in the db table and stores in array of objects
+module.exports.getGroups = async function (details, req, res) {
+  try {
+    const sql = db.sql
+    const config = db.config
+    const pool = await sql.connect(config)
+    const groups = await pool.request().query('SELECT groupname FROM Groups')
+
+    const groupList = []
+    groups.recordset.forEach(user => {
+      groupList.push(user)
+    })
+    console.log('sjjsj')
+    console.log(groupList)
+    console.log('sjjsj')
+    res.json(groupList)
+  } catch (err) {
+    console.log(err)
   }
 }

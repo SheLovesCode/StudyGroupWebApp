@@ -86,5 +86,12 @@ module.exports = {
     const validAddressLength = 0
     if ((address.length === validAddressLength)) return false
     else return true
+  },
+// Address has more than 1 comma
+  isAddressReal: function (address) {
+    const splitAddress = address.split(',')
+    const validAddressLength = 2
+    if ((splitAddress.length < validAddressLength)) return false
+    else return true
   }
 }
