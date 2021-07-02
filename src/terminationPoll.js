@@ -4,14 +4,17 @@ const generateList = document.getElementById('view')
 let myUsernames = []
 let myGroupMembers = []
 
-sendingToDB(4).then(response => {
+// Sends the members of sendingToDB to mainroutes to interact with backend DB
+sendingToDB(4).then(response => { // 4 => getTerminationPoll from TerminationPoll table
   myUsernames = response
   console.log(myUsernames)
 })
 let emailContent = ''
-sendingToDB(0, 'TerminationPoll').then(response => {
+sendingToDB(0, 'TerminationPoll').then(response => { // 0 => getGroupMembers from GroupMember table
   myGroupMembers = response
 })
+
+// When the view button is pressed, generate the various termination polls
 generateList.addEventListener('click', function myFunction () {
   generateList.remove()
   const heading = document.getElementById('myHeading')
@@ -20,6 +23,7 @@ generateList.addEventListener('click', function myFunction () {
   heading.appendChild(pollBtn)
   let numOfPollsLeft = myUsernames.length
 
+  // Create poll question with reason
   myUsernames.forEach(function (element) {
     const pollQuestion = document.createElement('li')
     const pollElements = createPoll(element.username, element.reason)
@@ -43,6 +47,7 @@ generateList.addEventListener('click', function myFunction () {
       if (totalVotes === element.voteCount) {
         if (element.yesCount > element.noCount) {
           emailContent = element.member + 'has not found favour with the team and has been removed from the group!'
+          sendingToDB(3, 'GroupMembership', element.yesCount, element.noCount, element.member, element.groupname)
         } else {
           emailContent = element.member + 'has found favour with the team and will continue to be part of the group!'
         }
@@ -70,10 +75,12 @@ generateList.addEventListener('click', function myFunction () {
       yesBtn.remove()
       noBtn.remove()
       pollQuestion.remove()
+      // send verdict when everyone has voted
       const totalVotes = (element.yesCount + element.noCount)
       if (totalVotes === element.voteCount) {
         if (element.yesCount > element.noCount) {
           emailContent = element.member + 'has not found favour with the team and has been removed from the group!'
+          sendingToDB(3, 'GroupMembership', element.yesCount, element.noCount, element.member, element.groupname)
         } else if (element.yesCount <= element.noCount) {
           emailContent = element.member + 'has found favour with the team and will continue to be part of the group!'
         }
@@ -108,6 +115,7 @@ generateList.addEventListener('click', function myFunction () {
   }
 }, false)
 
+// Function to interact with backend
 async function sendingToDB (inputType, tableName = 'TerminationPoll', yesNum = 0, noNum = 0, user = '', group = '') {
   const text = {
     input: inputType,

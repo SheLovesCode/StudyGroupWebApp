@@ -12,6 +12,8 @@ module.exports.selectFunction = async function (pollObj, req, res) {
     deleteTerminationPoll(pollObj, req, res)
   } else if (pollObj.input === 4) {
     getTerminationPolls(pollObj, req, res)
+  } else if (pollObj.input === 5) {
+    addMember(pollObj, req, res)
   }
 }
 
@@ -79,6 +81,17 @@ async function getTerminationPolls (pollObj, req, res) {
       memberList.push(user)
     })
     res.json(memberList)
+  } catch (err) {
+    console.log(err)
+  }
+}
+
+async function addMember (pollObj, req, res) {
+  try {
+    const sql = db.sql
+    const config = db.config
+    const pool = await sql.connect(config)
+    await pool.request().query(`INSERT INTO GroupMembership (groupname, member, memberrating) VALUES ('${pollObj.groupname}','${pollObj.member}', 0)`)
   } catch (err) {
     console.log(err)
   }

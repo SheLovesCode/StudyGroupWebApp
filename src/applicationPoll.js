@@ -46,19 +46,15 @@ generateList.addEventListener('click', function myFunction () {
       if (totalVotes === element.voteCount) {
         if (element.yesCount < element.noCount) {
           emailContent = element.member + 'has not found favour with the team and has been rejected!'
-          sendingToDB(3, 'ApplicationPoll', element.yesCount, element.noCount, element.username, element.groupname)
-          myGroupMembers.forEach(function (groupEmail) {
-            sendEmail(groupEmail, emailContent)
-          })
-          heading.innerHTML = 'No polls to review'
         } else {
           emailContent = element.member + 'has found favour with the team and is accepted into the group to be part of the group!'
-          sendingToDB(3, 'ApplicationPoll', element.yesCount, element.noCount, element.username, element.groupname)
-          myGroupMembers.forEach(function (groupEmail) {
-            sendEmail(groupEmail, emailContent)
-          })
-          heading.innerHTML = 'No polls to review'
+          sendingToDB(5, 'GroupMembership', element.yesCount, element.noCount, element.member, element.groupname)
         }
+        sendingToDB(3, 'ApplicationPoll', element.yesCount, element.noCount, element.username, element.groupname)
+        myGroupMembers.forEach(function (groupEmail) {
+          sendEmail(groupEmail, emailContent)
+        })
+        heading.innerHTML = 'No polls to review'
       }
       if (numOfPollsLeft === 1) {
         heading.innerHTML = 'No polls to review'
@@ -82,19 +78,15 @@ generateList.addEventListener('click', function myFunction () {
       if (totalVotes === element.voteCount) {
         if (element.yesCount > element.noCount) {
           emailContent = element.member + 'has not found favour with the team and has been rejected!'
-          sendingToDB(3, 'ApplicationPoll', element.yesCount, element.noCount, element.username, element.groupname)
-          myGroupMembers.forEach(function (groupEmail) {
-            sendEmail(groupEmail, emailContent)
-          })
-          heading.innerHTML = 'No polls to review'
         } else if (element.yesCount <= element.noCount) {
           emailContent = element.member + 'has found favour with the team and is accepted into the group to be part of the group!'
-          sendingToDB(3, 'ApplicationPoll', element.yesCount, element.noCount, element.username, element.groupname)
-          myGroupMembers.forEach(function (groupEmail) {
-            sendEmail(groupEmail, emailContent)
-          })
-          heading.innerHTML = 'No polls to review'
+          sendingToDB(5, 'GroupMembership', element.yesCount, element.noCount, element.member, element.groupname)
         }
+        sendingToDB(3, 'ApplicationPoll', element.yesCount, element.noCount, element.username, element.groupname)
+        myGroupMembers.forEach(function (groupEmail) {
+          sendEmail(groupEmail, emailContent)
+        })
+        heading.innerHTML = 'No polls to review'
       }
       if (numOfPollsLeft === 1) {
         heading.innerHTML = 'No polls to review'
