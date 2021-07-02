@@ -133,6 +133,15 @@ mainRouter.post('/nApi', function (req, res) {
   accountManager.getGroups(req.body, req, res)
 })
 
+mainRouter.post('/jApi', function (req, res) {
+  console.log(req.body)
+  accountManager.getUsername(req.body, req, res)
+})
+
+mainRouter.post('/pApi', function (req, res) {
+  accountManager.sendApplication(req.body, req, res)
+})
+
 mainRouter.get('/login', function (req, res) {
   console.log(req.body)
   console.log(req.session.user)

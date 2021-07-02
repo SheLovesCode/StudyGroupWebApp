@@ -125,10 +125,23 @@ module.exports.getGroups = async function (details, req, res) {
     groups.recordset.forEach(user => {
       groupList.push(user)
     })
-    console.log('sjjsj')
-    console.log(groupList)
-    console.log('sjjsj')
     res.json(groupList)
+  } catch (err) {
+    console.log(err)
+  }
+}
+
+module.exports.getUsername = async function (details, req, res) {
+  const username = req.session.user.username
+  res.json(username)
+}
+
+module.exports.sendApplication = async function (details, req, res) {
+  try {
+    const sql = db.sql
+    const config = db.config
+    const pool = await sql.connect(config)
+    await pool.request().query(`INSERT INTO ApplicationPoll (username, groupname, terminationStatus, voteCount, yesCount, noCount) VALUES ('${details.name}','${details.groupname}', 'In Progress', 0, 0, 0)`)
   } catch (err) {
     console.log(err)
   }

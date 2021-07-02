@@ -3,7 +3,7 @@ const charactersList = document.getElementById('charactersList')
 const searchBar = document.getElementById('searchBar')
 let hpCharacters = []
 const groupList = []
-const username = ' '
+let username = ' '
 
 searchBar.addEventListener('keyup', (e) => {
   const searchString = e.target.value.toLowerCase()
@@ -31,6 +31,39 @@ async function loadCharacters () {
   return response.json()
 }
 
+async function loadUsername () {
+  const ob = {
+    name: 'name'
+  }
+  const options = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(ob)
+  }
+
+  const response = await fetch('/jApi', options)
+  return response.json()
+}
+
+async function makeApplication (username, group) {
+  const ob = {
+    name: username,
+    groupname: group
+  }
+  const options = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(ob)
+  }
+
+  const response = await fetch('/pApi', options)
+  return response.json()
+}
+
 const displayCharacters = (characters) => {
   const htmlString = characters
     .map((character) => {
@@ -50,30 +83,27 @@ loadCharacters().then(response => {
   displayCharacters(hpCharacters)
 })
 
+loadUsername().then(response => {
+  username = response
+})
+
 function applyGroup () {
-  username = document.getElementById('username').value
   const group = document.getElementById('groupname').value
-  console.log(group)
   let isValiGroup = false
   for (let i = 0; i <= groupList.length; i++) {
-    console.log(groupList[i])
-    console.log(group)
     if (groupList[i] === group) {
-      console.log(groupList)
       isValiGroup = true
     }
   }
   if (!isValiGroup) {
     alert('Group does not exist')
   } else {
-
+    makeApplication(username, group)
   }
 }
 
 function createGroupList (hpCharacters) {
   hpCharacters.forEach(element => {
-    console.log(element.groupname)
     groupList.push(element.groupname)
   })
 }
-
