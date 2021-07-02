@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="utf-8">
     <link rel="stylesheet" type="text/css" href="/css/insideGroups.css">
+    <link rel="stylesheet" type="text/css" href="/css/meetings.css">
     <script src="https://kit.fontawesome.com/67c66657c7.js"></script>
 </head>
 
@@ -42,8 +43,9 @@
     <div class="main_container" id="mainContainer">
         <!-- Send COVID screening tool form -->
         <button class="meetingBtn" type="submit" id="sendFaceInviteBtn">Create Face-to-Face Meeting Invite</button>
+
         <div id="faceMeetings">
-            <p>Upcoming Face-to-Face Meetings</p>
+            <p class="upcomingMeetings">Upcoming Face-to-Face Meetings</p>
         </div>
         <!--Create Popup Modal -->
         <div class="modal" id="faceModal">
@@ -57,10 +59,10 @@
         </div>
 
         <!-- Send Online Meeting Invite -->
-        <button class="meetingBtn" id="sendOnlineInviteBtn">Create Online Meeting Invite</button>
+        <button class="meetingBtn" id="sendOnlineInviteBtn" float="right">Create Online Meeting Invite</button>
         <!--Create Popup Modal for online meeting -->
         <div id="onlineMeetings">
-            <p>Upcoming Online Meetings</p>
+            <p class="upcomingMeetings">Upcoming Online Meetings</p>
         </div>
         <div class="modal" id="onlineModal">
             <div class="modalContent">

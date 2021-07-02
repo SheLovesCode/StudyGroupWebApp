@@ -1,0 +1,29 @@
+.upcomingMeetings {
+    font-weight: bolder;
+    color: cornflowerblue
+}
+
+a {
+    background-color: cornflowerblue;
+    color: white;
+    padding: 0.5em;
+    border-radius: 5px;
+    font-size: small;
+    cursor: pointer;
+}
+
+#onlineMeetings,
+#faceMeetings {
+    border: cornflowerblue;
+    border-style: dotted;
+}
+
+.meetingBtn {
+    width: 100%;
+    height: 8%;
+    border-radius: 10px;
+}
+
+.mainContainer {
+    text-align: center;
+}
