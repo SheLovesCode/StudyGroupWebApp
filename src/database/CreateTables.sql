@@ -32,3 +32,13 @@ CREATE TABLE ChatsMessage (
 	message varchar(255) NOT NULL UNIQUE,
     PRIMARY KEY(messageid)
 );
+
+DROP TABLE IF EXISTS GroupMembership;
+
+CREATE TABLE GroupMembership (
+    id int identity NOT NULL,
+    groupname varchar(255) NOT NULL,
+    member varchar(255) NOT NULL,
+    memberrating varchar(255) NULL,
+    PRIMARY KEY(id)
+);
