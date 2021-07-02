@@ -1,0 +1,192 @@
+
+
+* {
+    margin:0px;
+    padding:0px;
+    box-sizing:border-box;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+  }
+  
+  nav{
+    display: flex;
+    width: 100%;
+    background: url(../utils/linear.png);
+    position: relative;
+    justify-content: space-between;
+    text-align: center;
+    padding: 7.5px 30px;
+}
+ 
+nav .icon{
+    font-size: 25px;
+    font-weight: 500;
+    color: #fff;
+    cursor: pointer;
+}
+
+nav ol{
+    display: flex;
+    list-style: none;
+    margin: auto 0;
+}
+
+nav ol li{
+    margin: 0 2px;
+}
+
+nav ol li a{
+    color: #fff;
+    font-size: 20px;
+    text-decoration: none;
+    text-transform: capitalize;
+    letter-spacing: 1px;
+    padding: 5px 10px;
+}
+
+nav ol li:hover a{
+    background: #fff;
+    color: cornflowerblue;
+}
+
+nav .search_box{
+    display: flex;
+    margin: auto 0;
+    height: 35px;
+    line-height: 35px;
+}
+
+nav .search_box input{
+    border: 3px solid darkblue;
+    outline: none;
+    background: #fff;
+    height: 100%;
+    padding: 0 10px;
+    font-size: 20px;
+    width: 400px;
+}
+
+
+nav .search_box span{
+    color: cornflowerblue;
+    font-size: 20px;
+    background: #fff;
+    height: 100%;
+    padding: 8px;
+    position: relative;
+    cursor: pointer;
+    z-index: 1;
+    border: 3px solid darkblue;
+}
+
+nav .search_box span:hover{
+    color: #fff;
+}
+nav .search_box span::after{
+    height: 100%;
+    width: 100%;
+    content: '';
+    background: darkblue;
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: -1;
+}
+
+nav .search_box span:hover::after{
+    width: 100%;
+}
+
+nav .bar{
+    position: relative;
+    margin: auto;
+}
+
+
+nav .bar span{
+    position: absolute;
+    /* color: #fff; */
+    font-size: 20px;
+}
+
+
+
+input[type="checkbox"]{
+    -webkit-appearance: none;
+    display: none;
+}
+
+section{
+    background: url(../utils/blue.jpg);
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    background-position: center;
+    background-size: cover;
+    top: 0;
+    z-index: -1;
+}
+
+.container {
+        width: 100%;
+        padding: 20px;
+        background: url(../utils/flowers2.jpg);
+        margin: auto;
+        grid-template-columns: repeat(4,1fr);
+        gap: 20px;
+        justify-content: center;
+        border: 1px solid #000000;
+    }
+  
+/* container 1 {
+  position:absolute; left:100px; top:120px;
+  letter-spacing: 5px;
+  font-size:medium;
+} */
+
+button {
+    background: #265f82;
+    cursor: pointer;
+    transition: background .3s ease;
+    position: relative;
+    border: 2px solid #265f82;
+    color: white;
+    font-family: inherit;
+    padding: 5px;
+    border-radius: 7px;
+}
+button:hover{
+    background: #1F4C69;
+    color: cornflowerblue;
+}
+#myHeading{
+  font-size: 30px;
+}
+
+#Question{
+  font-size: 25px;
+}
+#GoBack{
+  float: right
+}
+#YES{
+  float: fixed;
+  padding-left: 18px;
+  padding-right: 18px;
+  }
+
+#NO{
+  float: fixed;
+  padding-left: 20px;
+  padding-right: 20px;
+  }
+
+.button:hover {
+    background: #1F4C69
+}
+
+.button:disabled {
+    cursor: default;
+    background: #698ea5
+}

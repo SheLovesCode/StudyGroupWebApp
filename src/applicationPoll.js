@@ -18,6 +18,7 @@ generateList.addEventListener('click', function myFunction () {
   generateList.remove()
   const heading = document.getElementById('myHeading')
   const pollBtn = document.createElement('button')
+  pollBtn.id = 'GoBack'
   let numOfPollsLeft = myUsernames.length
   if (numOfPollsLeft === 0) {
     heading.innerHTML = 'No polls to review'
@@ -28,6 +29,7 @@ generateList.addEventListener('click', function myFunction () {
   // Create poll question with reason
   myUsernames.forEach(function (element) {
     const pollQuestion = document.createElement('li')
+    pollQuestion.id = 'Question'
     const pollElements = createPoll(element.username, element.reason)
     pollQuestion.innerText = pollElements
     heading.append(pollQuestion)
@@ -37,6 +39,8 @@ generateList.addEventListener('click', function myFunction () {
     const noBtn = document.createElement('button')
     yesBtn.innerHTML = 'Yes'
     noBtn.innerHTML = 'No'
+    yesBtn.id = 'YES'
+    noBtn.id = 'NO'
     heading.appendChild(yesBtn)
     heading.appendChild(noBtn)
 
