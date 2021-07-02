@@ -101,6 +101,7 @@ module.exports.login = async function (details, req, res) {
   }
 }
 
+// updates the address in the db for the individual in session
 module.exports.updateAddress = async function (details, req, res, username) {
   try {
     console.log('shdjdkdldlldl')
@@ -123,7 +124,7 @@ module.exports.updateAddress = async function (details, req, res, username) {
     res.redirect('/register')
   }
 }
-
+// Selects all the groups in the db table and stores in array of objects
 module.exports.getGroups = async function (details, req, res) {
   try {
     const sql = db.sql

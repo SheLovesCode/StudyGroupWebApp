@@ -3,7 +3,7 @@
 const charactersList = document.getElementById('charactersList')
 const searchBar = document.getElementById('searchBar')
 let hpCharacters = []
-
+// Checks letters in search bar to groups and filters
 searchBar.addEventListener('keyup', (e) => {
   const searchString = e.target.value.toLowerCase()
 
@@ -14,7 +14,7 @@ searchBar.addEventListener('keyup', (e) => {
   })
   displayCharacters(filteredCharacters)
 })
-
+// fetch
 async function loadCharacters () {
   const ob = {
     name: 'name'
@@ -29,7 +29,7 @@ async function loadCharacters () {
   const response = await fetch('/nApi', options)
   return response.json()
 }
-
+// display groups in array
 const displayCharacters = (characters) => {
   const htmlString = characters
     .map((character) => {
@@ -42,7 +42,7 @@ const displayCharacters = (characters) => {
     .join('')
   charactersList.innerHTML = htmlString
 }
-
+//fetch response
 loadCharacters().then(response => {
   hpCharacters = response
   displayCharacters(hpCharacters)
