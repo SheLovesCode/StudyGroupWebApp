@@ -80,6 +80,11 @@ module.exports = {
     const validPasswordLength = 5
     if ((username !== password) && (password.length >= validPasswordLength)) return true
     else return false
-  }
+  },
   // Address is valid
+  isAddressValid: function (address) {
+    const validAddressLength = 0
+    if ((address.length === validAddressLength)) return false
+    else return true
+  }
 }

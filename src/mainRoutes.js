@@ -126,8 +126,8 @@ mainRouter.get('/profile', function (req, res) {
 })
 
 mainRouter.post('/mApi', function (req, res) {
-  console.log(req.body)
-  accountManager.updateAddress(req.body, req, res)  
+  const username = req.session.user.username
+  accountManager.updateAddress(req.body, req, res, username)
 })
 
 mainRouter.get('/login', function (req, res) {
