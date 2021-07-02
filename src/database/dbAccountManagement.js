@@ -116,3 +116,23 @@ module.exports.updateAddress = async function (details, req, res) {
     res.redirect('/register')
   }
 }
+
+module.exports.getGroups = async function (details, req, res) {
+  try {
+    const sql = db.sql
+    const config = db.config
+    const pool = await sql.connect(config)
+    const groups = await pool.request().query('SELECT groupname FROM Groups')
+
+    const groupList = []
+    groups.recordset.forEach(user => {
+      groupList.push(user)
+    })
+    console.log('sjjsj')
+    console.log(groupList)
+    console.log('sjjsj')
+    res.json(groupList)
+  } catch (err) {
+    console.log(err)
+  }
+}
