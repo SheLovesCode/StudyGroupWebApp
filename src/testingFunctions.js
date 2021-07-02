@@ -18,8 +18,16 @@ function informationChecker (Username, Reason) {
   }
 }
 
+function createPoll (Name, Reason) {
+  const poll = {
+    question: 'Do you want to terminate the membership of ' + Name + ' because ' + Reason + '?'
+  }
+  return [poll.question]
+}
+
 module.exports = {
   method1: rounding,
   method2: isEmail,
-  method3: informationChecker
+  method3: informationChecker,
+  method4: createPoll
 }

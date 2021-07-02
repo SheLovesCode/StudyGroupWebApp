@@ -4,6 +4,7 @@ const myModule = require('../src/testingFunctions.js')
 const rounding = myModule.method1
 const isEmail = myModule.method2
 const informationChecker = myModule.method3
+const createPoll = myModule.method4
 
 describe('Rounding off testing', () => {
   test('rounded down number', () => {
@@ -56,5 +57,14 @@ describe('From poll.js - information getter from form', () => {
     const Reason = 'I have one'
     const result = 'Termination poll regarding ' + Username + ' successfully created for this reason: ' + Reason
     expect(informationChecker(Username, Reason)).toEqual(result)
+  })
+})
+
+describe('Updating Poll Question', () => {
+  test('Returns the poll object in square brackets', () => {
+    const name = 'Jackie'
+    const reason = 'No Reason'
+    const output = ['Do you want to terminate the membership of Jackie because No Reason?']
+    expect(createPoll(name, reason)).toEqual(output)
   })
 })

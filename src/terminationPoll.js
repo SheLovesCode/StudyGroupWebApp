@@ -43,17 +43,14 @@ generateList.addEventListener('click', function myFunction () {
       if (totalVotes === element.voteCount) {
         if (element.yesCount > element.noCount) {
           emailContent = element.member + 'has not found favour with the team and has been removed from the group!'
-          sendingToDB(3, 'TerminationPoll', element.yesCount, element.noCount, element.username, element.groupname)
-          myGroupMembers.forEach(function (groupEmail) {
-            sendEmail(groupEmail, emailContent)
-          })
         } else {
           emailContent = element.member + 'has found favour with the team and will continue to be part of the group!'
-          sendingToDB(3, 'TerminationPoll', element.yesCount, element.noCount, element.username, element.groupname)
-          myGroupMembers.forEach(function (groupEmail) {
-            sendEmail(groupEmail, emailContent)
-          })
         }
+        sendingToDB(3, 'TerminationPoll', element.yesCount, element.noCount, element.username, element.groupname)
+        myGroupMembers.forEach(function (groupEmail) {
+          sendEmail(groupEmail, emailContent)
+          heading.innerHTML = 'No polls to review'
+        })
       }
       if (numOfPollsLeft === 1) {
         heading.innerHTML = 'No polls to review'
@@ -77,19 +74,14 @@ generateList.addEventListener('click', function myFunction () {
       if (totalVotes === element.voteCount) {
         if (element.yesCount > element.noCount) {
           emailContent = element.member + 'has not found favour with the team and has been removed from the group!'
-          console.log(element.member)
-          console.log(element.username)
-          sendingToDB(3, 'TerminationPoll', element.yesCount, element.noCount, element.username, element.groupname)
-          myGroupMembers.forEach(function (groupEmail) {
-            sendEmail(groupEmail, emailContent)
-          })
         } else if (element.yesCount <= element.noCount) {
           emailContent = element.member + 'has found favour with the team and will continue to be part of the group!'
-          sendingToDB(3, 'TerminationPoll', element.yesCount, element.noCount, element.username, element.groupname)
-          myGroupMembers.forEach(function (groupEmail) {
-            sendEmail(groupEmail, emailContent)
-          })
         }
+        sendingToDB(3, 'TerminationPoll', element.yesCount, element.noCount, element.username, element.groupname)
+        myGroupMembers.forEach(function (groupEmail) {
+          sendEmail(groupEmail, emailContent)
+        })
+        heading.innerHTML = 'No polls to review'
       }
       if (numOfPollsLeft === 1) {
         heading.innerHTML = 'No polls to review'
