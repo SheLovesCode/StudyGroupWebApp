@@ -109,10 +109,14 @@ module.exports.updateAddress = async function (details, req, res, username) {
       res.redirect('/profile')
       return
     }
+    if (!accountProcess.isAddressReal(details.address)) {
+      res.redirect('/profile')
+      return
+    }
     const sql = db.sql
     const config = db.config
     const pool = await sql.connect(config)
-    await pool.request().query(`UPDATE Users SET address = \'${details.address}\' WHERE username = username`) // User details added to the table
+    await pool.request().query(`UPDATE Users SET address = \'${details.address}\' WHERE username = \'${username}\'`) // User details added to the table
     req.session.user = { address: details.address }
   } catch (err) {
     console.log(err)
