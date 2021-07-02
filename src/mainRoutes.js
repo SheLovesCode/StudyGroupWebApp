@@ -137,20 +137,16 @@ mainRouter.delete('/logout', checkIfSignedIn, function (req, res) {
   res.redirect('/login')
 })
 
-mainRouter.get('/test', function (req, res) {
-  /*console.log(req.session.user)
-  (async function () {
-    const complaints = await groupManager.getExistingGroups('groupname', req, res)
-    console.log('This is complaints')
-    console.log(complaints)
-    res.render('index', { complaints })
-  })() */
-})
-
 mainRouter.post('/test', function (req, res) {
   const useremail = req.session.user.email
   groupManager.getExistingGroups(useremail, req, res)
-  // res.redirect('/test')
+  console.log('/**********************/ body')
+  console.log(req.body)
+  console.log('/************************/ Group being removed')
+  console.log(req.body.groupname)
+  console.log('/************************/')
+  const groupRemoved = req.body.groupname
+  groupManager.removeExistingGroup(useremail, groupRemoved, req, res)
 })
 // Covid Screening after invitation
 mainRouter.get('/login/home/CovidScreening', function (req, res) {

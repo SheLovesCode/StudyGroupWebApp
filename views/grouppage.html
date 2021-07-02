@@ -72,14 +72,17 @@
                 var id_count = document.getElementById(clicked_id)
                 console.log(id_count)
                 for(i=0;i<5;i++) id_count.remove()
-                } else {
+
+                sendingToDB(clicked_id)
+                } 
+                
+                else {
                 txt = "You pressed Cancel!";
                 alert(txt)
                 }
             }
-            async function sendingToDB (email='1234',group='YEEEE') {
+            async function sendingToDB (group='YEEEE') {
             const text = {
-                memberemail : email,
                 groupname: group
             }
             const options = {
@@ -97,11 +100,3 @@
     </div>
 </body>
 </html>
-
-<!--
-<li class="character">
-
-    <h2>${character.groupname}</h2>
-
-</li> 
--->

@@ -137,3 +137,19 @@ module.exports.getExistingGroups = async function (memberemail, req, res) {
     console.log(err)
   }
 }
+
+module.exports.removeExistingGroup = async function (memberemail, groupname, req, res) {
+  // console.log('Storing Current Study Groups in List')
+  console.log(memberemail)
+  try {
+    // Making a connection to obtain the available groups in the database
+    const sql = db.sql
+    const config = db.config
+    const pool = await sql.connect(config)
+    await pool.request().query('DELETE FROM GroupMembership WHERE member = ' + '\'' + memberemail + '\''+' AND groupname =' + '\'' + groupname + '\'')
+    console.log('Successfully added to Group Membership')
+    console.log('Showing the deleted database')
+  } catch (err) {
+    console.log(err)
+  }
+}
