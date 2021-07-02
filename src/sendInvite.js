@@ -47,7 +47,7 @@ function sendEmail (emailAddress, studyGroupName) {
 // takes you back to home after clicking the "Cancel" button
 const Homebutton = document.getElementById('Homebtn')
 Homebutton.addEventListener('click', function myFunction () {
-  window.location = 'home'
+  window.location = '/login/home'
   document.write('Please Wait...Taking you home...')
   setTimeout(myFunction(), 4000)
 }, false)

@@ -42,3 +42,25 @@ CREATE TABLE GroupMembership (
     memberrating varchar(255) NULL,
     PRIMARY KEY(id)
 );
+CREATE TABLE TerminationPoll (
+    terminationID int identity NOT NULL,
+    username varchar(255) NOT NULL,
+    groupname varchar(255) NOT NULL,
+    reason varchar(255) NOT NULL,
+    terminationStatus varchar(255) NOT NULL,
+    voteCount int NOT NULL,
+    yesCount int NOT NULL,
+    noCount int NOT NULL,
+    PRIMARY KEY(terminationID)
+);
+
+CREATE TABLE ApplicationPoll (
+    applicationID int identity NOT NULL,
+    username varchar(255) NOT NULL,
+    groupname varchar(255) NOT NULL,
+    terminationStatus varchar(255) NOT NULL,
+    voteCount int NOT NULL,
+    yesCount int NOT NULL,
+    noCount int NOT NULL,
+    PRIMARY KEY(applicationID)
+);

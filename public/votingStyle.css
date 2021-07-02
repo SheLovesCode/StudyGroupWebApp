@@ -1,48 +1,67 @@
-*{
-    margin: 0;
-    padding: 0;
+
+
+* {
+    margin:0px;
+    padding:0px;
+    box-sizing:border-box;
+  }
+  body {
     font-family: inherit;
-    outline: black;
-    box-sizing: border-box;
-}
-body{
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     background: cornflowerblue;
-}
-.container{
-    background-color: #fff;
-    border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.3);
-    overflow: hidden;
-    width: 400px;
-    max-width: 100%;
-    justify-content: center;
-}
-h2{
-    color:black;
-    padding: 20px 50px;
-    font-size: 30px;
-    justify-content: center;
-}
-.voting{
-    background-color: #f7f7ff;
-    border-bottom: 1px solid #f0f0f0;
-    padding: 20px 40px;
-    justify-content: center;
-}
-button{
-    background-color: #4CAF50; /* Green */
-    border: none;
-    color: white;
-    padding: 10px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 4px 2px;
-    cursor: pointer;
-    justify-content: center;
-}
+  }
+  .poll {
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    width:100%;
+    max-width:400px;
+    background:#fff;
+    border-radius:10px;
+    box-shadow:0px 0px 20px 5px rgba(35,30,128,0.05);
+  }
+  .poll .question {
+    padding:20px;
+    color:#111;
+    font-size:25px;
+    border-bottom:1px solid #eee;
+  }
+  .poll .answers {
+    padding:20px 20px 10px;
+  }
+  .poll .answers .answer {
+    position:relative;
+    width:100%;
+    height:40px;
+    padding:0px 10px;
+    line-height:40px;
+    color:#111;
+    margin-bottom:10px;
+    border:1px solid #d4d4d4;
+    border-radius:10px;
+    cursor:pointer;
+    overflow:hidden;
+  }
+  .poll .answers .answer.selected {
+    border:2px solid #8f9fe8;
+  }
+  .poll .answers .answer span.percentage-value {
+    position:absolute;
+    top:50%;
+    right:0px;
+    width:40px;
+    transform:translateY(-50%);
+    color:#111;
+    font-size:15px;
+  }
+  .poll .answers .answer span.percentage-bar {
+    position:absolute;
+    top:0px;
+    left:0px;
+    width:0%;
+    height:100%;
+    background:#ccd8f1;
+    z-index:-1;
+    transition:width 300ms ease-in-out;
+  }
+  
