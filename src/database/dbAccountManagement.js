@@ -34,7 +34,9 @@ const passwordCompare = function (index, password, req, res) {
     console.log('gh')
     console.log(req.session.user)
     console.log('gh')
-    res.redirect('/home')
+    
+    req.session.user = { firstName: user.firstName, username: user.username }
+    res.redirect('/login/home')
   } else {
     res.redirect('/login')
   }
