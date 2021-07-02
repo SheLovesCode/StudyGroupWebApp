@@ -22,7 +22,8 @@ function checkIfSignedIn(req, res, next) {
         alert('User not logged in!')
         res.redirect('/login')
     }
-}
+const { request } = require('http')
+const dbPoll = require('../src/database/dbPoll.js')
 
 mainRouter.get('/', function(req, res) {
     res.render('../views/register.ejs')
@@ -112,6 +113,14 @@ mainRouter.get('/creategroup', function(req, res) {
     mainRouter.get('/public/form.css', function(req, res) {
         res.sendFile(path.join(__dirname, '../public', '/form.css'))
     })
+mainRouter.post('/api', function (req, res) {
+  console.log(req.body)
+  dbPoll.selectFunction(req.body, req, res)
+})
+
+mainRouter.post('/register', async function (req, res) {
+  console.log(req.body)
+  accountManager.addUser(req.body, req, res)
 })
 
 /*

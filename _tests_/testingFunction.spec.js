@@ -1,6 +1,10 @@
+'use strict'
+
 const myModule = require('../src/testingFunctions.js')
-const rounding = myModule.method
-const isEmail = myModule.otherMethod
+const rounding = myModule.method1
+const isEmail = myModule.method2
+const informationChecker = myModule.method3
+const createPoll = myModule.method4
 
 describe('Rounding off testing', () => {
   test('rounded down number', () => {
@@ -26,5 +30,41 @@ describe('Email validation testing', () => {
     const email = 'kate.embgmail.com'
     const result = false
     expect(isEmail(email)).toEqual(result)
+  })
+})
+
+describe('From poll.js - information getter from form', () => {
+  test('Both username and reason are empty', () => {
+    const Username = ''
+    const Reason = ''
+    const result = 'Please enter all information'
+    expect(informationChecker(Username, Reason)).toEqual(result)
+  })
+  test('Only username is empty', () => {
+    const Username = ''
+    const Reason = 'I have one'
+    const result = 'Please enter all information'
+    expect(informationChecker(Username, Reason)).toEqual(result)
+  })
+  test('Only reason is empty', () => {
+    const Username = 'someUsername'
+    const Reason = ''
+    const result = 'Please enter all information'
+    expect(informationChecker(Username, Reason)).toEqual(result)
+  })
+  test('Both username and reason are entered', () => {
+    const Username = 'someUsername'
+    const Reason = 'I have one'
+    const result = 'Termination poll regarding ' + Username + ' successfully created for this reason: ' + Reason
+    expect(informationChecker(Username, Reason)).toEqual(result)
+  })
+})
+
+describe('Updating Poll Question', () => {
+  test('Returns the poll object in square brackets', () => {
+    const name = 'Jackie'
+    const reason = 'No Reason'
+    const output = ['Do you want to terminate the membership of Jackie because No Reason?']
+    expect(createPoll(name, reason)).toEqual(output)
   })
 })
