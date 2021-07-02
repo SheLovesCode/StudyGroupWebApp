@@ -7,6 +7,7 @@ const db = require('../db.js')
 const accountManager = require('../src/database/dbAccountManagement.js')
 const alert = require('alert')
 const groupManager = require('../src/createGroup')
+    // New code
 const dbMeetings = require('../src/database/dbMeetings')
 
 function checkIfSignedIn(req, res, next) {
@@ -246,6 +247,8 @@ mainRouter.delete('/logout', checkIfSignedIn, function(req, res) {
 mainRouter.get('/CovidScreening', function(req, res) {
     res.sendFile(path.join(__dirname, '../views', 'covidForm.html'))
 })
+
+// Meetings
 
 mainRouter.post('/meetingDetails', (req, res) => {
     console.log(req.body.status);

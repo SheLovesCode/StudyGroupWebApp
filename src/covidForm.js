@@ -23,7 +23,7 @@ function generateAcceptDeclineBtns(allowedToMeet) {
         document.querySelector("#notAllowedModal").style.display = "flex";
     }
 
-    // Accept and Decline button listeners
+    // Accept button listeners
     document.getElementById("acceptBtn").onclick = function() {
         var acceptOrDecline = true;
         document.getElementById("allowedModal").style.display = "none";
@@ -38,7 +38,7 @@ function generateAcceptDeclineBtns(allowedToMeet) {
     //     redirect('../group');
     // }
 
-    // Accept and Decline button listeners
+    // Decline button listeners
     document.getElementById("declineBtn").onclick = function() {
         var acceptOrDecline = true;
         document.getElementById("allowedModal").style.display = "none";
