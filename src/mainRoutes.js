@@ -8,6 +8,7 @@ const accountManager = require('../src/database/dbAccountManagement.js')
 const alert = require('alert')
 const groupManager = require('../src/createGroup')
 const { request } = require('http')
+const dbPoll = require('../src/database/dbPoll.js')
 
 function checkIfSignedIn (req, res, next) {
   if (req.session.user) {
@@ -119,13 +120,8 @@ mainRouter.get('/register', (req, res) => {
 })
 
 mainRouter.post('/api', function (req, res) {
-  console.log('**************')
   console.log(req.body)
-  console.log('**************')
-  res.json({
-    status: 'success',
-    name: req.body
-  })
+  dbPoll.selectFunction(req.body, req, res)
 })
 
 mainRouter.post('/register', async function (req, res) {

@@ -1,34 +1,39 @@
 'use strict'
 
-// const { response } = require("express")
+let myGroupMembers = []
+let memberToBeTerminated = ''
+let inputType = 0
+sendingToDB(inputType).then(response => {
+  myGroupMembers = response
+  console.log(myGroupMembers)
+})
 
-// const { options } = require("./mainRoutes")
-
-const myUsernames = []
-const myGroupMembers = ['1911499@students.wits.ac.za', '1870356@students.wits.ac.za']
+inputType = 3
+sendingToDB(inputType)
 // When Create Poll button is pressed, a "Successful Creation of Termination Poll" message must be sent .
 const createTerminationPollButton = document.getElementById('createPollbtn')
 createTerminationPollButton.addEventListener('click', function myFunction () {
-  const Username = document.querySelector('#myUsername').value
+  memberToBeTerminated = document.querySelector('#myUsername').value
   const Reason = document.querySelector('#myReason').value
-  const Message = informationChecker(Username, Reason)
+  const Message = informationChecker(memberToBeTerminated, Reason)
   if (Message !== 'Please enter all information') {
     document.forms[0].reset()
-    myUsernames.push(Username)
+    inputType = 1
+    sendingToDB(inputType, Reason)
+    inputType = 0
     myGroupMembers.forEach(function (myEmail) {
-      sendEmail(myEmail, Username)
+      sendEmail(myEmail, memberToBeTerminated)
     })
   }
   alert(Message)
 }, false)
 
-sendingToDB().then(response => {
-  console.log(response)
-})
-
-async function sendingToDB () {
+async function sendingToDB (inputType, Reason) {
   const text = {
-    groupname: 'group1'
+    groupname: 'YEEEE',
+    member: memberToBeTerminated,
+    reason: Reason,
+    input: inputType
   }
   const options = {
     method: 'POST',
@@ -60,6 +65,7 @@ const viewTerminationbutton = document.getElementById('Terminationbtn')
 viewTerminationbutton.addEventListener('click', function myFunction () {
   window.location = '/group/terminationPoll'
 }, false)
+
 // links to smtpJS host to send email
 function sendEmail (emailAddress, Username) {
   Email.send({

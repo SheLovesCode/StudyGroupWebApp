@@ -1,74 +1,143 @@
 'use strict'
 
-const myUsernames = ['Elijah', 'Steve', 'Diana', 'Farai']
+const generateList = document.getElementById('view')
+let myUsernames = []
+let myGroupMembers = []
 
-function createPoll (Name) {
-  const poll = {
-    question: 'Do you want to terminate the membership of ' + Name + '?',
-    groupMemberNum: 20, // Need to get from db
-    answersWeight: [0, 0], // Also from db
-    // selectedAnswer: -1,
-    pollCount: 0,
-    No: 0,
-    Yes: 0
+sendingToDB(4).then(response => {
+  myUsernames = response
+  console.log(myUsernames)
+})
+let emailContent = ''
+sendingToDB(0).then(response => {
+  myGroupMembers = response
+})
+generateList.addEventListener('click', function myFunction () {
+  generateList.remove()
+  const heading = document.getElementById('myHeading')
+  const pollBtn = document.createElement('button')
+  pollBtn.innerHTML = 'Go Back to Poll'
+  heading.appendChild(pollBtn)
+  let numOfPollsLeft = myUsernames.length
+
+  myUsernames.forEach(function (element) {
+    const pollQuestion = document.createElement('li')
+    const pollElements = createPoll(element.username, element.reason)
+    pollQuestion.innerText = pollElements
+    heading.append(pollQuestion)
+
+    const yesBtn = document.createElement('button')
+    const noBtn = document.createElement('button')
+    yesBtn.innerHTML = 'Yes'
+    noBtn.innerHTML = 'No'
+    heading.appendChild(yesBtn)
+    heading.appendChild(noBtn)
+
+    yesBtn.addEventListener('click', function myFunction () {
+      element.yesCount += 1
+      sendingToDB(2, element.yesCount, element.noCount, element.username, element.groupname)
+      yesBtn.remove()
+      noBtn.remove()
+      pollQuestion.remove()
+      const totalVotes = element.yesCount + element.noCount
+      if (totalVotes === element.voteCount) {
+        if (element.yesCount > element.noCount) {
+          emailContent = element.member + 'has not found favour with the team and has been removed from the group!'
+          sendingToDB(3, element.yesCount, element.noCount, element.username, element.groupname)
+          myGroupMembers.forEach(function (groupEmail) {
+            sendEmail(groupEmail, emailContent)
+          })
+        } else {
+          emailContent = element.member + 'has found favour with the team and will continue to be part of the group!'
+          sendingToDB(3, element.yesCount, element.noCount, element.username, element.groupname)
+          myGroupMembers.forEach(function (groupEmail) {
+            sendEmail(groupEmail, emailContent)
+          })
+        }
+      }
+      if (numOfPollsLeft === 1) {
+        heading.innerHTML = 'No polls to review'
+        heading.appendChild(pollBtn)
+        numOfPollsLeft -= 1
+      } else {
+        numOfPollsLeft -= 1
+      }
+    // Change db status
+    }, false)
+
+    noBtn.addEventListener('click', function myFunction () {
+      element.noCount += 1
+      sendingToDB(2, element.yesCount, element.noCount, element.username, element.groupname)
+      yesBtn.remove()
+      noBtn.remove()
+      pollQuestion.remove()
+      const totalVotes = element.yesCount + element.noCount
+      if (totalVotes === element.voteCount) {
+        if (element.yesCount > element.noCount) {
+          emailContent = element.member + 'has not found favour with the team and has been removed from the group!'
+          sendingToDB(3, element.yesCount, element.noCount, element.username, element.groupname)
+          myGroupMembers.forEach(function (groupEmail) {
+            sendEmail(groupEmail, emailContent)
+          })
+        } else {
+          emailContent = element.member + 'has found favour with the team and will continue to be part of the group!'
+          sendingToDB(3, element.yesCount, element.noCount, element.username, element.groupname)
+          myGroupMembers.forEach(function (groupEmail) {
+            sendEmail(groupEmail, emailContent)
+          })
+        }
+      }
+      if (numOfPollsLeft === 1) {
+        heading.innerHTML = 'No polls to review'
+        heading.appendChild(pollBtn)
+        numOfPollsLeft -= 1
+      } else {
+        numOfPollsLeft -= 1
+      }
+    }, false)
+
+    pollBtn.addEventListener('click', function myFunction () {
+      window.location = '/group/poll.html'
+    })
+  })
+
+  function createPoll (Name, Reason) {
+    const poll = {
+      question: 'Do you want to terminate the membership of ' + Name + ' because ' + Reason + '?'
+    }
+    return [poll.question]
   }
-  return [poll.question, poll.groupMemberNum, poll.pollCount, poll.Yes, poll.No]
+}, false)
+
+async function sendingToDB (inputType, yesNum = 0, noNum = 0, user = '', group = '') {
+  const text = {
+    input: inputType,
+    yesVotes: yesNum,
+    noVotes: noNum,
+    member: user,
+    groupname: group
+  }
+  const options = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(text)
+  }
+  const response = await fetch('/api', options)
+  return response.json()
 }
 
-const heading = document.getElementById('myHeading')
-const pollBtn = document.createElement('button')
-pollBtn.innerHTML = 'Go Back to Poll'
-heading.appendChild(pollBtn)
-let numOfPollsLeft = myUsernames.length
-myUsernames.forEach(function (element) {
-  const pollQuestion = document.createElement('li')
-  const pollElements = createPoll(element)
-  pollQuestion.innerText = pollElements[0]
-  heading.append(pollQuestion)
-  const yesBtn = document.createElement('button')
-  const noBtn = document.createElement('button')
-  yesBtn.innerHTML = 'Yes'
-  noBtn.innerHTML = 'No'
-  heading.appendChild(yesBtn)
-  heading.appendChild(noBtn)
-
-  yesBtn.addEventListener('click', function myFunction () {
-    pollElements[2] += 1
-    pollElements[3] += 1
-    yesBtn.remove()
-    noBtn.remove()
-    pollQuestion.remove()
-    // alert('Number of votes cast: ' + pollElements[2] + '\n' + 'Number of yes votes: ' + pollElements[3] + '\n' + 'Number of no votes: ' + pollElements[4])
-    if (numOfPollsLeft === 1) {
-      heading.innerHTML = 'No polls to review'
-      heading.appendChild(pollBtn)
-      numOfPollsLeft -= 1
-    } else {
-      numOfPollsLeft -= 1
-    }
-    // Change db status
-  }, false)
-
-  noBtn.addEventListener('click', function myFunction () {
-    pollElements[2] += 1
-    pollElements[4] += 1
-    yesBtn.remove()
-    noBtn.remove()
-    pollQuestion.remove()
-    // alert('Number of votes cast: ' + pollElements[2] + '\n' + 'Number of yes votes: ' + pollElements[3] + '\n' + 'Number of no votes: ' + pollElements[4])
-    if (numOfPollsLeft === 1) {
-      heading.innerHTML = 'No polls to review'
-      heading.appendChild(pollBtn)
-      numOfPollsLeft -= 1
-    } else {
-      numOfPollsLeft -= 1
-    }
-    // Change db status
-  }, false)
-
-  pollBtn.addEventListener('click', function myFunction () {
-    window.location = '/group/poll.html'
-    // document.write('Please Wait...Taking you back...')
-    // setTimeout(myFunction(), 10)
-  })
-})
+function sendEmail (emailAddress, emailContent) {
+  Email.send({
+    Host: 'smtp.gmail.com',
+    Username: 'dummylia160@gmail.com',
+    Password: '`12345qwerty',
+    To: `${emailAddress}`,
+    From: 'dummylia160@gmail.com',
+    Subject: 'Termination Poll Results',
+    Body: `${emailContent}`
+  }).then(
+    // message => alert(`Successfully sent to ${emailAddress}`)
+  )
+}

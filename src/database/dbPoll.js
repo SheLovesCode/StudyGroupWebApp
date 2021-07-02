@@ -1,21 +1,84 @@
 'use strict'
 
 const db = require('../../db')
-const accountProcess = require('./accountProcess')
+module.exports.selectFunction = async function (pollObj, req, res) {
+  if (pollObj.input === 0) {
+    getGroupMembers(pollObj, req, res)
+  } else if (pollObj.input === 1) {
+    createTerminationPoll(pollObj, req, res)
+  } else if (pollObj.input === 2) {
+    setTermination(pollObj, req, res)
+  } else if (pollObj.input === 3) {
+    deleteTerminationPoll(pollObj, req, res)
+  } else if (pollObj.input === 4) {
+    getTerminationPolls(pollObj, req, res)
+  }
+}
 
-module.exports.addUser = async function (details, req, res) {
-  const user = accountProcess.createUser(details) // Create an object from the req.body
-
+async function getGroupMembers (pollObj, req, res) {
   try {
-    // address valid
-    const pool = await db.pools
-    await pool.request().query(createUserQuery(user)) // User details added to the table
-
-    req.session.user = { name: user.username, email: user.email }
-    console.log(req.session.user)
-    res.redirect('/login')
+    const sql = db.sql
+    const config = db.config
+    const pool = await sql.connect(config)
+    const member = await pool.request().query('SELECT member FROM GroupMembership WHERE groupname = ' + '\'' + pollObj.groupname + '\'')
+    let groupMemberCount = 0
+    const memberList = []
+    member.recordset.forEach(user => {
+      groupMemberCount += 1
+      memberList.push(user.member)
+    })
+    await pool.request().query(`UPDATE TerminationPoll SET voteCount = ${groupMemberCount} WHERE groupname = '${pollObj.groupname}'`)
+    res.json(memberList)
   } catch (err) {
     console.log(err)
-    res.redirect('/register')
+  }
+}
+
+async function createTerminationPoll (pollObj, req, res) {
+  try {
+    const sql = db.sql
+    const config = db.config
+    const pool = await sql.connect(config)
+    await pool.request().query(`INSERT INTO TerminationPoll (username, groupname, reason, terminationStatus, voteCount, yesCount, noCount) VALUES ('${pollObj.member}','${pollObj.groupname}', '${pollObj.reason}', 'In Progress', 0, 0, 0)`)
+  } catch (err) {
+    console.log(err)
+  }
+}
+
+async function setTermination (pollObj, req, res) {
+  try {
+    const sql = db.sql
+    const config = db.config
+    const pool = await sql.connect(config)
+    await pool.request().query(`UPDATE TerminationPoll SET yesCount = ${pollObj.yesVotes}, noCount = ${pollObj.noVotes} WHERE username = \'${pollObj.member}\' AND groupname = \'${pollObj.groupname}\'`)
+  } catch (err) {
+    console.log(err)
+  }
+}
+
+async function deleteTerminationPoll (pollObj, req, res) {
+  try {
+    const sql = db.sql
+    const config = db.config
+    const pool = await sql.connect(config)
+    await pool.request().query(`DELETE FROM TerminationPoll WHERE username = '${pollObj.member}' AND groupname = '${pollObj.groupname}'`)
+  } catch (err) {
+    console.log(err)
+  }
+}
+
+async function getTerminationPolls (pollObj, req, res) {
+  try {
+    const sql = db.sql
+    const config = db.config
+    const pool = await sql.connect(config)
+    const terminationPolls = await pool.request().query('SELECT * FROM TerminationPoll')
+    const memberList = []
+    terminationPolls.recordset.forEach(user => {
+      memberList.push(user)
+    })
+    res.json(memberList)
+  } catch (err) {
+    console.log(err)
   }
 }
