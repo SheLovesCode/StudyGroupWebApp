@@ -9,6 +9,9 @@ body {
    justify-content: center;
    min-height: 100vh;
    margin: 0;
+   background-image: linear-gradient(rgba(171, 225, 250, 0.507),rgba(171, 225, 250, 0.507)),url(../../utils/marker-speech-bubbles.jpg);
+   background-size: cover;
+   background-position: center;
 }
 
 .container {
@@ -18,6 +21,7 @@ body {
    overflow: hidden;
    width: 500px;
    max-width: 100%;
+   
 }
 
 .header {
