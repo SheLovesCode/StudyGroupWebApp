@@ -30,45 +30,48 @@
     <div id="container-class" class="container">
         <script>
             let usersGroup = []
-    
+
             sendingToDB().then(response => {
                 //myGroupMembers = response
                 usersGroup = response
                 console.log(usersGroup)
-                displayCharacters(usersGroup)
-            })
-            const displayCharacters = (groupname) => {
+                displayGroups(usersGroup)
+
+        });
+            const displayGroups = (groupname) => {
                 
                 const class_container = document.getElementById('container-class')
                 const htmlString = groupname
-    
                 .map((groupname) => {
     
                     return `
                     
-                        <div class="box">
-                            <div class="info">
-                                <h2>${groupname}</h2>
-                                <a href="/login/home/group/chat" class="btn">Enter Group</a>
-                                <a href="#" class="leave">Leave Group</a>
+                        <div id="${groupname}" class="box">
+                            <div id="${groupname}" class="info">
+                                <h2 id="${groupname}">${groupname}</h2>
+                                <a id="${groupname}" href="/login/home/group/chat" class="btn">Enter Group</a>
+                                <a href="#" id="${groupname}" class="leave" onclick="myFunction(this.id); return false;">Leave Group</a>
                             </div>
                         </div>
     
                     `
     
                 })
-    
-                .join('')
-    
+                .join('')    
                 class_container.innerHTML = htmlString
-    
-    }
+            }
             const numberOfTeams = usersGroup.length
-            /*function addClassForGroup(){
-                var class_container = document.getElementById('container-class');
-                class_container.className += 'box';
-                class_container.className +='info';
-            }*/
+            function myFunction(clicked_id) {
+                
+                //alert("I am a pop up ! " + clicked_id);
+                var txt;
+                var r = confirm("Are you sure you want to leave "+clicked_id+"\nOK or Cancel.");
+                if (r == true) {
+                txt = "You pressed OK!";
+                } else {
+                txt = "You pressed Cancel!";
+                }
+            }
             async function sendingToDB (email='1234',group='YEEEE') {
             const text = {
                 memberemail : email,
@@ -84,6 +87,7 @@
             const response = await fetch('/test', options)
             return response.json()
             }
+
         </script>
     </div>
 </body>
