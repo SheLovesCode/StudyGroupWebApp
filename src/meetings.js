@@ -40,11 +40,11 @@ function displayStoredMeetings(responseContainer) {
                 let newMeeting = document.createElement('div');
                 newMeeting.id = "faceToFaceDiv";
                 newMeeting.className = "meetingDivs"; // Will be used to style div
-                newMeeting.innerText = "Date: " + storedDate + " at " + storedTime + "\n";
+                newMeeting.innerText = "Date: " + storedDate + " at " + storedTime + " \n Please complete the COVID-19 form to Accept\Decline the invite ";
                 faceMeetings.appendChild(newMeeting);
 
                 var covidFormLink = document.createElement('a');
-                var covidFormLinkText = document.createTextNode("Complete COVID-19 Screening Form");
+                var covidFormLinkText = document.createTextNode("COVID-19 Screening Form");
                 covidFormLink.appendChild(covidFormLinkText);
                 covidFormLink.title = "COVID Screening Form";
                 covidFormLink.href = storedUrl;
@@ -56,11 +56,12 @@ function displayStoredMeetings(responseContainer) {
                 let newOnlineMeeting = document.createElement('div');
                 newOnlineMeeting.id = "onlineDiv";
                 newOnlineMeeting.className = "meetingDivs"; // Will be used to style div
-                newOnlineMeeting.innerText = "Date: " + storedDate + " at " + storedTime + "\n Meeting Link: ";
+                newOnlineMeeting.innerText = "Date: " + storedDate + " at " + storedTime + "\n Meeting Link     ";
                 onlineMeetings.append(newOnlineMeeting);
                 console.log(storedUrl);
 
                 var onlineLink = document.createElement('a');
+                onlineLink.id = "onlineUrl";
                 var onlineLinkText = document.createTextNode("Online Meeting Link");
                 onlineLink.appendChild(onlineLinkText);
                 onlineLink.href = storedUrl;
@@ -91,7 +92,7 @@ document.getElementById("faceMeetingBtn").onclick = function() {
     let newMeeting = document.createElement('div');
     newMeeting.id = "faceToFaceDiv";
     newMeeting.className = "meetingDivs"; // Will be used to style div
-    newMeeting.innerText = "Date: " + meetingDate.value + " at " + meetingTime.value + "\n";
+    newMeeting.innerText = "/n Date: " + meetingDate.value + " at " + meetingTime.value;
     faceMeetings.appendChild(newMeeting);
 
     async function storingInDB(userEmail, group, formUrl, meetingDate, meetingTime) {
@@ -116,7 +117,7 @@ document.getElementById("faceMeetingBtn").onclick = function() {
 
     // Add paragraph to the div
     let instructions = document.createElement('p');
-    instructions.innerHTML = "Please complete the COVID-19 form to Accept/Decline this meeting invite."
+    instructions.innerHTML = "Please complete the COVID-19 form to Accept/Decline this meeting invite \n \n"
     newMeeting.appendChild(instructions);
 
     var covidFormLink = document.createElement('a');
@@ -167,7 +168,7 @@ document.getElementById("onlineMeetingBtn").onclick = function() {
     let newOnlineMeeting = document.createElement('div');
     newOnlineMeeting.id = "onlineDiv";
     newOnlineMeeting.className = "meetingDivs"; // Will be used to style div
-    newOnlineMeeting.innerText = "Date: " + onlineMeetingDate.value + " at " + onlineMeetingTime.value + " on the following link: \n";
+    newOnlineMeeting.innerText = "/n /n Date: " + onlineMeetingDate.value + " at " + onlineMeetingTime.value + "     Meeting Link: ";
     onlineMeetings.append(newOnlineMeeting);
 
     var onlineLink = document.createElement('a');
