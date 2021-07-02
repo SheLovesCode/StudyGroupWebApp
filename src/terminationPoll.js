@@ -22,7 +22,9 @@ generateList.addEventListener('click', function myFunction () {
   pollBtn.innerHTML = 'Go Back to Poll'
   heading.appendChild(pollBtn)
   let numOfPollsLeft = myUsernames.length
-
+  if (numOfPollsLeft === 0) {
+    heading.innerHTML = 'No polls to review'
+  }
   // Create poll question with reason
   myUsernames.forEach(function (element) {
     const pollQuestion = document.createElement('li')
