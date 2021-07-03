@@ -47,6 +47,7 @@ Below are the HTML coding style guidelines used throughout the project.
 ```
 
 ### Practicality over purity
+* Keep the implementation practical with only necessary implementation, avoiding extra unnecessary ones.
 
 ## Attribute order
 
