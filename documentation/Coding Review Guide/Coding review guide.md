@@ -26,14 +26,17 @@ The following describe what standards are reviewed for the project:
 * The code has appropriate unit tests.
 * The tests for the code are well-designed (they are correct, sensible, and useful).
 * The tests must be well maintained.
+* The tests do not require client input.
 
 ## Naming
 * The developer used clear names for everything.
 * The developer used the appropriate coding style guides for naming conventions.
+* Ambiguos names have comments to indicate the identity.
 
 ## Comments
 * Comments must be clear and useful.
 * Comments must explain why instead of what.
+* No comments necessary for self explanatory functions.
 
 ## Style
 * The code conforms to the coding style guides provided.
@@ -48,6 +51,7 @@ Below are the conducts the reviewer and developer need to have during a code rev
 ## Respect (Mentoring)
 
 * (Reviewer) Leave comments that help a developer learn something new.(if comment is purely educational, but not critical to meeting the standards described in this document, prefix it with “Nit: “ or otherwise indicate that it’s not mandatory for the author to resolve it).
+* (Reviewee) checks comments and answers with the actions they  are going to take and inform the (Reviewer) when the actions are done.
 
 
 ## Principle
