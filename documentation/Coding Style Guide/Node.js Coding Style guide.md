@@ -8,9 +8,9 @@ Below are the Node.js coding style guidelines used throughout the project for Gr
 
 ---
 
-# Project Structure Practices
+## Project Structure Practices
 
-## Project Structure:
+### Project Structure:
 
 The project needs to make sure that the structure is not clustered by partitioning dependencies 
 in their respective folders (components) and code base.
@@ -30,20 +30,20 @@ The structure for the project is as follows:
 - views folder:
 	- contains the `.html` or `.ejs` files
 
-## Separate Express app.js file and server.js file:
+### Separate Express app.js file and server.js file:
 
 Avoid putting the server side (Network side) of the project with the app side (API) in one entire file. Rather split them
 into different files for better structure.
 
-## Environment variables
+### Environment variables:
 
 A good structure makes sure that all security information is hidden from source code. In order to do such
 the use of environment variables are very much recommended. The use of .env are highly recommmended.
 
 ---
-# Error Handling Practices
+## Error Handling Practices
 
-## Use Async-Await for error handling
+### Use Async-Await for error handling:
 
 When handling errors, use reputable libraries or the `asyn-await` function. They enable the use of the functionality,
 try and catch which assist to avoid callbacks. Below a format is provided.
@@ -76,14 +76,14 @@ async function executeAsyncTask () {
 
 ```
 
-# Coding Style Practices
+## Coding Style Practices
 
-## Formatting
+### Formatting:
 * use editorconfig.org to enforce the formatting settings in your editor
 * `2 Spaces for indentation`
 
 
-## Newlines
+### Newlines:
 * Use UNIX-style newlines (\n), and a newline character as the last character of a file.
 
 * No trailing whitespace
@@ -106,7 +106,7 @@ var foo = 'bar';
 var foo = "bar";
 ```
 
-## Opening braces go on the same line
+### Opening braces go on the same line:
 * Your opening braces go on the same line as the statement.
 
 *Right:*
@@ -125,7 +125,7 @@ if (true)
   console.log('losing');
 }
 ```
-## Declare one variable per var statement
+### Declare one variable per var statement:
 
 *Right:*
 
@@ -154,7 +154,7 @@ while (keys.length) {
 }
 ```
 
-## Naming Conventions
+### Naming Conventions:
 * Use lowerCamelCase for variables, properties and function names
 
 *Right:*
@@ -169,7 +169,7 @@ var adminUser = db.query('SELECT * FROM users ...');
 var admin_user = db.query('SELECT * FROM users ...');
 ```
 
-## Conditionals
+### Conditionals:
 * Use the === operator
 
 *Right:*
@@ -188,7 +188,7 @@ if (a == '') {
   console.log('losing');
 }
 ```
-## Use UpperCamelCase for class names
+### Use UpperCamelCase for class names:
 Class names should be capitalized using UpperCamelCase.
 
 *Right:*
@@ -205,8 +205,8 @@ function bank_Account() {
 }
 ```
 
-## Variables
-### Object / Array creation
+### Variables:
+#### Object / Array creation
 * Use trailing commas and put short declarations on a single line. Only quote keys when your interpreter complains:
 
 
@@ -231,7 +231,7 @@ var b = {"good": 'code'
         };
 ```
 
-## Use multi-line ternary operator
+### Use multi-line ternary operator:
 * The ternary operator should not be used on a single line. Split it up into multiple lines instead.
 
 *Right:*
@@ -248,7 +248,7 @@ var foo = (a === b)
 var foo = (a === b) ? 1 : 2;
 ```
 
-## Use descriptive conditions
+### Use descriptive conditions:
 
 *Right:*
 ```js
@@ -265,7 +265,7 @@ if (password.length >= 4 && /^(?=.*\d).{4,}$/.test(password)) {
   console.log('losing');
 }
 ```
-## Name your closures
+### Name your closures
 
 *Right:*
 
@@ -283,8 +283,8 @@ req.on('end', function() {
 });
 ```
 
-### Method chaining
-*One method per line should be used to chain methods.
+### Method chaining:
+* One method per line should be used to chain methods.
 
 *Right:*
 
@@ -325,7 +325,7 @@ User.findOne({ name: 'foo' }).populate('bar')
 ```
 
 
-## Comments
+### Comments:
 * Use slashes for comments
 
 *Right:*
@@ -366,11 +366,11 @@ if (isSessionValid) {
 }
 ```
 ---
-# Testing Practices
+## Testing Practices
 
 The mininmum requirement with regards to testing is to at least have API (component) testing.
 
-## Test structure
+### Test structure:
 
 Test must be structured using the AAA pattern (Arrange, Act, Assert).
 
@@ -422,12 +422,12 @@ test('Should be classified as premium', () => {
     });
 ```
 
-## Test must be tagged
+### Test must be tagged:
 
 Each test must have been completed for each sprint and different conditions/scenarios.
 for example: IO test when commits are done.
 
-## Test must be done using coverage tools
+### Test must be done using coverage tools:
 
 Test coverage tools are beneficial as the help automate CI/CD integration. They assist
 identifying testing errors and mismatches (Previous working tests not working with the new implementations done
@@ -436,14 +436,14 @@ implementations.
 
 ---
 
-# Production Practices
+## Production Practices
 
-## Get your frontend assets out of Node
+### Get your frontend assets out of Node:
 
 For front end development do not use tools such as (CDN,nginx,S3) as they provide static 
 files which are detrimental the Node performance.
 
-## Set NODE_ENV
+### Set NODE_ENV:
 
 To prevent important security information or detail from being leaked use environment
 variables where possible.
