@@ -1,28 +1,98 @@
 # Node.js Coding Style Guide
 * Reference: https://github.com/felixge/node-style-guide
+* Reference: https://www.perfomatix.com/nodejs-coding-standards-and-best-practices-node-js-development-company/
 
 ## Introduction
 
-Below are the Node.js coding style guidelines used throughout the project.
+Below are the Node.js coding style guidelines used throughout the project for Group-012
 
 ---
 
+# Project Structure Practices
+
+## Project Structure:
+
+The project needs to make sure that the structure is not clustered by partitioning dependencies 
+in their respective folders (components) and code base.
+
+The structure for the project is as follows:
+- _test_ folder:
+	- contains only test files such as `.spec.js files` or `.test.js files`
+- documentation folder:
+	- containing important documentations such as the coding `style` and `review` guide, the 
+	  projects `Sprints`, `the User Story Map` and the `ADR` for the project.
+- public folder:
+	- contains the `.css` files
+- utils folder:
+	- contains external resources such as `.jpg` files used.
+- src folder:
+	- contains the `.js` files
+- views folder:
+	- contains the `.html` or `.ejs` files
+
+## Separate Express app.js file and server.js file:
+
+Avoid putting the server side (Network side) of the project with the app side (API) in one entire file. Rather split them
+into different files for better structure.
+
+## Environment variables
+
+A good structure makes sure that all security information is hidden from source code. In order to do such
+the use of environment variables are very much recommended. The use of .env are highly recommmended.
+
+---
+# Error Handling Practices
+
+## Use Async-Await for error handling
+
+When handling errors, use reputable libraries or the `asyn-await` function. They enable the use of the functionality,
+try and catch which assist to avoid callbacks. Below a format is provided.
+
+```js
+
+Code Example - using async/await to catch errors
+
+async function executeAsyncTask () {
+
+  try {
+
+    const valueA = await functionA();
+
+    const valueB = await functionB(valueA);
+
+    const valueC = await functionC(valueB);
+
+    return await functionD(valueC);
+
+  }
+
+  catch(err) {
+
+    logger.error(err);
+
+  }
+
+}
+
+```
+
+# Coding Style Practices
+
 ## Formatting
 * use editorconfig.org to enforce the formatting settings in your editor
-
-### 2 Spaces for indentation
+* `2 Spaces for indentation`
 
 
 ## Newlines
 * Use UNIX-style newlines (\n), and a newline character as the last character of a file.
 
-### No trailing whitespace
+* No trailing whitespace
 
-### Use Semicolons
+* Use Semicolons
 
-### 80 characters per line
+* 80 characters per line
 
-## Use single quotes
+* Use single quotes
 
 *Right:*
 
@@ -119,7 +189,7 @@ if (a == '') {
 }
 ```
 ## Use UpperCamelCase for class names
-* Class names should be capitalized using UpperCamelCase.
+Class names should be capitalized using UpperCamelCase.
 
 *Right:*
 
@@ -133,29 +203,6 @@ function BankAccount() {
 ```js
 function bank_Account() {
 }
-```
-
-## Use UPPERCASE for Constants
-* Constants should be declared as regular variables or static class properties, using all uppercase letters.
-
-*Right:*
-
-```js
-var SECOND = 1 * 1000;
-
-function File() {
-}
-File.FULL_PERMISSIONS = 0777;
-```
-
-*Wrong:*
-
-```js
-const SECOND = 1 * 1000;
-
-function File() {
-}
-File.fullPermissions = 0777;
 ```
 
 ## Variables
@@ -318,3 +365,85 @@ if (isSessionValid) {
   // ...
 }
 ```
+---
+# Testing Practices
+
+The mininmum requirement with regards to testing is to at least have API (component) testing.
+
+## Test structure
+
+Test must be structured using the AAA pattern (Arrange, Act, Assert).
+
+
+
+*Right:*
+
+```js
+describe.skip('Customer classifier', () => {
+
+    test('When customer spent more than 500$, classify as premium', () => {
+
+        //Arrange
+
+        const customerToClassify = {spent:505, joined: new Date(), id:1}
+
+        const DBStub = sinon.stub(dataAccess, "getCustomer")
+
+            .reply({id:1, classification: 'regular'});
+
+        //Act
+
+        const receivedClassification = customerClassifier.classifyCustomer(customerToClassify);
+
+        //Assert
+
+        expect(receivedClassification).toMatch('premium');
+
+    });
+
+});
+```
+
+*Wrong:*
+
+```js
+test('Should be classified as premium', () => {
+
+        const customerToClassify = {spent:505, joined: new Date(), id:1}
+
+        const DBStub = sinon.stub(dataAccess, "getCustomer")
+
+            .reply({id:1, classification: 'regular'});
+
+        const receivedClassification = customerClassifier.classifyCustomer(customerToClassify);
+
+        expect(receivedClassification).toMatch('premium');
+
+    });
+```
+
+## Test must be tagged
+
+Each test must have been completed for each sprint and different conditions/scenarios.
+for example: IO test when commits are done.
+
+## Test must be done using coverage tools
+
+Test coverage tools are beneficial as the help automate CI/CD integration. They assist
+identifying testing errors and mismatches (Previous working tests not working with the new implementations done
+within the project). It also provides deployment protection as it prevents the production build of failing/failed
+implementations. 
+
+---
+
+# Production Practices
+
+## Get your frontend assets out of Node
+
+For front end development do not use tools such as (CDN,nginx,S3) as they provide static 
+files which are detrimental the Node performance.
+
+## Set NODE_ENV
+
+To prevent important security information or detail from being leaked use environment
+variables where possible.
