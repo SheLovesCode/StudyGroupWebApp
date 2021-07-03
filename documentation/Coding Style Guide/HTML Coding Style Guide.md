@@ -1,7 +1,7 @@
 # HTML Coding Style Guide
 * Reference: https://codeguide.co/
 * Reference: https://www.informit.com/articles/article.aspx?p=24011&seqNum=3
-
+---
 ## Introduction
 
 Below are the HTML coding style guidelines used throughout the project.
